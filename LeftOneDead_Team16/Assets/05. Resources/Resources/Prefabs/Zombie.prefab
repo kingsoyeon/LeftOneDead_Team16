@@ -4172,6 +4172,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: 521df14d982299245a3262e3ccba7cca, type: 2}
   characterController: {fileID: 924207405335318717}
+  animator: {fileID: 0}
+  enemyAnimaionData:
+    idleParameterName: Idle
+    moveParameterName: Move
+    attackParameterName: Attack
+    skillAttackParameterName: SkillAttack
+    deathParameterName: Death
   target: {fileID: 0}
   targetLayer:
     serializedVersion: 2

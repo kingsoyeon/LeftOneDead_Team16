@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     [field:SerializeField] private EnemySO enemySO;
     [field:SerializeField] private EnemyStateMachine stateMachine;
     public CharacterController characterController;
+    public Animator animator; // 애니메이터
+    public EnemyAnimaionData enemyAnimaionData; // 애니메이션 데이터
 
 
     public float moveSpeed => enemySO.MovementData.MoveSpeed;
@@ -39,12 +41,13 @@ public class Enemy : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         targetLayer = LayerMask.GetMask("Player");  // 타겟 레이어 설정
+        animator = GetComponent<Animator>();
     }
 
     private void Awake()
     {
         stateMachine = new EnemyStateMachine(this);
-
+        enemyAnimaionData.Initialize();
     }
 
     private void Start()
