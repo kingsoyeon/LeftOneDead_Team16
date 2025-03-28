@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     public float patrolTime => enemySO.MovementData.PatrolTime;
     public float patrolWaitTime => enemySO.MovementData.PatrolWaitTime;
     public float skillAttackRange => enemySO.MovementData.SkillAttackRange;
+    public float attackSpeed => enemySO.MovementData.AttackSpeed;
 
     public float detectionRange => enemySO.MovementData.DetectionRange;
 
@@ -66,6 +67,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void DetectTarget()
     {
+        Debug.Log("DetectTarget");
         if(Vector3.Distance(transform.position, target.position) <= traceRange)
         {
             stateMachine.ChangeState(stateMachine.TraceState);
@@ -77,6 +79,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void FindNearestTarget()
     {
+        Debug.Log("FindNearestTarget");
         // 감지 범위 내의 모든 타겟 찾기
         Collider[] colliders = Physics.OverlapSphere(stateMachine.enemy.transform.position, stateMachine.enemy.detectionRange, stateMachine.enemy.targetLayer);
         float nearestDistance = float.MaxValue;

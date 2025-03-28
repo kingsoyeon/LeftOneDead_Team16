@@ -21,6 +21,7 @@ public class EnemyPatrolState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("PatrolState");
     }
 
     public override void Update()

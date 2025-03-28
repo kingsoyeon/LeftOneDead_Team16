@@ -25,6 +25,9 @@ public class EnemyMovementData
     public float PatrolWaitTime { get; private set; } = 1; // 순찰 대기 시간
     [field: SerializeField][field: Range(0, 10)]
     public float AttackRange { get; private set; } = 2; // 공격 거리
+    
+    [field: SerializeField][field: Range(0, 10)]
+    public float AttackSpeed { get; private set; } = 1; // 공격 속도
 
     [field: SerializeField][field: Range(0, 10)]
     public float SkillAttackRange { get; private set; } = 5; // 스킬 공격 거리
