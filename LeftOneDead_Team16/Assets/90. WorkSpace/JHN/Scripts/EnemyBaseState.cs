@@ -26,12 +26,11 @@ public class EnemyBaseState : IState
     {
     }
 
-
     /// <summary>
     /// 타겟 위치로 움직임      
     /// </summary>
     /// <param name="targetPos">타겟 위치</param>
-    void MoveTo(Vector3 targetPos)
+    public void MoveTo(Vector3 targetPos)
     {
         Vector3 dir = (targetPos - stateMachine.enemy.transform.position).normalized;
         Move(dir);
@@ -42,7 +41,7 @@ public class EnemyBaseState : IState
     /// 캐릭터 컨트롤러를 통해 움직임
     /// </summary>
     /// <param name="dir">움직이는 방향</param>
-    void Move(Vector3 dir)
+    public void Move(Vector3 dir)
     {
         // 방향으로 회전
         Rotate(dir);
@@ -55,13 +54,16 @@ public class EnemyBaseState : IState
     /// 외부 힘에 의한 이동
     /// </summary>
     /// <param name="force">외부 힘</param>
-    void ForeceMove(Vector3 force)
+    public void ForeceMove(Vector3 force)
     {
         stateMachine.enemy.characterController.Move(force * Time.deltaTime);
     }
 
-
-    void Rotate(Vector3 movementDirection)
+    /// <summary>
+    /// 방향으로 회전   
+    /// </summary>
+    /// <param name="movementDirection">회전 방향</param>
+    public void Rotate(Vector3 movementDirection)
     {
         if (movementDirection != Vector3.zero)
         {
@@ -70,6 +72,16 @@ public class EnemyBaseState : IState
         }
     }
 
-
+    /// <summary>
+    /// 플레이어와의 거리 체크해서 탐지
+    /// <param name="detectionRange">탐지 거리</param>
+    /// <param name="target">타겟</param>
+    public void CheckForPlayer(float detectionRange, Transform target)
+    {
+        if (Vector3.Distance(stateMachine.enemy.transform.position, target.position) <= detectionRange)
+        {
+            stateMachine.ChangeState(stateMachine.TraceState);
+        }
+    }
 
 }

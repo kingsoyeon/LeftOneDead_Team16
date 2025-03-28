@@ -11,6 +11,7 @@ public class EnemyStateMachine : StateMachine
     public EnemyPatrolState PatrolState { get; private set; }
     public EnemyTraceState TraceState { get; private set; }
     public EnemySkillAttackState SkillAttackState { get; private set; }
+    
 
     public EnemyStateMachine(Enemy enemy)
     {
@@ -24,5 +25,7 @@ public class EnemyStateMachine : StateMachine
 
         ChangeState(IdleState);
     }
+
+
 
 }
