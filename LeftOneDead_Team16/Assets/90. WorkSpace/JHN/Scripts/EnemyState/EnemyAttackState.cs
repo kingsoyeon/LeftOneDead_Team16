@@ -19,6 +19,10 @@ public class EnemyAttackState : EnemyBaseState
         base.Update();
         Attack();
     }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 
     /// <summary>
     /// 공격 처리

@@ -20,6 +20,11 @@ public class EnemyTraceState : EnemyBaseState
         Trace();
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+    }
+    
     /// <summary>
     /// 추적 처리
     /// </summary>
