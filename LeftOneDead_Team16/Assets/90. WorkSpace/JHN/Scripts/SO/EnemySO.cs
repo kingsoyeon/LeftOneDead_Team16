@@ -12,7 +12,13 @@ public class EnemyMovementData
     public float RotateSpeed { get; private set; } = 1f; // 기본 회전 스피드
 
     [field: SerializeField][field: Range(0, 10)]
-    public float TraceDistance { get; private set; } = 10; // 탐색 거리
+    public float TraceRange { get; private set; } = 10; // 탐색 거리
+
+    [field: SerializeField][field: Range(0, 10)]
+    public float AttackRange { get; private set; } = 2; // 공격 거리
+
+    [field: SerializeField][field: Range(0, 10)]
+    public float SkillAttackRange { get; private set; } = 5; // 스킬 공격 거리
 
 }
 
@@ -24,10 +30,15 @@ public class EnemyStatData
     [field: SerializeField] public int BaseDef {get; private set;}
 }   
 
+public enum EnemyType
+{
+    None,
+}
 
 [CreateAssetMenu(fileName = "EnemySO", menuName = "SO/EnemySO")]
 public class EnemySO : ScriptableObject
 {
+    [field: SerializeField] public EnemyType enemyType { get; private set; }
     [field: SerializeField] public EnemyMovementData MovementData { get; private set; }
 
     [field: SerializeField] public EnemyStatData StatData { get; private set; } 

@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTraceState : MonoBehaviour
+public class EnemyTraceState : EnemyBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public EnemyTraceState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
-        
+        base.Enter();
     }
 }
