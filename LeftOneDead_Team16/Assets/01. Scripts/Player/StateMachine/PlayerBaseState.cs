@@ -51,7 +51,7 @@ public class PlayerBaseState : IState
 
     }
 
-    public virtual void Update()
+    public virtual void Uqdate()
     {
         Move();
     }
@@ -113,13 +113,21 @@ public class PlayerBaseState : IState
 
     private void Rotate(Vector3 direction)
     {
-        float targetYRotation = stateMachine.MainCamTransform.eulerAngles.y;
-        Quaternion targetRotation = Quaternion.Euler(0f, targetYRotation, 0f);
-        stateMachine.player.transform.rotation = targetRotation;
+        if (direction != Vector3.zero)
+        {
+            Transform playerTransform = stateMachine.player.transform;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, stateMachine.RotationDamping * Time.deltaTime);
+        }
     }
 
     public void FixedUpdate()
     {
+        throw new System.NotImplementedException();
+    }
 
+    public virtual void Update()
+    {
+        Move();
     }
 }

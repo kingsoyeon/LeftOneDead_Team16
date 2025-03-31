@@ -20,9 +20,9 @@ public class PlayerIdleState : PlayerGroundState
         base.Exit();
     }
 
-    public override void Update()
+    public override void Uqdate()
     {
-        base.Update();
+        base.Uqdate();
 
         if (stateMachine.MovementInput != Vector2.zero)
         {

@@ -18,9 +18,9 @@ public class PlayerFallState : PlayerAirState
         base.Exit();
     }
 
-    public override void Update()
+    public override void Uqdate()
     {
-        base.Update();
+        base.Uqdate();
 
         if(stateMachine.player.Controller.isGrounded)
         {

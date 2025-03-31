@@ -20,15 +20,9 @@ public class PlayerJumpState : PlayerAirState
         base.Exit();
     }
 
-    public override void Update()
+    public override void Uqdate()
     {
-        base.Update();
-
-        if(stateMachine.player.Input.playerActions.Run.ReadValue<float>() > 0 )
-        {
-            stateMachine.ChageState(stateMachine.RunState);
-            return;
-        }
+        base.Uqdate();
 
         if(stateMachine.player.Controller.velocity.y <= 0)
         {
