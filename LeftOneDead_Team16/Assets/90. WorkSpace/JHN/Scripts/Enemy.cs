@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
     [field:SerializeField] private EnemySO enemySO;
     [field:SerializeField] private EnemyStateMachine stateMachine;
@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
     public Transform target;    // 적의 타겟
     public LayerMask targetLayer;
 
+    public int curHp{get; private set;}
 
     public NavMeshAgent navMeshAgent{get; private set;}
 
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour
     {
         stateMachine = new EnemyStateMachine(this);
         enemyAnimaionData.Initialize();
+        curHp = baseHp;
     }
 
     private void Start()
@@ -65,6 +67,13 @@ public class Enemy : MonoBehaviour
         stateMachine.FixedUpdate();
     }
 
+
+    // 일정 위치로 무조건 가게 하는 함수
+    public void MoveToPosition(Vector3 position)
+    {
+        navMeshAgent.SetDestination(position);
+    }
+
     /// <summary>
     /// 타겟을 찾았을 때 스테이트를 TraceState로 변경
     /// </summary>
@@ -75,10 +84,9 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-        if(Vector3.Distance(transform.position, target.position) <= traceRange)
-        {
-            stateMachine.ChangeState(stateMachine.TraceState);
-        }
+
+        stateMachine.ChangeState(stateMachine.TraceState);
+        
     }
 
     /// <summary>
@@ -105,11 +113,39 @@ public class Enemy : MonoBehaviour
 
         if(target != null)
         {
+            Debug.Log("DetectTarget으로 들어가주세요 제~발");
             DetectTarget();
             return true;
         }
         
         return false;
 
+    }
+
+
+    /// <summary>
+    /// 데미지 처리         
+    /// </summary>
+    /// <param name="damage">데미지</param>
+    public void TakeDamage(int damage)
+    {
+        float damageMultiplier = 100f / (100f + baseDef);
+        // 데미지 받기 방어력 적용해서 데미지 계산
+        damage = Mathf.Max(Mathf.RoundToInt(damage * damageMultiplier), 1);
+       
+        // 데미지 처리
+        curHp -= damage;
+
+        // 체력이 0이하면 죽음
+        if(curHp <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("Die");
+        animator.SetBool("Die", true);
     }
 }

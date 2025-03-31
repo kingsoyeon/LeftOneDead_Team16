@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySkillAttackState : EnemyBaseState
+public class PlayerAirState : PlayerBaseState
 {
-    public EnemySkillAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
+    public PlayerAirState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        stateMachine.enemy.animator.SetTrigger("Skill");
     }
+
     public override void Exit()
     {
         base.Exit();

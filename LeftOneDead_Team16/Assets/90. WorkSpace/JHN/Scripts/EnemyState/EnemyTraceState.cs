@@ -12,6 +12,10 @@ public class EnemyTraceState : EnemyBaseState
     {
         Debug.Log("TraceState");
         base.Enter();
+        stateMachine.enemy.animator.SetBool("Move", true);
+        stateMachine.enemy.animator.SetFloat("Speed", 1f);
+
+        stateMachine.enemy.navMeshAgent.isStopped = false;
     }
 
     public override void Update()
@@ -23,6 +27,8 @@ public class EnemyTraceState : EnemyBaseState
     public override void Exit()
     {
         base.Exit();
+        stateMachine.enemy.animator.SetBool("Move", false);
+        stateMachine.enemy.animator.SetFloat("Speed", 0f);
     }
     
     /// <summary>
