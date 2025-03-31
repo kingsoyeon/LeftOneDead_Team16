@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyAttackState : EnemyBaseState
 {
-    private float lastAttackTime;
+    private float lastAttackTime; // 일반 공격 마지막 시간
+    private float lastSkillAttackTime;  // 스킬 공격 마지막 시간
     public EnemyAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -19,11 +20,51 @@ public class EnemyAttackState : EnemyBaseState
     {
         base.Update();
         CheckPlayerDistance();
-        Attack();
+
+        UseSkillOrAttack(); // 스킬 공격 또는 일반 공격 처리
     }
     public override void Exit()
     {
         base.Exit();
+    }
+
+
+    /// <summary>   
+    /// 스킬 공격 또는 일반 공격 처리
+    /// 스킬 공격 쓸 수 있으면 우선적으로 스킬 사용
+    /// 스킬 공격 쓸 수 없으면 일반 공격
+    /// </summary>
+
+    public void UseSkillOrAttack()
+    {
+        float currentTime = Time.time;
+        if(stateMachine.enemy.skill != null && currentTime - lastSkillAttackTime >= stateMachine.enemy.skillSpeed)
+        {
+            SkillAttack();
+            lastAttackTime = currentTime;
+        }
+        else if(currentTime - lastAttackTime >= stateMachine.enemy.attackSpeed)
+        {
+            Attack();
+            lastAttackTime = currentTime;
+        }
+    }
+
+
+    /// <summary>
+    /// 스킬 공격 처리  
+    /// </summary>
+    public void SkillAttack()
+    {
+        float skillSpeed = stateMachine.enemy.skillSpeed;
+        if(Time.time - lastSkillAttackTime >= skillSpeed)
+        {
+            lastSkillAttackTime = Time.time;
+            stateMachine.enemy.animator.SetTrigger("Skill");
+            stateMachine.enemy.skill?.UseSkill();
+
+
+        }
     }
 
     /// <summary>
