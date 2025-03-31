@@ -36,6 +36,29 @@ public class PlayerStateMachine : StateMachine
 
         MovementSpeed = player.Data.GroundData.BaseSpeed;
         RotationDamping = player.Data.GroundData.BaseRotationDaping;
+    }
 
+    public void HandleInput()
+    {
+        MovementInput = player.Input.playerActions.Movement.ReadValue<Vector2>();
+    }
+
+    public void ChageState(IState state)
+    {
+        currentState?.Exit();
+        currentState = state;
+        currentState?.Enter();
+    }
+
+    public void PhysicsUpdate()
+    {
+        if (currentState == FallState && player.Controller.isGrounded)
+        {
+            ChageState(IdleState);
+        }
+        else if (currentState is PlayerGroundState && !player.Controller.isGrounded)
+        {
+            ChageState(FallState);
+        }
     }
 }

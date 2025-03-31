@@ -120,4 +120,14 @@ public class PlayerBaseState : IState
             playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, stateMachine.RotationDamping * Time.deltaTime);
         }
     }
+
+    public void FixedUpdate()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public virtual void Update()
+    {
+        Move();
+    }
 }
