@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chapter: 1
   stage: 1
-  enemyResourceList: []
+  playerRespawnPos: {x: 0, y: 0, z: 0}
+  enemyInitialRespawnPosList:
+  - {x: 0, y: 0, z: 0}
+  enemyResourceList:
+  - {fileID: 8550347273633087010, guid: 548b613165deb5f4c8c2aff401eaa3f5, type: 3}

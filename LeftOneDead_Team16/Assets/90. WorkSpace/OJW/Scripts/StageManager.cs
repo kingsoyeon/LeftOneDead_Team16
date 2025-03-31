@@ -7,6 +7,9 @@ public class StageManager : Singleton<StageManager>
 
     private Stage curStage;
     //private Player player;
+    private List<GameObject> enemyList;
+
+    public List<GameObject> EnemyList => enemyList;
     
     protected override void Awake()
     {
@@ -41,6 +44,11 @@ public class StageManager : Singleton<StageManager>
 
     private void InitStage(StageData stageData)
     {
-        var stage = new Stage(stageData);
+        var stage = new Stage(this, stageData);
+    }
+
+    private void EndStage()
+    {
+        
     }
 }
