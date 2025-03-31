@@ -20,9 +20,9 @@ public class PlayerGroundState : PlayerBaseState
         base.Exit();
     }
 
-    public override void Uqdate()
+    public override void Update()
     {
-        base.Uqdate();
+        base.Update();
     }
 
     public override void PhysicsUpdate()
