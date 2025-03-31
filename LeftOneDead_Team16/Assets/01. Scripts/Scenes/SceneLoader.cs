@@ -20,11 +20,12 @@ public class SceneLoader : MonoBehaviour
     public static SceneName sceneName;
     public static GameManager.GameState nextState;
     private LoadingUI loadingUI;
-    
+    public Transform uiTransform;
+
     private void Start()
     {
-        var prefab = Resources.Load<LoadingUI>("Prefabs/LoadingUI");
-        loadingUI = Instantiate(prefab, transform);
+        var prefab = Resources.Load<LoadingUI>("UI/Screen/LoadingUI");
+        loadingUI = Instantiate(prefab, uiTransform);
         gameObject.SetActive(true);
         StartCoroutine(LoadSceneAsync());
     }
