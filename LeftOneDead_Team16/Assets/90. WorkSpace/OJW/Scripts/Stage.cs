@@ -1,20 +1,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage
+public class Stage : MonoBehaviour
 {
-    private StageManager stageManager;
-    
-    private StageData data;
-
-    //private Player player;
+    private Player player;
     private List<Enemy> enemyList;
 
-    public Stage(StageManager manager, StageData stageData/*, Player player*/)
+    [SerializeField] private Transform playerRespawn;
+    [SerializeField] private List<Transform> enemyRespawn;
+
+    public Player Player => player;
+
+    private void Awake()
     {
-        stageManager = manager;
-        data = stageData;
-        //this.player = player;
+        enemyList = new();
+    }
+
+    private void Start()
+    {
+        RespawnPlayer();
+        RespawnInitialEnemy();
+        StageManager.Instance.SetCurrentStage(this);
+    }
+
+    // 플레이어 생성 및 Player 객체 저장
+    private void RespawnPlayer()
+    {
+        var playerRes = Resources.Load<GameObject>("Prefabs/Character/Player");
+        var go = Instantiate(playerRes, playerRespawn.position, playerRespawn.rotation);
+        player = go.GetComponent<Player>();
     }
 
     /// <summary>
@@ -22,11 +36,16 @@ public class Stage
     /// </summary>
     private void RespawnInitialEnemy()
     {
-        for (var i = 0; i < data.enemyInitialRespawnPosList.Count; i++)
+        var enemyRes = Resources.Load<GameObject>("Prefabs/Zombie");
+        for (var i = 0; i < enemyRespawn.Count; i++)
         {
-            var randomIndex = Random.Range(0, data.enemyResourceList.Count);
-            var newEnemy = GameObject.Instantiate(data.enemyResourceList[randomIndex]);
-            stageManager.EnemyList.Add(newEnemy);
+            var go = Instantiate(enemyRes, enemyRespawn[i].position, enemyRespawn[i].rotation);
+            enemyList.Add(go.GetComponent<Enemy>());
         }
+    }
+
+    public void StartEnemyWave()
+    {
+        
     }
 }

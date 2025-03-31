@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,12 +7,13 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField, Range(1f, 5f)] private float movingTime;
     [SerializeField, Range(1f, 5f)] private float movingDistance;
 
-    private bool isOpened;
     private bool isMoving;
+    
+    public bool IsClosed { get; private set; }
 
     private void Awake()
     {
-        isOpened = false;
+        IsClosed = true;
         isMoving = false;
     }
 
@@ -20,7 +22,7 @@ public class Door : MonoBehaviour, IInteractable
         // test 코드
         if (Input.GetKeyDown(KeyCode.E))
         {
-            StartCoroutine(ToggleDoor());
+            Interact();
         }
     }
 
@@ -41,7 +43,7 @@ public class Door : MonoBehaviour, IInteractable
 
         var elapsedTime = 0f;
         var startPos = transform.position;
-        var dir = isOpened ? Vector3.down : Vector3.up;
+        var dir = IsClosed ? Vector3.up : Vector3.down;
         var endPos = startPos + dir * movingDistance;
         isMoving = true;
         
@@ -53,7 +55,7 @@ public class Door : MonoBehaviour, IInteractable
         }
         
         transform.position = endPos;
-        isOpened = !isOpened;
+        IsClosed = !IsClosed;
         isMoving = false;
     }
 }

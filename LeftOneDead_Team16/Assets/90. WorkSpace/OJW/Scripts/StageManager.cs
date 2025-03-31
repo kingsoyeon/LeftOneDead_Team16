@@ -6,10 +6,8 @@ public class StageManager : Singleton<StageManager>
     private Dictionary<int, List<StageData>> stageDataDict;
 
     private Stage curStage;
-    //private Player player;
-    private List<GameObject> enemyList;
 
-    public List<GameObject> EnemyList => enemyList;
+    public Player Player;
     
     protected override void Awake()
     {
@@ -42,13 +40,15 @@ public class StageManager : Singleton<StageManager>
         }
     }
 
-    private void InitStage(StageData stageData)
+    public void SetCurrentStage(Stage stage)
     {
-        var stage = new Stage(this, stageData);
+        curStage = stage;
+        Player = stage.Player;
     }
 
-    private void EndStage()
+    public void EndStage()
     {
-        
+        // 스테이지 클리어
+        print("스테이지 종료");
     }
 }
