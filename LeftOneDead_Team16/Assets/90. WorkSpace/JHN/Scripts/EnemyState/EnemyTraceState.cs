@@ -14,6 +14,8 @@ public class EnemyTraceState : EnemyBaseState
         base.Enter();
         stateMachine.enemy.animator.SetBool("Move", true);
         stateMachine.enemy.animator.SetFloat("Speed", 1f);
+
+        stateMachine.enemy.navMeshAgent.isStopped = false;
     }
 
     public override void Update()

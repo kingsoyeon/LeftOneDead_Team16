@@ -12,12 +12,13 @@ public class EnemyAttackState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
-        stateMachine.enemy.animator.SetTrigger("Attack");
+        
     }
 
     public override void Update()
     {
         base.Update();
+        CheckPlayerDistance();
         Attack();
     }
     public override void Exit()
@@ -34,7 +35,17 @@ public class EnemyAttackState : EnemyBaseState
         if(currentTime - lastAttackTime >= stateMachine.enemy.attackSpeed)
         {
             lastAttackTime = currentTime;
+            stateMachine.enemy.animator.SetTrigger("Attack");
             Debug.Log("Attack");
+        }
+    }
+
+    // 플레이어가 멀어지면 공격상태 종료 후 trace 상태로 전환
+    private void CheckPlayerDistance()
+    {
+        if(Vector3.Distance(stateMachine.enemy.transform.position, stateMachine.enemy.target.position) > stateMachine.enemy.attackRange)
+        {
+            stateMachine.ChangeState(stateMachine.TraceState);
         }
     }
     
