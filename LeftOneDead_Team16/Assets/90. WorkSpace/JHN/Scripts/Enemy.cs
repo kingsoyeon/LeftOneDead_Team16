@@ -42,7 +42,6 @@ public class Enemy : MonoBehaviour, IDamageable
     void OnValidate()
     {
         characterController = GetComponent<CharacterController>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
         targetLayer = LayerMask.GetMask("Player");  // 타겟 레이어 설정
         animator = GetComponent<Animator>();
     }
@@ -50,6 +49,8 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Awake()
     {
         stateMachine = new EnemyStateMachine(this);
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
         enemyAnimaionData.Initialize();
         curHp = baseHp;
 
