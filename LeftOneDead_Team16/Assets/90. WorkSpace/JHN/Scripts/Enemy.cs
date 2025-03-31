@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
     [field:SerializeField] private EnemySO enemySO;
     [field:SerializeField] private EnemyStateMachine stateMachine;
@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
     public Transform target;    // 적의 타겟
     public LayerMask targetLayer;
 
+    public int curHp{get; private set;}
 
     public NavMeshAgent navMeshAgent{get; private set;}
 
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour
     {
         stateMachine = new EnemyStateMachine(this);
         enemyAnimaionData.Initialize();
+        curHp = baseHp;
     }
 
     private void Start()
@@ -118,5 +120,32 @@ public class Enemy : MonoBehaviour
         
         return false;
 
+    }
+
+
+    /// <summary>
+    /// 데미지 처리         
+    /// </summary>
+    /// <param name="damage">데미지</param>
+    public void TakeDamage(int damage)
+    {
+        float damageMultiplier = 100f / (100f + baseDef);
+        // 데미지 받기 방어력 적용해서 데미지 계산
+        damage = Mathf.Max(Mathf.RoundToInt(damage * damageMultiplier), 1);
+       
+        // 데미지 처리
+        curHp -= damage;
+
+        // 체력이 0이하면 죽음
+        if(curHp <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("Die");
+        animator.SetBool("Die", true);
     }
 }
