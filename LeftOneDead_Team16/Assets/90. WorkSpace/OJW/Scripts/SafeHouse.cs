@@ -38,7 +38,7 @@ public class SafeHouse : MonoBehaviour
     {
         if (IsInPlayer() && door.IsClosed)
         {
-            stageManager.EndStage();
+            stageManager.ClearStage();
         }
     }
 }
