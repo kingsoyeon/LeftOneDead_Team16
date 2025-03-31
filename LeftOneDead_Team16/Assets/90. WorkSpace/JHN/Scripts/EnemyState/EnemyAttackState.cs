@@ -36,6 +36,14 @@ public class EnemyAttackState : EnemyBaseState
         {
             lastAttackTime = currentTime;
             stateMachine.enemy.animator.SetTrigger("Attack");
+
+            // 나중에 플레이어 생기면 플레이어의 takeDamage 호출
+            stateMachine.enemy.target.TryGetComponent<IDamageable>(out IDamageable damageable);
+            if(damageable != null)
+            {
+                damageable.TakeDamage(stateMachine.enemy.baseAtk);
+            }
+
             Debug.Log("Attack");
         }
     }
