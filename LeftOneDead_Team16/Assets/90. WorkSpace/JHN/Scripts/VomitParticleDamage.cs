@@ -54,13 +54,11 @@ public class VomitParticleDamage : MonoBehaviour
     /// </summary>
     void OnParticleTrigger()
     {
-        Debug.Log("포이즌 트리거");
         int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);    
         Debug.Log("numEnter: " + numEnter);
 
         if(numEnter != 0)
         {
-            Debug.Log("OnParticleTrigger: 포이즌 데미지 주기");
             if(poisonCoroutine == null)
             {
                 poisonCoroutine = StartCoroutine(PoisonCoroutine());
@@ -70,7 +68,6 @@ public class VomitParticleDamage : MonoBehaviour
         {
             Debug.Log("OnParticleTrigger: 포이즌 데미지 종료");
         }
-        Debug.Log("count: " + count);
     }
 
     // 나는 너무 낡고 지쳤어요...............

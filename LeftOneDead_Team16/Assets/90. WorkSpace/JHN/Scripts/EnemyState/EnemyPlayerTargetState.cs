@@ -28,6 +28,8 @@ public class EnemyPlayerTargetState : EnemyBaseState
     {
         base.Exit();
         stateMachine.enemy.navMeshAgent.speed = stateMachine.enemy.moveSpeed;
+        stateMachine.enemy.animator.SetBool("Move", false);
+        stateMachine.enemy.animator.SetFloat("Speed", 0f);
     }
 
     public override void Update()

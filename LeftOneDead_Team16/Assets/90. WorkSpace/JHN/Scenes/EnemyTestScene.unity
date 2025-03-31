@@ -5724,6 +5724,11 @@ PrefabInstance:
       propertyPath: vomitPrefab
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5820269036545954028, guid: c8c951d0dee140c49afc90963d4ef61a,
+        type: 3}
+      propertyPath: vomitParticle
+      value: 
+      objectReference: {fileID: 8180702113353163897}
     - target: {fileID: 7627762952477029595, guid: c8c951d0dee140c49afc90963d4ef61a,
         type: 3}
       propertyPath: looping
@@ -6092,6 +6097,12 @@ PrefabInstance:
 --- !u!4 &8180702113353163894 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1777919397422158348, guid: c8c951d0dee140c49afc90963d4ef61a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8180702113353163893}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8180702113353163897 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7627762952477029595, guid: c8c951d0dee140c49afc90963d4ef61a,
     type: 3}
   m_PrefabInstance: {fileID: 8180702113353163893}
   m_PrefabAsset: {fileID: 0}

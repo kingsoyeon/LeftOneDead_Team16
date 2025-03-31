@@ -12,8 +12,15 @@ public class Skill : MonoBehaviour
     [field: SerializeField] public SkillType skillType { get; private set; }
 
     [Header("Vomit")]
-    public GameObject vomitPrefab;
-    public Transform vomitPoint;
+    public ParticleSystem vomitParticle;
+
+    void Awake()
+    {
+        if(vomitParticle != null)
+        {
+            vomitParticle.Stop();
+        }
+    }
 
     public void UseSkill()
     {
@@ -29,10 +36,9 @@ public class Skill : MonoBehaviour
     {
         Debug.Log("Vomit");
 
-        if(vomitPrefab != null)
+        if(vomitParticle != null)
         {
-            vomitPrefab.transform.position = vomitPoint.position;
-            vomitPrefab.SetActive(true);
+            vomitParticle.Play();
         }
     }
 }
