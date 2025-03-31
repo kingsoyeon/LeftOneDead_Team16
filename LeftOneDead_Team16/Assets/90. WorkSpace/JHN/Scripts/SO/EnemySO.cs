@@ -9,6 +9,8 @@ public class EnemyMovementData
     public float MoveSpeed { get; private set; } = 5;   // 기본 이동 스피드
 
     [field: SerializeField][field: Range(0, 10)]
+    public float RunSpeed { get; private set; } = 10;   // 뛰기 스피드
+    [field: SerializeField][field: Range(0, 10)]
     public float RotateSpeed { get; private set; } = 1f; // 기본 회전 스피드
 
     [field: SerializeField][field: Range(0, 10)]

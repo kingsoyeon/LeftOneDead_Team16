@@ -5,6 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum EnemyStartState
+{
+    Idle,
+    Trace,
+}
+
 
 public class Enemy : MonoBehaviour, IDamageable
 {
@@ -14,9 +20,12 @@ public class Enemy : MonoBehaviour, IDamageable
     public Animator animator; // 애니메이터
     public EnemyAnimaionData enemyAnimaionData; // 애니메이션 데이터
 
-    public Skill skill;
+    public Skill skill; // 스킬
+
+    public EnemyStartState startState = EnemyStartState.Idle;  // 시작 상태 정해주기 => 기본 대기
 
     public float moveSpeed => enemySO.MovementData.MoveSpeed;
+    public float runSpeed => enemySO.MovementData.RunSpeed;
     public float rotateSpeed => enemySO.MovementData.RotateSpeed;
     public float attackRange => enemySO.MovementData.AttackRange;
     public float traceRange => enemySO.MovementData.TraceRange;
@@ -59,7 +68,19 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        stateMachine.ChangeState(stateMachine.IdleState);
+        Debug.Log($"시작 상태 : {startState}");
+
+        if (startState == EnemyStartState.Idle)
+        {
+            stateMachine.ChangeState(stateMachine.IdleState);
+            Debug.Log("대기 상태 진입");
+        }
+        else if(startState == EnemyStartState.Trace)
+        {
+            stateMachine.ChangeState(stateMachine.PlayerTargetState);
+            Debug.Log("플레이어 타겟 상태 진입");
+        }
+
     }
 
     private void Update()

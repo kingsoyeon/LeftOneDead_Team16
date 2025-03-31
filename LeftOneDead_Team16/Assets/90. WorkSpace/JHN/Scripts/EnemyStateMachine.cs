@@ -10,6 +10,7 @@ public class EnemyStateMachine : StateMachine
     public EnemyAttackState AttackState { get; private set; }
     public EnemyPatrolState PatrolState { get; private set; }
     public EnemyTraceState TraceState { get; private set; }
+    public EnemyPlayerTargetState PlayerTargetState { get; private set; }
     public EnemySkillAttackState SkillAttackState { get; private set; }
     
 
@@ -22,8 +23,8 @@ public class EnemyStateMachine : StateMachine
         PatrolState = new EnemyPatrolState(this);
         TraceState = new EnemyTraceState(this);
         SkillAttackState = new EnemySkillAttackState(this);
+        PlayerTargetState = new EnemyPlayerTargetState(this);
 
-        ChangeState(IdleState);
     }
 
 

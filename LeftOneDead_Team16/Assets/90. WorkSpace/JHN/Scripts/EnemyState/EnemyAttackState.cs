@@ -92,7 +92,7 @@ public class EnemyAttackState : EnemyBaseState
     // 플레이어가 멀어지면 공격상태 종료 후 trace 상태로 전환
     private void CheckPlayerDistance()
     {
-        if(Vector3.Distance(stateMachine.enemy.transform.position, stateMachine.enemy.target.position) > stateMachine.enemy.attackRange)
+        if(Vector3.Distance(stateMachine.enemy.transform.position, stateMachine.enemy.target.position) > stateMachine.enemy.attackRange + 1f)
         {
             stateMachine.ChangeState(stateMachine.TraceState);
         }
