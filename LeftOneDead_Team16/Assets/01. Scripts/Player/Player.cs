@@ -6,7 +6,11 @@ public class Player : MonoBehaviour
 {
     [field: SerializeField] public PlayerSO Data { get; private set; }
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 8140256 (Merge branch 'CJM/Feat/Player' into Dev)
     public PlayerController Input { get; private set; }
     public CharacterController Controller { get; private set; }
     public ForceReceiver ForceReceiver { get; private set; }
@@ -31,7 +35,11 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.HandleInput();
+<<<<<<< HEAD
         stateMachine.Update();
+=======
+        stateMachine.Uqdate();
+>>>>>>> 8140256 (Merge branch 'CJM/Feat/Player' into Dev)
     }
 
     private void FixedUpdate()

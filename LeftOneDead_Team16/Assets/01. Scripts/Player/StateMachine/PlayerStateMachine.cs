@@ -36,6 +36,7 @@ public class PlayerStateMachine : StateMachine
 
         MovementSpeed = player.Data.GroundData.BaseSpeed;
         RotationDamping = player.Data.GroundData.BaseRotationDaping;
+<<<<<<< HEAD
     }
 
     public void HandleInput()
@@ -60,5 +61,8 @@ public class PlayerStateMachine : StateMachine
         {
             ChageState(FallState);
         }
+=======
+
+>>>>>>> 8140256 (Merge branch 'CJM/Feat/Player' into Dev)
     }
 }

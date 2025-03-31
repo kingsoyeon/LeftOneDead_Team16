@@ -120,6 +120,7 @@ public class PlayerBaseState : IState
             playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, stateMachine.RotationDamping * Time.deltaTime);
         }
     }
+<<<<<<< HEAD
 
     public void FixedUpdate()
     {
@@ -130,4 +131,6 @@ public class PlayerBaseState : IState
     {
         Move();
     }
+=======
+>>>>>>> 8140256 (Merge branch 'CJM/Feat/Player' into Dev)
 }
