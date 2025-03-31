@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,8 @@ public class EnemyPatrolState : EnemyBaseState
 {
 
     [Header("Wandering")]
-    private float minWanderDistance = 3f;
     private float maxWanderDistance = 5f;
+    private float maxDistance = 5f;
     private float minWanderWaitTime = 1f;
     private float maxWanderWaitTime = 3f;
 
@@ -45,8 +46,11 @@ public class EnemyPatrolState : EnemyBaseState
     /// </summary>
     private void Patrol()
     {
+        Debug.Log("Patrol");
+        Debug.Log($"patrolPosition: {patrolPosition}");
+
         // 정찰 위치에 도달했을 때 아이들 상태로 전환
-        if(Vector3.Distance(stateMachine.enemy.transform.position, patrolPosition) < 0.1f)
+        if (Vector3.Distance(stateMachine.enemy.transform.position, patrolPosition) < 0.1f)
         {
             stateMachine.ChangeState(stateMachine.IdleState);
         }
@@ -61,17 +65,31 @@ public class EnemyPatrolState : EnemyBaseState
         Debug.Log("GetPatrolPosition");
         NavMeshHit hit;
 
-        NavMesh.SamplePosition(stateMachine.enemy.transform.position +
-       (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
+        Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * UnityEngine.Random.Range(stateMachine.enemy.traceRange, maxWanderDistance);
+        Vector3 randomOffset = new Vector3(randomCircle.x, 0, randomCircle.y);
+        
+
+        if (!NavMesh.SamplePosition(stateMachine.enemy.transform.position + randomOffset, out hit, maxDistance, NavMesh.AllAreas))
+        {
+            // 실패하면 기본값 반환
+            return stateMachine.enemy.transform.position;
+        }
 
         int i = 0; 
-        // 정찰 위치가 길어질 때까지 반복(최대30회)
-        while(Vector3.Distance(stateMachine.enemy.transform.position, hit.position) <stateMachine.enemy.traceRange)
+        // 정찰 위치가 길어질 때까지 반복(최대60회)
+        while(Vector3.Distance(stateMachine.enemy.transform.position, hit.position) < stateMachine.enemy.traceRange)
         {
-            NavMesh.SamplePosition(stateMachine.enemy.transform.position + 
-            (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
             i++;
-            if(i==30) break;
+            if(i==60) 
+            {
+                return stateMachine.enemy.transform.position;
+            }
+
+            randomCircle = UnityEngine.Random.insideUnitCircle * UnityEngine.Random.Range(stateMachine.enemy.traceRange, maxWanderDistance);
+            randomOffset = new Vector3(randomCircle.x, 0, randomCircle.y);
+
+            NavMesh.SamplePosition(stateMachine.enemy.transform.position + randomOffset, out hit, maxDistance, NavMesh.AllAreas);
+
         }
         return hit.position;
     }

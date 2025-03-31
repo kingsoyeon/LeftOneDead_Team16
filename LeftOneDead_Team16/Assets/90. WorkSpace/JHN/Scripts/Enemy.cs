@@ -65,6 +65,13 @@ public class Enemy : MonoBehaviour
         stateMachine.FixedUpdate();
     }
 
+
+    // 일정 위치로 무조건 가게 하는 함수
+    public void MoveToPosition(Vector3 position)
+    {
+        navMeshAgent.SetDestination(position);
+    }
+
     /// <summary>
     /// 타겟을 찾았을 때 스테이트를 TraceState로 변경
     /// </summary>
@@ -75,10 +82,9 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-        if(Vector3.Distance(transform.position, target.position) <= traceRange)
-        {
-            stateMachine.ChangeState(stateMachine.TraceState);
-        }
+
+        stateMachine.ChangeState(stateMachine.TraceState);
+        
     }
 
     /// <summary>
@@ -105,6 +111,7 @@ public class Enemy : MonoBehaviour
 
         if(target != null)
         {
+            Debug.Log("DetectTarget으로 들어가주세요 제~발");
             DetectTarget();
             return true;
         }
