@@ -11,6 +11,10 @@ public class Skill : MonoBehaviour
 {
     [field: SerializeField] public SkillType skillType { get; private set; }
 
+    [Header("Vomit")]
+    public GameObject vomitPrefab;
+    public Transform vomitPoint;
+
     public void UseSkill()
     {
         switch(skillType)
@@ -24,5 +28,11 @@ public class Skill : MonoBehaviour
     private void Vomit()
     {
         Debug.Log("Vomit");
+
+        if(vomitPrefab != null)
+        {
+            vomitPrefab.transform.position = vomitPoint.position;
+            vomitPrefab.SetActive(true);
+        }
     }
 }
