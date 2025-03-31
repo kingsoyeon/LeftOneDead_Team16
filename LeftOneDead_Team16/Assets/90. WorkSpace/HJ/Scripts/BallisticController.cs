@@ -23,9 +23,12 @@ public class BallisticController : MonoBehaviour, IPoolable
         state = BulletState.Ready;
     }
 
-    public void Fire(Vector3 direction, GunData weaponData)
+    public void Fire(Transform transform, GunData weaponData)
     {
-        velocity = direction.normalized * data.MuzzleVelocity * weaponData.MuzzleVelocityModifier;
+        lastCheckedTime = Time.time;
+
+        this.transform.position = transform.position;
+        velocity = transform.forward * data.MuzzleVelocity * weaponData.MuzzleVelocityModifier;
 
         ChangeState(BulletState.Flying);
     }
@@ -33,11 +36,15 @@ public class BallisticController : MonoBehaviour, IPoolable
     private void Update()
     {
         deltaTime = Time.time - lastCheckedTime;
-        lastCheckedTime = Time.time;
+
         switch (state)
         {
             case BulletState.Flying:
-                if (deltaTime >= 0.02f) ApplyExternalBallistics();
+                if (deltaTime >= 0.02f)
+                {
+                    lastCheckedTime = Time.time;
+                    ApplyExternalBallistics();
+                }
                 break;
             case BulletState.Hit:
                 ApplyTerminalBallistics();

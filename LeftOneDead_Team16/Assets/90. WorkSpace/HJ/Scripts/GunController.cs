@@ -13,6 +13,8 @@ public class GunController : MonoBehaviour
     public GunData Data;
     public GunState State;
 
+    public GameObject MuzzlePositon;
+
 
     public GunFireMode[] FireModes;
     public GunFireMode CurrentFireMode;
@@ -92,7 +94,7 @@ public class GunController : MonoBehaviour
         {
             if (ammo.state == BulletState.Ready) ammo.ChangeState(BulletState.Idle);
         }
-        yield return new WaitForSeconds(3); //재장전에 걸리는 시간
+        yield return new WaitForSeconds(Data.ReloadingTime); //재장전에 걸리는 시간
         ammos = pool.GetAvailableAmmo(Data.MagazineCapacity, Data.BulletData);
         reloadCoroutine = null;
         ChangeGunState(GunState.Idle);
@@ -140,9 +142,11 @@ public class GunController : MonoBehaviour
             timeLastFired = Time.time;
             //fire
             AmmoCount--;
-            ammos[AmmoCount].Fire(transform.forward, Data);
+            ammos[AmmoCount].Fire(MuzzlePositon.transform, Data);
         }
     }
+
+
 
 
     public void ChangeGunState(GunState state)
@@ -177,7 +181,8 @@ public class GunController : MonoBehaviour
         /// </summary>
         public void Reload()
         {
-
+            parentGun.ChangeGunState(GunState.Reload);
+            parentGun.Reload();
         }
         /// <summary>
         /// 방아쇠 당기기
@@ -192,6 +197,7 @@ public class GunController : MonoBehaviour
         public void TriggerRelease()
         {
             parentGun.isTriggerPulled = false;
+            parentGun.awaitTriggerRelease = false;
         }
         /// <summary>
         /// 발사 모드를 한 단계씩 바꿈
