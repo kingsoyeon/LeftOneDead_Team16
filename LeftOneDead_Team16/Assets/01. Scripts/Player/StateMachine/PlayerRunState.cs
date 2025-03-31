@@ -21,9 +21,9 @@ public class PlayerRunState : PlayerGroundState
         base.Exit();
     }
 
-    public override void Uqdate()
+    public override void Update()
     {
-        base.Uqdate();
+        base.Update();
 
         if(stateMachine.player.Input.playerActions.Run.ReadValue<float>() <= 0)
         {
