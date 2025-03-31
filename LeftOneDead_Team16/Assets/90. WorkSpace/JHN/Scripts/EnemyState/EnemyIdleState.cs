@@ -14,12 +14,14 @@ public class EnemyIdleState : EnemyBaseState
     {
         base.Enter();
         Debug.Log("IdleState");
+        stateMachine.enemy.animator.SetBool("Idle", true);
         idleTime = 0;
     }
 
     public override void Exit()
     {
         base.Exit();
+        stateMachine.enemy.animator.SetBool("Idle", false);
     }
 
     public override void Update()

@@ -25,8 +25,10 @@ public class EnemyPatrolState : EnemyBaseState
     {
         base.Enter();
         Debug.Log("PatrolState");
+        stateMachine.enemy.animator.SetBool("Move", true);
         patrolPosition = GetPatrolPosition();
         stateMachine.enemy.navMeshAgent.SetDestination(patrolPosition);
+        stateMachine.enemy.animator.SetFloat("Speed", 0f);
     }
 
     public override void Update()
@@ -39,6 +41,8 @@ public class EnemyPatrolState : EnemyBaseState
     public override void Exit()
     {
         base.Exit();
+        stateMachine.enemy.animator.SetBool("Move", false); 
+        stateMachine.enemy.animator.SetFloat("Speed", 1f);
     }
 
     /// <summary>
