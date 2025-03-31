@@ -17,12 +17,17 @@ public class EnemyIdleState : EnemyBaseState
         idleTime = 0;
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
     public override void Update()
     {
         base.Update();
 
         // 타겟을 검색
-        stateMachine.enemy.FindNearestTarget();
+        if(stateMachine.enemy.FindNearestTarget()) return;
 
         // 대기 상태 시간 증가
         idleTime += Time.deltaTime;

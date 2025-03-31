@@ -12,4 +12,8 @@ public class EnemySkillAttackState : EnemyBaseState
     {
         base.Enter();
     }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }

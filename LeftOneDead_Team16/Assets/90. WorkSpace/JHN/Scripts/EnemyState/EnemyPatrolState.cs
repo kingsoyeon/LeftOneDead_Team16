@@ -8,10 +8,12 @@ public class EnemyPatrolState : EnemyBaseState
 {
 
     [Header("Wandering")]
-    public float minWanderDistance;
-    public float maxWanderDistance;
-    public float minWanderWaitTime;
-    public float maxWanderWaitTime;
+    private float minWanderDistance = 3f;
+    private float maxWanderDistance = 5f;
+    private float minWanderWaitTime = 1f;
+    private float maxWanderWaitTime = 3f;
+
+    Vector3 patrolPosition;
 
     public EnemyPatrolState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
@@ -22,12 +24,14 @@ public class EnemyPatrolState : EnemyBaseState
     {
         base.Enter();
         Debug.Log("PatrolState");
+        patrolPosition = GetPatrolPosition();
+        stateMachine.enemy.navMeshAgent.SetDestination(patrolPosition);
     }
 
     public override void Update()
     {
         base.Update();
-        stateMachine.enemy.FindNearestTarget();
+        if(stateMachine.enemy.FindNearestTarget()) return;
         Patrol();
     }
 
@@ -41,12 +45,8 @@ public class EnemyPatrolState : EnemyBaseState
     /// </summary>
     private void Patrol()
     {
-        // 정찰 위치 설정
-        Vector3 patrolPosition = GetPatrolPosition();
-        stateMachine.enemy.navMeshAgent.SetDestination(patrolPosition);
-
         // 정찰 위치에 도달했을 때 아이들 상태로 전환
-        if(Vector3.Distance(stateMachine.enemy.transform.position, patrolPosition) < 0.5f)
+        if(Vector3.Distance(stateMachine.enemy.transform.position, patrolPosition) < 0.1f)
         {
             stateMachine.ChangeState(stateMachine.IdleState);
         }
@@ -58,20 +58,18 @@ public class EnemyPatrolState : EnemyBaseState
     /// <returns>정찰 위치</returns>
     private Vector3 GetPatrolPosition()
     {
+        Debug.Log("GetPatrolPosition");
         NavMeshHit hit;
 
         NavMesh.SamplePosition(stateMachine.enemy.transform.position +
        (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
-        stateMachine.enemy.navMeshAgent.destination = hit.position;
 
         int i = 0; 
         // 정찰 위치가 길어질 때까지 반복(최대30회)
         while(Vector3.Distance(stateMachine.enemy.transform.position, hit.position) <stateMachine.enemy.traceRange)
         {
-            i++;
             NavMesh.SamplePosition(stateMachine.enemy.transform.position + 
             (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
-            stateMachine.enemy.navMeshAgent.destination = hit.position;
             i++;
             if(i==30) break;
         }

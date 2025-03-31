@@ -71,6 +71,10 @@ public class Enemy : MonoBehaviour
     public void DetectTarget()
     {
         Debug.Log("DetectTarget");
+        if(target == null)
+        {
+            return;
+        }
         if(Vector3.Distance(transform.position, target.position) <= traceRange)
         {
             stateMachine.ChangeState(stateMachine.TraceState);
@@ -80,7 +84,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// 가장 가까운 타겟을 찾는 함수
     /// </summary>
-    public void FindNearestTarget()
+    public bool FindNearestTarget()
     {
         Debug.Log("FindNearestTarget");
         // 감지 범위 내의 모든 타겟 찾기
@@ -96,9 +100,16 @@ public class Enemy : MonoBehaviour
                 nearestDistance = distance;
                 stateMachine.enemy.target = collider.transform;
             }
+
         }
-        // 타겟이 있으면 타겟을 찾았다고 판단하고 스테이트를 TraceState로 변경
-        DetectTarget();
+
+        if(target != null)
+        {
+            DetectTarget();
+            return true;
+        }
+        
+        return false;
 
     }
 }

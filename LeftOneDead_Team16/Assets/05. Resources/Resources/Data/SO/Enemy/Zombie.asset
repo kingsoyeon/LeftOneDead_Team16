@@ -17,7 +17,7 @@ MonoBehaviour:
     <MoveSpeed>k__BackingField: 10
     <RotateSpeed>k__BackingField: 1
     <DetectionRange>k__BackingField: 10
-    <TraceRange>k__BackingField: 10
+    <TraceRange>k__BackingField: 2
     <PatrolTime>k__BackingField: 6
     <PatrolWaitTime>k__BackingField: 1
     <AttackRange>k__BackingField: 5
