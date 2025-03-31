@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public Animator animator; // 애니메이터
     public EnemyAnimaionData enemyAnimaionData; // 애니메이션 데이터
 
+    public Skill skill;
 
     public float moveSpeed => enemySO.MovementData.MoveSpeed;
     public float rotateSpeed => enemySO.MovementData.RotateSpeed;
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public float patrolWaitTime => enemySO.MovementData.PatrolWaitTime;
     public float skillAttackRange => enemySO.MovementData.SkillAttackRange;
     public float attackSpeed => enemySO.MovementData.AttackSpeed;
+    public float skillSpeed => enemySO.MovementData.SkillAttackSpeed;
 
     public float detectionRange => enemySO.MovementData.DetectionRange;
 
@@ -40,7 +42,6 @@ public class Enemy : MonoBehaviour, IDamageable
     void OnValidate()
     {
         characterController = GetComponent<CharacterController>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
         targetLayer = LayerMask.GetMask("Player");  // 타겟 레이어 설정
         animator = GetComponent<Animator>();
     }
@@ -48,8 +49,12 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Awake()
     {
         stateMachine = new EnemyStateMachine(this);
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
         enemyAnimaionData.Initialize();
         curHp = baseHp;
+
+        skill = GetComponent<Skill>();
     }
 
     private void Start()
@@ -113,7 +118,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if(target != null)
         {
-            Debug.Log("DetectTarget으로 들어가주세요 제~발");
             DetectTarget();
             return true;
         }

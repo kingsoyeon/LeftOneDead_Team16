@@ -4068,6 +4068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 171053942843558741}
   - component: {fileID: 924207405335318717}
+  - component: {fileID: 5683206305843586048}
   - component: {fileID: 8360993196899471028}
   - component: {fileID: 7301118873184498259}
   - component: {fileID: 3766734520362108635}
@@ -4121,6 +4122,27 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!95 &5683206305843586048
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550347273633087010}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e2c1c24aec0aaa94eb4cb7a2aae271a0, type: 3}
+  m_Controller: {fileID: 9100000, guid: ef6b3d59118e4de4bb2132595d0723a8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8360993196899471028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4150,7 +4172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: 521df14d982299245a3262e3ccba7cca, type: 2}
   characterController: {fileID: 924207405335318717}
-  animator: {fileID: 0}
+  animator: {fileID: 5683206305843586048}
   enemyAnimaionData:
     idleParameterName: Idle
     moveParameterName: Move
