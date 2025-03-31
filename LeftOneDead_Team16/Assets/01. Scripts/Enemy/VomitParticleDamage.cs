@@ -37,7 +37,7 @@ public class VomitParticleDamage : MonoBehaviour
     /// <param name="other"></param>
     private void OnParticleCollision(GameObject other)
     {
-        if(poisonCoroutine == null)
+        if (poisonCoroutine == null)
         {
             poisonCoroutine = StartCoroutine(PoisonCoroutine());
         }
