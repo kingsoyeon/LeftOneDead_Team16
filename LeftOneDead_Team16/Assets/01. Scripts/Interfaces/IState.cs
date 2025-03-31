@@ -1,7 +1,9 @@
 public interface IState
 {
-    void Enter();
-    void Exit();
+
+    public void Enter();
+    public void Exit();
+
     void Update();
     void FixedUpdate();
 }
