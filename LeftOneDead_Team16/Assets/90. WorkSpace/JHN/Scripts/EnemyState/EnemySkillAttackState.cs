@@ -11,6 +11,7 @@ public class EnemySkillAttackState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
+        stateMachine.enemy.animator.SetTrigger("Skill");
     }
     public override void Exit()
     {

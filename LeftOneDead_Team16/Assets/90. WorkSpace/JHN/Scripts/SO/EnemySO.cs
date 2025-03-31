@@ -32,6 +32,9 @@ public class EnemyMovementData
     [field: SerializeField][field: Range(0, 10)]
     public float SkillAttackRange { get; private set; } = 5; // 스킬 공격 거리
 
+    [field: SerializeField][field: Range(0, 10)]
+    public float SkillAttackSpeed { get; private set; } = 1; // 스킬 공격 속도
+
 }
 
 [System.Serializable]
@@ -44,7 +47,9 @@ public class EnemyStatData
 
 public enum EnemyType
 {
-    None,
+    Regular,
+    VomitZombie,
+
 }
 
 [CreateAssetMenu(fileName = "EnemySO", menuName = "SO/EnemySO")]
