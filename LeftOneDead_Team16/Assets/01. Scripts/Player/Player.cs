@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     [field: SerializeField] public PlayerSO Data { get; private set; }
 
-
+    
     public PlayerController Input { get; private set; }
     public CharacterController Controller { get; private set; }
     public ForceReceiver ForceReceiver { get; private set; }
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.HandleInput();
-        stateMachine.Uqdate();
+        stateMachine.Update();
     }
 
     private void FixedUpdate()
