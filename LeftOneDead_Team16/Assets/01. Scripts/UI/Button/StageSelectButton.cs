@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -8,5 +9,12 @@ using UnityEngine;
 /// </summary>
 public class StageSelectButton : MonoBehaviour
 {
-   
+    private StageData stageData;
+    [SerializeField] private TextMeshProUGUI stageNameText;
+
+    public void Init(StageData data)
+    {
+        stageData = data;
+        stageNameText.text = data.stageName;
+    }
 }
