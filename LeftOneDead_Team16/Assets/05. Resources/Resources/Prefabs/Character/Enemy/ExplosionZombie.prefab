@@ -43041,12 +43041,15 @@ MonoBehaviour:
   enemySO: {fileID: 11400000, guid: 65374633dcc75fa48af21f95220c8b69, type: 2}
   characterController: {fileID: 924207405335318717}
   animator: {fileID: 5683206305843586048}
-  enemyAnimaionData:
+  <enemyAnimaionData>k__BackingField:
     idleParameterName: Idle
     moveParameterName: Move
     attackParameterName: Attack
     skillAttackParameterName: SkillAttack
     deathParameterName: Death
+    airParameterName: '@Air'
+    jumpParameterName: Jump
+    fallParameterName: Fall
   skill: {fileID: 0}
   startState: 0
   target: {fileID: 0}

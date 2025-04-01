@@ -102,6 +102,15 @@ public class Enemy : MonoBehaviour, IDamageable
             stateMachine.ChangeState(stateMachine.FallState);
             return;
         }
+
+        // 점프 상태 진입
+        if (stateMachine.enemy.navMeshAgent.velocity.y > 0)
+        {
+            Debug.Log("jump 상태 진입");
+            stateMachine.ChangeState(stateMachine.JumpState);
+            return;
+        }
+
     }
 
     private void OnEnable()
@@ -299,10 +308,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public void Jump()
     {
         // 점프 처리
-        navMeshAgent.enabled = false;
-        // 점프 force만큼 점프
-        characterController.Move(Vector3.up * jumpForce);
-        navMeshAgent.enabled = true;
+
     }
 
 }

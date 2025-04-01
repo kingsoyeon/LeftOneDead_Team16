@@ -16,6 +16,7 @@ MonoBehaviour:
   <MovementData>k__BackingField:
     <MoveSpeed>k__BackingField: 5
     <RunSpeed>k__BackingField: 7.5
+    <JumpForce>k__BackingField: 1
     <RotateSpeed>k__BackingField: 1
     <DetectionRange>k__BackingField: 20
     <DetectionAngle>k__BackingField: 5
