@@ -14,6 +14,7 @@ public class UIInputHandler : IInputHandler
     {
         UIManager.Instance.ClosePopup();
         InputManager.Instance.ChangeToPlayerActions();
+        GameManager.Instance.SetGameState(GameManager.GameState.InGame);
     }
 
     public void OnScroll()

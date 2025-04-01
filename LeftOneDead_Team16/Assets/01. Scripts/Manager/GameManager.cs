@@ -48,7 +48,7 @@ public class GameManager : Singleton<GameManager>
 
             SceneLoader.nextState = GameState.InGame;
             SceneManager.LoadScene("LoadingScene");
-        }
+            }
     }
 
     /// <summary>
@@ -60,7 +60,6 @@ public class GameManager : Singleton<GameManager>
         SceneLoader.sceneName = SceneName.LobbyScene;
         SceneLoader.nextState = GameState.Lobby;
         SceneManager.LoadScene("LoadingScene");
-
     }
 
     /// <summary>

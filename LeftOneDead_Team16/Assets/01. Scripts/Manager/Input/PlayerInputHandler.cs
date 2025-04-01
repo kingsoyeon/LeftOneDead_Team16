@@ -15,6 +15,7 @@ public class PlayerInputHandler : IInputHandler
     {
         UIManager.Instance.ShowPopup<SettingUI>("SettingUI");
         InputManager.Instance.ChangeToUIActions();
+        GameManager.Instance.SetGameState(GameManager.GameState.Setting);
     }
 
     public void OnScroll()

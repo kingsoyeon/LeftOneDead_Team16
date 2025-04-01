@@ -54,6 +54,8 @@ public class StageManager : Singleton<StageManager>
         // 스테이지 클리어
         print("스테이지 클리어");
         isStageEnd = true;
+        GameManager.Instance.SetGameState(GameManager.GameState.GameClear);
         UIManager.Instance.ShowPopup<ClearUI>("ClearUI");
+
     }
 }
