@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,12 +8,20 @@ public class Door : MonoBehaviour, IInteractable
 
     private bool isMoving;
     
+    private Material material;
+    private Color originColor;
+    private Color interactColor;
+    
     public bool IsClosed { get; private set; }
 
     private void Awake()
     {
         IsClosed = true;
         isMoving = false;
+        
+        material = GetComponent<MeshRenderer>().material;
+        originColor = material.color;
+        interactColor = new Color(8f, 8f, 8f);
     }
 
     private void Start()

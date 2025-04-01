@@ -45,7 +45,8 @@ public class EnemyWave : MonoBehaviour
             {
                 go = Instantiate(enemyResource, transform.position, Quaternion.identity);
             }
-            go.GetComponent<Enemy>().MoveToPosition(StageManager.Instance.Player.transform.position);
+            //go.GetComponent<Enemy>().MoveToPosition(StageManager.Instance.Player.transform.position);
+            go.GetComponent<Enemy>().startState = EnemyStartState.Trace;
             curRespawnCount++;
             print($"현재 리스폰 된 좀비 수: {curRespawnCount}");
             yield return new WaitForSeconds(respawnInterval);

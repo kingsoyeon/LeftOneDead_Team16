@@ -9,7 +9,7 @@ public class StageManager : Singleton<StageManager>
 
     private Dictionary<int, Action> eventActionDict;
 
-    public Player Player;
+    [NonSerialized] public Player Player;
 
     protected override void Awake()
     {
