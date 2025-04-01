@@ -118,7 +118,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd55079e9c55154da87df3d86ce35da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplosiveDatas:
+  - ExplodeType: 0
+    Radius: 5
+    Damage: 50
+    Duration: 0
+  - ExplodeType: 1
+    Radius: 10
+    Damage: 5
+    Duration: 20
   SpreadPrefab: {fileID: 0}
-  ExplodeAfterTime: 0
-  ImmediateExplodeCount: 0
-  IgnoreExplodeCount: 0
+  ExplodeAfterTime: 5
+  ImmediateExplodeCount: 3
+  IgnoreExplodeCount: 1
