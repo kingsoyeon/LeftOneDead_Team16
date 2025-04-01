@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
     { 
         Lobby, 
         Loading, 
-        Setting,
+        Setting, 
         InGame,
         GameOver,
         GameClear
@@ -29,9 +29,9 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         Application.targetFrameRate = 60;
-        if(CurrentState == GameState.InGame) Cursor.lockState = CursorLockMode.Locked;
 
-        // ESC를 누르면 CurrentState == Setting으로 전환해야 함. 어디서?
+        
+       
     }
 
     /// <summary>
@@ -70,5 +70,12 @@ public class GameManager : Singleton<GameManager>
     public void SetGameState(GameState nextState)
     {
         CurrentState = nextState;
+        Debug.Log($"{CurrentState}");
+        UpdateCursorMode();
+    }
+
+    private void UpdateCursorMode()
+    {
+        Cursor.lockState = (CurrentState == GameState.InGame) ? CursorLockMode.Locked : CursorLockMode.None;
     }
 }
