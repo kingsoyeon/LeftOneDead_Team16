@@ -33,6 +33,7 @@ public class StageManager : Singleton<StageManager>
     private void InitStageInfoData()
     {
         var stageSOAsset = Resources.LoadAll<StageData>("Data/SO/Stage");
+        stageDataDict = new();
 
         if (stageSOAsset != null)
         {
