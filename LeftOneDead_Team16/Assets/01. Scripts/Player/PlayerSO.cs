@@ -4,6 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
+public class PlayerCondition
+{
+    [Header("Health")]
+    public float maxHealth = 100f;
+    public float currentHealth = 100f;
+
+    [Header("Movement")]
+    public float moveSpeed = 5f;
+}
+
+[Serializable]
 public class PlayerGroundData
 {
     [field: SerializeField][field: Range(0f, 25f)] public float BaseSpeed { get; set; } = 5f;
@@ -32,6 +43,7 @@ public class PlayerAirData
 [CreateAssetMenu(fileName = "Player", menuName = "Characters/Player")]
 public class PlayerSO : ScriptableObject
 {
+    [field: SerializeField] public PlayerCondition Condition { get; private set; }
     [field: SerializeField] public PlayerGroundData GroundData { get; private set; }
     [field: SerializeField] public PlayerAirData AirData { get; private set; }
 }

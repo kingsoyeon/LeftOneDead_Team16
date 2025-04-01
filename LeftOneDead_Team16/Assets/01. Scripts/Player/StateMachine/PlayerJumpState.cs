@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : PlayerAirState
+public class PlayerJumpState : PlayerBaseState
 {
-    public PlayerJumpState(PlayerStateMachine stateMachine) : base(stateMachine)
+    private PlayerAirState airState;
+
+    public PlayerJumpState(PlayerStateMachine stateMachine, PlayerAirState airState) : base(stateMachine)
     {
+        this.airState = airState;
     }
 
     public override void Enter()
@@ -15,30 +18,13 @@ public class PlayerJumpState : PlayerAirState
         base.Enter();
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
     public override void Update()
     {
         base.Update();
 
-        if(stateMachine.player.Controller.velocity.y <= 0)
+        if (stateMachine.player.Controller.velocity.y <= 0)
         {
-            if(stateMachine.player.Input.playerActions.Run.ReadValue<float>() > 0)
-            {
-                stateMachine.ChageState(stateMachine.RunState);
-            }
-            else if(stateMachine.MovementInput != Vector2.zero)
-            {
-                stateMachine.ChageState(stateMachine.WalkState);
-            }
-            else
-            {
-                stateMachine.ChageState(stateMachine.IdleState);
-            }
-            return;
+            airState.ChangeSubState(airState.FallState);
         }
     }
 }

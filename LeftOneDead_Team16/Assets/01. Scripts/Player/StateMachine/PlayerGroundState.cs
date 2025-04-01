@@ -5,48 +5,66 @@ using UnityEngine.InputSystem;
 
 public class PlayerGroundState : PlayerBaseState
 {
+    private IState currentGroundState;
+    public PlayerIdleState IdleState { get; private set; }
+    public PlayerWalkState WalkState { get; private set; }
+    public PlayerRunState RunState { get; private set; }
+
+    private float groundCheckGraceTime = 0.1f;
+    private float groundCheckTimer;
+
     public PlayerGroundState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-
-
+        IdleState = new PlayerIdleState(stateMachine, this);
+        WalkState = new PlayerWalkState(stateMachine, this);
+        RunState = new PlayerRunState(stateMachine, this);
     }
+    public void HandleJumpInput()
+    {
+        stateMachine.AirState.EnterFromJumping();
+        stateMachine.ChangeState(stateMachine.AirState);
+    }
+
     public override void Enter()
     {
         base.Enter();
+        groundCheckTimer = groundCheckGraceTime;
+
+        currentGroundState = IdleState;
+        currentGroundState.Enter();
     }
 
     public override void Exit()
     {
+        currentGroundState.Exit();
         base.Exit();
     }
 
     public override void Update()
     {
         base.Update();
+        currentGroundState.Update();
+
+        groundCheckTimer -= Time.deltaTime;
+
+        if (groundCheckTimer <= 0f && !stateMachine.player.Controller.isGrounded)
+        {
+            stateMachine.ChangeState(stateMachine.AirState);
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-
-        if (!stateMachine.player.Controller.isGrounded && stateMachine.player.Controller.velocity.y < Physics.gravity.y * Time.fixedDeltaTime)
-        {
-            stateMachine.ChageState(stateMachine.FallState);
-        }
+        currentGroundState.FixedUpdate();
     }
 
-    protected override void OnMovementCanceled(InputAction.CallbackContext context)
+    public void ChangeSubState(IState newSubState)
     {
-        if (stateMachine.MovementInput == Vector2.zero) return;
+        currentGroundState.Exit();
+        currentGroundState = newSubState;
+        currentGroundState.Enter();
+        Debug.Log(currentGroundState);
 
-        stateMachine.ChageState(stateMachine.IdleState);
-
-        base.OnMovementCanceled(context);
-    }
-
-    protected override void OnJumpStarted(InputAction.CallbackContext context)
-    {
-        base.OnJumpStarted(context);
-        stateMachine.ChageState(stateMachine.JumpState);
     }
 }
