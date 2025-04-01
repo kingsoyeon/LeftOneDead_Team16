@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: 
   HelpText: 
+  Consumables:
+  - Type: 0
+    Value: 80
+    Duration: 0

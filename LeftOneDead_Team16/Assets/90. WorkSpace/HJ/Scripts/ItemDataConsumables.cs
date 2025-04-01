@@ -12,6 +12,7 @@ public class ConsumableTypeValue
 {
     public ConsumeType Type;
     public float Value;
+    public float Duration;
 }
 
 public enum ConsumeType

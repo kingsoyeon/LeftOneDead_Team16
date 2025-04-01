@@ -15,5 +15,6 @@ MonoBehaviour:
   BulletData: {fileID: 11400000, guid: 7c4a0c6b52159c24ca1336e98251b057, type: 2}
   MuzzleVelocityModifier: 1
   MagazineCapacity: 30
+  MaxAmmoCanHold: 350
   RoundPerMinute: 600
   ReloadingTime: 3
