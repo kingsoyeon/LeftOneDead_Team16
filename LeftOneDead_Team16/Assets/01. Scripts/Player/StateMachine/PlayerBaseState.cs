@@ -51,7 +51,7 @@ public class PlayerBaseState : IState
 
     }
 
-    public virtual void Uqdate()
+    public virtual void Update()
     {
         Move();
     }
@@ -63,12 +63,40 @@ public class PlayerBaseState : IState
 
     protected virtual void OnRunStarted(InputAction.CallbackContext context)
     {
-
+        if (stateMachine.MovementInput != Vector2.zero && stateMachine.GroundState != null)
+        {
+            stateMachine.GroundState.ChangeSubState(stateMachine.GroundState.RunState);
+        }
     }
 
     protected virtual void OnJumpStarted(InputAction.CallbackContext context)
     {
+        if (!stateMachine.player.Controller.isGrounded) return;
 
+        if (stateMachine.GroundState != null)
+        {
+            stateMachine.GroundState.HandleJumpInput();
+        }
+    }
+    protected virtual void OnRunCanceled(InputAction.CallbackContext context)
+    {
+        Debug.Log("▶ Run canceled!");
+
+        if (stateMachine.GroundState != null)
+        {
+            if (stateMachine.MovementInput != Vector2.zero)
+            {
+                Debug.Log("→ Switching to WalkState");
+                stateMachine.GroundState.ChangeSubState(stateMachine.GroundState.WalkState);
+                stateMachine.MovementSpeedModifier = groundData.WalkSpeedModifier;
+            }
+            else
+            {
+                Debug.Log("→ Switching to IdleState");
+                stateMachine.GroundState.ChangeSubState(stateMachine.GroundState.IdleState);
+                stateMachine.MovementSpeedModifier = 1f;
+            }
+        }
     }
 
     private void ReadMovementInput()
@@ -113,21 +141,13 @@ public class PlayerBaseState : IState
 
     private void Rotate(Vector3 direction)
     {
-        if (direction != Vector3.zero)
-        {
-            Transform playerTransform = stateMachine.player.transform;
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, stateMachine.RotationDamping * Time.deltaTime);
-        }
+        float targetYRotation = stateMachine.MainCamTransform.eulerAngles.y;
+        Quaternion targetRotation = Quaternion.Euler(0f, targetYRotation, 0f);
+        stateMachine.player.transform.rotation = targetRotation;
     }
 
     public void FixedUpdate()
     {
-        throw new System.NotImplementedException();
-    }
 
-    public virtual void Update()
-    {
-        Move();
     }
 }

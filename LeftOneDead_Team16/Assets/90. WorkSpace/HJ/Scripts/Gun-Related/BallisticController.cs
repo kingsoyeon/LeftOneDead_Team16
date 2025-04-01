@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BallisticController : MonoBehaviour, IPoolable
+public class BallisticController : MonoBehaviour
 {
     public BulletBallistics data;
     public BulletState state;

@@ -49,7 +49,7 @@ public class GameManager : Singleton<GameManager>
     public void ChangeToLobby()
     {
         CurrentState = GameState.Loading;
-        SceneLoader.sceneName = SceneName.MainScene;
+        SceneLoader.sceneName = SceneName.LobbyScene;
         SceneLoader.nextState = GameState.Lobby;
         SceneManager.LoadScene("LoadingScene");
 

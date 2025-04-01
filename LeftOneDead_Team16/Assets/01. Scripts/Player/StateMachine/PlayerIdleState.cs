@@ -1,38 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerIdleState : PlayerGroundState
+public class PlayerIdleState : PlayerBaseState
 {
-    public PlayerIdleState(PlayerStateMachine stateMachine) : base(stateMachine)
-    {
+    private readonly PlayerGroundState groundState;
 
+    public PlayerIdleState(PlayerStateMachine stateMachine, PlayerGroundState groundState) : base(stateMachine)
+    {
+        this.groundState = groundState;
     }
 
-    public override void Enter()
+    public override void Update()
     {
-        base.Enter();
-
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
-    public override void Uqdate()
-    {
-        base.Uqdate();
+        base.Update();
 
         if (stateMachine.MovementInput != Vector2.zero)
         {
-            stateMachine.ChageState(stateMachine.WalkState);
-            return;
-        }
-    }
+            bool isRunning = stateMachine.player.Input.playerActions.Run.ReadValue<float>() > 0f;
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
+            if (isRunning)
+            {
+                groundState.ChangeSubState(groundState.RunState);
+            }
+            else
+            {
+                groundState.ChangeSubState(groundState.WalkState);
+            }
+        }
     }
 }

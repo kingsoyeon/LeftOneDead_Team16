@@ -4,26 +4,28 @@ using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerWalkState : PlayerGroundState
+public class PlayerWalkState : PlayerBaseState
 {
-    public PlayerWalkState(PlayerStateMachine stateMachine) : base(stateMachine)
+    private readonly PlayerGroundState groundState;
+
+    public PlayerWalkState(PlayerStateMachine stateMachine, PlayerGroundState groundState) : base(stateMachine)
     {
+        this.groundState = groundState;
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (stateMachine.player.Input.playerActions.Run.ReadValue<float>() > 0f)
+        {
+            groundState.ChangeSubState(groundState.RunState);
+        }
     }
 
     public override void Enter()
     {
         stateMachine.MovementSpeedModifier = groundData.WalkSpeedModifier;
         base.Enter();
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
-    protected override void OnRunStarted(InputAction.CallbackContext context)
-    {
-        base.OnRunStarted(context);
-        stateMachine.ChageState(stateMachine.RunState);
     }
 }

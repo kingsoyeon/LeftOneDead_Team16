@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        stateMachine.ChageState(stateMachine.IdleState);
+        stateMachine.ChangeState(stateMachine.GroundState);
     }
 
     private void Update()

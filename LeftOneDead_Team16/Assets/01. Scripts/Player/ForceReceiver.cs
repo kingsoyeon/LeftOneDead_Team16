@@ -37,6 +37,6 @@ public class ForceReceiver : MonoBehaviour
     public void Jump(float jumpForce)
     {
         jumpCooldownTimer = jumpCooldownTime;
-        verticalVelocity += jumpForce;
+        verticalVelocity = jumpForce;
     }
 }
