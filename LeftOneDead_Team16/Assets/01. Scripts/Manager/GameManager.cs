@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,13 +35,18 @@ public class GameManager : Singleton<GameManager>
     /// <summary>
     /// 1. 로비에서 스테이지 진입 버튼 2. 2번째 스테이지를 시작할 때 [최종 'StageScene'으로 전환]
     /// </summary>
-    public void StageStart()
+    public void StageStart(StageData stage)
     {
-        CurrentState = GameState.Loading;
-        SceneLoader.sceneName = SceneName.Stage1Scene;
-        SceneLoader.nextState = GameState.InGame;
-        SceneManager.LoadScene("LoadingScene");
+        // string -> Enum 변환
+        if (Enum.TryParse(stage.sceneName, out SceneName scene))
+            {
+            CurrentState = GameState.Loading;
+            //SceneLoader.sceneName = SceneName.Stage1Scene;
+            SceneLoader.sceneName = scene;
 
+            SceneLoader.nextState = GameState.InGame;
+            SceneManager.LoadScene("LoadingScene");
+        }
     }
 
     /// <summary>

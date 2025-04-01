@@ -274,8 +274,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5454367136997846442}
-        m_TargetAssemblyTypeName: StageSelectUI, Assembly-CSharp
+      - m_Target: {fileID: 4499983957163904434}
+        m_TargetAssemblyTypeName: StageSelectButton, Assembly-CSharp
         m_MethodName: OnStageSelectButton
         m_Mode: 1
         m_Arguments:

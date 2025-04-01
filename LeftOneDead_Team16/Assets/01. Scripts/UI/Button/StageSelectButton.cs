@@ -17,4 +17,9 @@ public class StageSelectButton : MonoBehaviour
         stageData = data;
         stageNameText.text = data.stageName;
     }
+
+    public void OnStageSelectButton()
+    {
+        GameManager.Instance.StageStart(stageData);
+    }
 }

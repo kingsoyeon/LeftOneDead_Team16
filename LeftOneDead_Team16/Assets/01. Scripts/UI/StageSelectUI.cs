@@ -32,9 +32,5 @@ public class StageSelectUI : PopupUI
         stageList = Resources.LoadAll<StageData>("Data/SO/Stage").ToList();
     }
 
-    public void OnStageSelectButton()
-    {
-        // 현재 강제적으로 스테이지 1-1에 이동 중 - 임시
-        GameManager.Instance.StageStart();
-    }
+    
 }
