@@ -93,6 +93,31 @@ public class Enemy : MonoBehaviour, IDamageable
         stateMachine.FixedUpdate();
     }
 
+    /// <summary>
+    /// 초기화 함수
+    /// </summary>
+    public void Initialize()
+    {
+        curHp = baseHp;
+        animator.SetBool("Die", false);
+        animator.SetBool("Move", false);
+        animator.SetBool("Attack", false);
+        animator.SetBool("Skill", false);
+        navMeshAgent.isStopped = true;
+        navMeshAgent.enabled = true;
+        navMeshAgent.ResetPath();
+        target = null;
+
+        if (startState == EnemyStartState.Idle)
+        {
+            stateMachine.ChangeState(stateMachine.IdleState);
+        }
+        else if (startState == EnemyStartState.Trace)
+        {
+            stateMachine.ChangeState(stateMachine.PlayerTargetState);
+        }            
+
+    }
 
     // 일정 위치로 무조건 가게 하는 함수
     public void MoveToPosition(Vector3 position)
@@ -173,4 +198,6 @@ public class Enemy : MonoBehaviour, IDamageable
         Debug.Log("Die");
         animator.SetBool("Die", true);
     }
+
+
 }

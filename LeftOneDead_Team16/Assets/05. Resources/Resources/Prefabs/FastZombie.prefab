@@ -1564,7 +1564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ac92da6103d7149816c5203bff1dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySO: {fileID: 11400000, guid: 521df14d982299245a3262e3ccba7cca, type: 2}
+  enemySO: {fileID: 11400000, guid: 6dfaf900b427cde42a9f216a48ed54b6, type: 2}
   characterController: {fileID: 8987302211497169468}
   animator: {fileID: 1766302264212154182}
   enemyAnimaionData:
