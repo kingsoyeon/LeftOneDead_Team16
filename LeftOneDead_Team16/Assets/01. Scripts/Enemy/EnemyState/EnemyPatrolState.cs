@@ -34,14 +34,22 @@ public class EnemyPatrolState : EnemyBaseState
         stateMachine.enemy.navMeshAgent.SetDestination(patrolPosition);
         stateMachine.enemy.animator.SetFloat("Speed", 0f);
         patrolTime = 0f;
+        allTime = 0f;
     }
 
+    float allTime = 0f;
     public override void Update()
     {
         base.Update();
-        if(stateMachine.enemy.CheckTargetInSight()) return;
-        Patrol();
-        CheckPatrolTime();
+
+        allTime += Time.deltaTime;
+        if(allTime > 0.1f){
+
+            if(stateMachine.enemy.CheckTargetInSight()) return;
+            Patrol();
+            CheckPatrolTime();
+            allTime = 0f;
+        }
     }
 
     public override void Exit()

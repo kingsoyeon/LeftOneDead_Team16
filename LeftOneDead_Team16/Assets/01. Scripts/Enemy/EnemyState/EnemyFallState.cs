@@ -12,6 +12,7 @@ public class EnemyFallState : EnemyBaseState
     {
         base.Enter();
         stateMachine.enemy.animator.SetBool("Fall", true);
+        Debug.Log("떨어지는 상태 진입");
     }
     public override void Exit()
     {
