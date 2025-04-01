@@ -10797,7 +10797,7 @@ MonoBehaviour:
     attackParameterName: Attack
     skillAttackParameterName: SkillAttack
     deathParameterName: Death
-  skill: {fileID: 0}
+  skill: {fileID: 5820269036545954028}
   startState: 0
   target: {fileID: 0}
   targetPlayer: {fileID: 0}
@@ -10840,7 +10840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <skillType>k__BackingField: 0
-  skillParticle: {fileID: 0}
+  skillParticle: {fileID: 7627762952477029595}
 --- !u!1 &4266443639923113342
 GameObject:
   m_ObjectHideFlags: 0
