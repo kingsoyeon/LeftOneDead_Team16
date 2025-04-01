@@ -6,6 +6,8 @@ public class EnemyBaseState : IState
 {
     protected EnemyStateMachine stateMachine;
 
+
+
     public EnemyBaseState(EnemyStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;

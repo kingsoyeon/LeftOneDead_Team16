@@ -24,14 +24,7 @@ public class EnemyFallState : EnemyBaseState
         base.Update();
        if (stateMachine.enemy.navMeshAgent.isOnNavMesh)
        {
-        if(stateMachine.enemy.targetPlayer != null)
-        {
-            stateMachine.ChangeState(stateMachine.PlayerTargetState);
-        }
-        else
-        {
-            stateMachine.ChangeState(stateMachine.PatrolState);
-        }
+            stateMachine.ChangeState(stateMachine.beforeState);
        }
     }
 

@@ -15,6 +15,7 @@ public class EnemyJumpState : EnemyBaseState
 
         stateMachine.enemy.Jump();
         StartAnimation(stateMachine.enemy.enemyAnimaionData.JumpParameterName);
+        stateMachine.enemy.animator.SetFloat("Speed", 1f);
     }
     public override void Exit()
     {
@@ -30,7 +31,7 @@ public class EnemyJumpState : EnemyBaseState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (stateMachine.enemy.navMeshAgent.velocity.y <= 0)
+        if (stateMachine.enemy.navMeshAgent.velocity.y <= 0f)
         {
             stateMachine.ChangeState(stateMachine.FallState);
             return;
