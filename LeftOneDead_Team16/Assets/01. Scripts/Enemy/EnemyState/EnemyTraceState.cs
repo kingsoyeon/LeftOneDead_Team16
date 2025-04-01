@@ -40,7 +40,7 @@ public class EnemyTraceState : EnemyBaseState
         if(stateMachine.enemy.target != null)   
         { 
             // 타겟이 있으면 추적 처리
-            if(Vector3.Distance(stateMachine.enemy.transform.position, stateMachine.enemy.target.position) > stateMachine.enemy.attackRange)
+            if(Vector3.Distance(stateMachine.enemy.transform.position, stateMachine.enemy.target.position) > stateMachine.enemy.attackRange - 0.1f)
             {
                 // 공격 범위 밖에 있으면 추적 처리
                 stateMachine.enemy.navMeshAgent.SetDestination(stateMachine.enemy.target.position);
@@ -49,7 +49,7 @@ public class EnemyTraceState : EnemyBaseState
             else
             {
                 // 공격 범위 내에 들어오면 공격 상태로 변경
-                stateMachine.enemy.navMeshAgent.isStopped = true;
+                stateMachine.enemy.transform.position = stateMachine.enemy.target.position;
                 stateMachine.ChangeState(stateMachine.AttackState);
             }
         }

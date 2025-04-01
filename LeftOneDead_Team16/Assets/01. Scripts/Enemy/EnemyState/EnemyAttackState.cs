@@ -48,6 +48,7 @@ public class EnemyAttackState : EnemyBaseState
             Attack();
             lastAttackTime = currentTime;
         }
+
     }
 
 
