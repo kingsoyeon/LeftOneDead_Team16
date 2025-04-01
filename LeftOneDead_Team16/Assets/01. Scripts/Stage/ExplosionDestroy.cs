@@ -9,15 +9,6 @@ public class ExplosionDestroy : MonoBehaviour
         StageManager.Instance.AddActionToEventActionDict(0, ExplosionEvent);
     }
 
-    private void Update()
-    {
-        // 테스트 코드
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            ExplosionEvent();
-        }
-    }
-
     private void ExplosionEvent()
     {
         print("폭발 발생");
