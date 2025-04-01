@@ -8,7 +8,8 @@ public enum SceneName
 {
     LobbyScene = 0,
     LoadingScene = 1,
-    StageScene= 2
+    Stage1Scene= 2,
+    Stage2Scene= 3,   
 }
 
 /// <summary>
