@@ -17,11 +17,12 @@ MonoBehaviour:
     <MoveSpeed>k__BackingField: 5
     <RunSpeed>k__BackingField: 7.5
     <RotateSpeed>k__BackingField: 1
-    <DetectionRange>k__BackingField: 10
+    <DetectionRange>k__BackingField: 20
+    <DetectionAngle>k__BackingField: 15
     <TraceRange>k__BackingField: 2
     <PatrolTime>k__BackingField: 6
     <PatrolWaitTime>k__BackingField: 3
-    <AttackRange>k__BackingField: 5
+    <AttackRange>k__BackingField: 2.5
     <AttackSpeed>k__BackingField: 5
     <SkillAttackRange>k__BackingField: 5
     <SkillAttackSpeed>k__BackingField: 1

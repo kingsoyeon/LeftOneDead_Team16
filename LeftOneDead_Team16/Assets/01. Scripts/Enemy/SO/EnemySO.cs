@@ -13,8 +13,11 @@ public class EnemyMovementData
     [field: SerializeField][field: Range(0, 10)]
     public float RotateSpeed { get; private set; } = 1f; // 기본 회전 스피드
 
-    [field: SerializeField][field: Range(0, 10)]
+    [field: SerializeField][field: Range(0, 30)]
     public float DetectionRange { get; private set; } = 10; // 감지 거리
+
+    [field: SerializeField][field: Range(0, 60)]
+    public float DetectionAngle { get; private set; } = 30; // 감지 각도
 
     [field: SerializeField][field: Range(0, 10)]
     public float TraceRange { get; private set; } = 10; // 순찰 거리

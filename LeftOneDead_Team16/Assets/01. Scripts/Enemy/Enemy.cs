@@ -36,12 +36,16 @@ public class Enemy : MonoBehaviour, IDamageable
     public float skillSpeed => enemySO.MovementData.SkillAttackSpeed;
 
     public float detectionRange => enemySO.MovementData.DetectionRange;
+    public float detectionAngle => enemySO.MovementData.DetectionAngle;
 
     public int baseHp => enemySO.StatData.BaseHp;
     public int baseAtk => enemySO.StatData.BaseAtk;
     public int baseDef => enemySO.StatData.BaseDef;
 
     public Transform target;    // 적의 타겟
+
+    public Transform targetPlayer;
+    public float distanceToPlayer;
     public LayerMask targetLayer;
 
     public int curHp{get; private set;}
@@ -64,6 +68,8 @@ public class Enemy : MonoBehaviour, IDamageable
         curHp = baseHp;
 
         skill = GetComponent<Skill>();
+
+        targetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Start()
@@ -86,6 +92,83 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Update()
     {
         stateMachine.Update();
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(CheckDistanceToPlayer());
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(CheckDistanceToPlayer());
+    }
+
+
+
+    /// <summary>
+    /// 플레이어와의 distance를 계산하는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator CheckDistanceToPlayer()
+    {
+        while(true)
+        {
+            distanceToPlayer = DistanceToPlayer();
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+
+    /// <summary>
+    /// 플레이어와의 distance를 계산하는 함수
+    /// </summary>
+    /// <returns></returns>
+    public float DistanceToPlayer()
+    {
+        return Vector3.Distance(transform.position, targetPlayer.position);
+    }
+
+
+    /// <summary>
+    /// distance를 시야 거리랑 비교해서 시야 거리보다 짧을 경우 해당 플레이어를 향해 ray발사        
+    /// </summary>
+    public bool CheckTargetInSight()
+    {
+        if(distanceToPlayer <= detectionRange) // 비교
+        {
+            RaycastHit hitA;
+            // 레이 발사함
+            if(Physics.Raycast(transform.position, targetPlayer.position - transform.position, out hitA, detectionRange, targetLayer))
+            {
+                if (hitA.collider.gameObject.layer != LayerMask.NameToLayer("Player"))
+                {
+                    return false;
+                }
+
+                // a 벡터 계산 시작/ raycast를 솼던 플레이어를 향해 쏜 방향벡터를 가지고 옴
+                Vector3 a = targetPlayer.position - transform.position;
+                a.y = 0;
+                a = a.normalized;
+
+                // 플레이어 방향 벡터 계산
+                Vector3 b = transform.forward;
+                b.y = 0;
+                b = b.normalized;
+
+                float angle = Vector3.Angle(a, b);  // 얘는 0에서 180도 사이의 각도를 반환함
+                Debug.Log($"angle : {angle}");
+                if (angle <= detectionAngle)   // 만약에 detectionAngle이 30이면, 왼쪽 30 / 오른쪽 30 => 총 60도 만큼 체크해줌
+                {
+                    Debug.Log("플레이어 타겟 발견");
+                    stateMachine.ChangeState(stateMachine.PlayerTargetState);
+                    return true;
+                }
+            }
+
+        }
+
+        return false;
     }
 
     private void FixedUpdate()
@@ -139,6 +222,9 @@ public class Enemy : MonoBehaviour, IDamageable
         stateMachine.ChangeState(stateMachine.TraceState);
         
     }
+
+
+
 
     /// <summary>
     /// 가장 가까운 타겟을 찾는 함수

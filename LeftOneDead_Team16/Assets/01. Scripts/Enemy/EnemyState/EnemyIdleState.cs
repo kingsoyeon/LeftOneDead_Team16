@@ -32,7 +32,7 @@ public class EnemyIdleState : EnemyBaseState
         base.Update();
 
         // 타겟을 검색
-        if(stateMachine.enemy.FindNearestTarget()) return;
+        if(stateMachine.enemy.CheckTargetInSight()) return;
 
         // 대기 상태 시간 증가
         idleTime += Time.deltaTime;

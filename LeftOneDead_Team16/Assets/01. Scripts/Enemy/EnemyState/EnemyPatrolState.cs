@@ -35,7 +35,7 @@ public class EnemyPatrolState : EnemyBaseState
     public override void Update()
     {
         base.Update();
-        if(stateMachine.enemy.FindNearestTarget()) return;
+        if(stateMachine.enemy.CheckTargetInSight()) return;
         Patrol();
     }
 
