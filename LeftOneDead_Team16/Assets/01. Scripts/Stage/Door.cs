@@ -30,15 +30,6 @@ public class Door : MonoBehaviour, IInteractable
         StageManager.Instance.AddActionToEventActionDict(0, Interact);
     }
 
-    private void Update()
-    {
-        // test 코드
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-        }
-    }
-
     public void Interact()
     {
         StartCoroutine(ToggleDoor());
