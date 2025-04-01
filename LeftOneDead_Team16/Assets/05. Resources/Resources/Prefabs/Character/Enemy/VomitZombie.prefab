@@ -398,7 +398,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -5622,7 +5622,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -10800,6 +10800,8 @@ MonoBehaviour:
   skill: {fileID: 0}
   startState: 0
   target: {fileID: 0}
+  targetPlayer: {fileID: 0}
+  distanceToPlayer: 0
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
