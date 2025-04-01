@@ -37,6 +37,5 @@ public class PlayerRunState : PlayerBaseState
     public override void Exit()
     {
         base.Exit();
-        stateMachine.MovementSpeedModifier = groundData.WalkSpeedModifier;
     }
 }

@@ -19,10 +19,5 @@ public class PlayerFallState : PlayerBaseState
     public override void Update()
     {
         base.Update();
-
-        if (stateMachine.player.Controller.velocity.y <= 0)
-        {
-            airState.ChangeSubState(airState.FallState);
-        }
     }
 }

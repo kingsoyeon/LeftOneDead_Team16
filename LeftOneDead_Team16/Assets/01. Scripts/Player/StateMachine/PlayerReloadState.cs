@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerReloadState : PlayerBaseState
 {
-    private readonly PlayerReloadState reloadState;
+    private readonly PlayerAttackState attackState;
 
     public PlayerReloadState(PlayerStateMachine stateMachine, PlayerAttackState attackState) : base(stateMachine)
     {
-        this.reloadState = reloadState;
+        this.attackState = attackState;
     }
 
     public override void Enter()

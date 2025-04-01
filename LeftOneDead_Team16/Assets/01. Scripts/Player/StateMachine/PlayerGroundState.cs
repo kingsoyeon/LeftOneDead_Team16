@@ -30,13 +30,26 @@ public class PlayerGroundState : PlayerBaseState
         base.Enter();
         groundCheckTimer = groundCheckGraceTime;
 
-        currentGroundState = IdleState;
+        bool isMoving = stateMachine.MovementInput != Vector2.zero;
+        bool isRunning = stateMachine.player.Input.playerActions.Run.ReadValue<float>() > 0f;
+
+        if (isMoving)
+        {
+            currentGroundState = isRunning ? RunState : WalkState;
+        }
+        else
+        {
+            currentGroundState = IdleState;
+        }
+
         currentGroundState.Enter();
     }
 
     public override void Exit()
     {
         currentGroundState.Exit();
+
+        
         base.Exit();
     }
 

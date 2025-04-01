@@ -15,5 +15,19 @@ public class PlayerIdleState : PlayerBaseState
     public override void Update()
     {
         base.Update();
+
+        if (stateMachine.MovementInput != Vector2.zero)
+        {
+            bool isRunning = stateMachine.player.Input.playerActions.Run.ReadValue<float>() > 0f;
+
+            if (isRunning)
+            {
+                groundState.ChangeSubState(groundState.RunState);
+            }
+            else
+            {
+                groundState.ChangeSubState(groundState.WalkState);
+            }
+        }
     }
 }

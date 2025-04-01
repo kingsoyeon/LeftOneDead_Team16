@@ -27,8 +27,6 @@ public class PlayerAirState : PlayerBaseState
         {
             currentAirState = FallState;
         }
-
-        currentAirState.Enter();
     }
 
     public void EnterFromFalling()

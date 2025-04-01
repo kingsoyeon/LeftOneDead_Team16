@@ -21,8 +21,11 @@ public class PlayerWalkState : PlayerBaseState
         {
             groundState.ChangeSubState(groundState.RunState);
         }
+    }
 
-        // 항상 걷기 속도 유지
+    public override void Enter()
+    {
         stateMachine.MovementSpeedModifier = groundData.WalkSpeedModifier;
+        base.Enter();
     }
 }

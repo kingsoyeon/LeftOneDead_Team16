@@ -41,6 +41,7 @@ public class PlayerStateMachine : StateMachine
         currentState?.Exit();
         currentState = state;
         currentState?.Enter();
+        Debug.Log(currentState);
     }
 
     public void PhysicsUpdate()
