@@ -5840,7 +5840,7 @@ GameObject:
   - component: {fileID: 6414780006280185870}
   - component: {fileID: 5820269036545954028}
   m_Layer: 7
-  m_Name: FatZombie
+  m_Name: VomitZombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -29,6 +29,7 @@ public class EnemyTraceState : EnemyBaseState
         base.Exit();
         stateMachine.enemy.animator.SetBool("Move", false);
         stateMachine.enemy.animator.SetFloat("Speed", 0f);
+        stateMachine.enemy.navMeshAgent.isStopped = false;
     }
     
     /// <summary>
@@ -49,7 +50,7 @@ public class EnemyTraceState : EnemyBaseState
             else
             {
                 // 공격 범위 내에 들어오면 공격 상태로 변경
-                stateMachine.enemy.transform.position = stateMachine.enemy.target.position;
+                stateMachine.enemy.navMeshAgent.isStopped = true;
                 stateMachine.ChangeState(stateMachine.AttackState);
             }
         }
