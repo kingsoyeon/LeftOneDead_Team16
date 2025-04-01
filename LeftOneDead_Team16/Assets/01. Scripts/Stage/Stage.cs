@@ -14,10 +14,6 @@ public class Stage : MonoBehaviour
     private void Awake()
     {
         enemyList = new();
-    }
-
-    private void Start()
-    {
         RespawnPlayer();
         RespawnInitialEnemy();
         StageManager.Instance.SetCurrentStage(this);

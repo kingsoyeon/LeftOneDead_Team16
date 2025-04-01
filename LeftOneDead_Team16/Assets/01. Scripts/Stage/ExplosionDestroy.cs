@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ExplosionDestroy : MonoBehaviour
@@ -7,6 +8,14 @@ public class ExplosionDestroy : MonoBehaviour
     private void Start()
     {
         StageManager.Instance.AddActionToEventActionDict(0, ExplosionEvent);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            ExplosionEvent();
+        }
     }
 
     private void ExplosionEvent()
