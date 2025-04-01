@@ -12,4 +12,15 @@ public abstract class BaseUI : MonoBehaviour
     {
         this.uiManager = uiManager;
     }
+
+    public virtual void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public virtual void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
 }
