@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SlotUI : MonoBehaviour
+public class SlotUI : MonoBehaviour
 {
-    [SerializeField] private WeaponSlot weaponSlot;
-    [SerializeField] private PistolSlot pistolSlot;
-    [SerializeField] private ItemSlot itemSlot;
+    //[SerializeField] private WeaponSlot weaponSlot;
+    //[SerializeField] private PistolSlot pistolSlot;
+    //[SerializeField] private ItemSlot itemSlot;
 
-    public void Init(SlotUI slotUI) 
-    {
-        slotUI = this;
-    }
+    //public void Init(SlotUI slotUI) 
+    //{
+    //    slotUI = this;
+    //}
     
 
     void Update()
