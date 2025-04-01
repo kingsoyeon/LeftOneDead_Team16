@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     [field:SerializeField] private EnemySO enemySO;
     [field:SerializeField] private EnemyStateMachine stateMachine;
+    [field:SerializeField] private EnemyStateMachine beforeStateMachine;
     public CharacterController characterController;
     public Animator animator; // 애니메이터
     [field: SerializeField] public EnemyAnimaionData enemyAnimaionData{get; private set;} // 애니메이션 데이터
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public Skill skill; // 스킬
 
     public EnemyStartState startState = EnemyStartState.Idle;  // 시작 상태 정해주기 => 기본 대기
+
 
     public float moveSpeed => enemySO.MovementData.MoveSpeed;
     public float runSpeed => enemySO.MovementData.RunSpeed;
@@ -96,7 +98,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         stateMachine.Update();
 
-        if (stateMachine.enemy.navMeshAgent.velocity.y < 0)
+        if (stateMachine.enemy.navMeshAgent.velocity.y < -1f)
         {
             Debug.Log("fall 상태 진입");
             stateMachine.ChangeState(stateMachine.FallState);
@@ -104,7 +106,7 @@ public class Enemy : MonoBehaviour, IDamageable
         }
 
         // 점프 상태 진입
-        if (stateMachine.enemy.navMeshAgent.velocity.y > 0)
+        if (stateMachine.enemy.navMeshAgent.velocity.y > 1f)
         {
             Debug.Log("jump 상태 진입");
             stateMachine.ChangeState(stateMachine.JumpState);

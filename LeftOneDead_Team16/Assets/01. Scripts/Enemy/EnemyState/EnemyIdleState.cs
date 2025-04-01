@@ -17,6 +17,7 @@ public class EnemyIdleState : EnemyBaseState
         stateMachine.enemy.animator.SetBool("Idle", true);
         stateMachine.enemy.navMeshAgent.isStopped = true;
         idleTime = 0;
+        allTime = 0f;
     }
 
     public override void Exit()
@@ -27,15 +28,21 @@ public class EnemyIdleState : EnemyBaseState
 
     }
 
+    float allTime = 0f;
     public override void Update()
     {
         base.Update();
+        idleTime += Time.deltaTime;
+        allTime += Time.deltaTime;
 
         // 타겟을 검색
-        if(stateMachine.enemy.CheckTargetInSight()) return;
+        if(allTime > 0.1f){
+            if (stateMachine.enemy.CheckTargetInSight()) return;
+            allTime = 0f;
+        }
 
         // 대기 상태 시간 증가
-        idleTime += Time.deltaTime;
+        
 
         // 대기 상태 시간이 지나면 순찰 상태로 변경
         if(idleTime >= stateMachine.enemy.patrolWaitTime)

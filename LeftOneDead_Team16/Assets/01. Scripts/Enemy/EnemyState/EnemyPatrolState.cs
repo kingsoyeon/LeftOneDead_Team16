@@ -11,8 +11,11 @@ public class EnemyPatrolState : EnemyBaseState
     [Header("Wandering")]
     private float maxWanderDistance = 5f;
     private float maxDistance = 5f;
-    private float minWanderWaitTime = 1f;
-    private float maxWanderWaitTime = 3f;
+
+
+    private float patrolMaxTime = 5f;
+    private float patrolTime = 0f;
+
 
     Vector3 patrolPosition;
 
@@ -30,13 +33,23 @@ public class EnemyPatrolState : EnemyBaseState
         patrolPosition = GetPatrolPosition();
         stateMachine.enemy.navMeshAgent.SetDestination(patrolPosition);
         stateMachine.enemy.animator.SetFloat("Speed", 0f);
+        patrolTime = 0f;
+        allTime = 0f;
     }
 
+    float allTime = 0f;
     public override void Update()
     {
         base.Update();
-        if(stateMachine.enemy.CheckTargetInSight()) return;
-        Patrol();
+
+        allTime += Time.deltaTime;
+        if(allTime > 0.1f){
+
+            if(stateMachine.enemy.CheckTargetInSight()) return;
+            Patrol();
+            CheckPatrolTime();
+            allTime = 0f;
+        }
     }
 
     public override void Exit()
@@ -53,6 +66,7 @@ public class EnemyPatrolState : EnemyBaseState
     {
         Debug.Log("Patrol");
         Debug.Log($"patrolPosition: {patrolPosition}");
+        patrolTime += Time.deltaTime;
 
         // 정찰 위치에 도달했을 때 아이들 상태로 전환
         if (Vector3.Distance(stateMachine.enemy.transform.position, patrolPosition) < 0.1f)
@@ -99,4 +113,12 @@ public class EnemyPatrolState : EnemyBaseState
         return hit.position;
     }
 
+    // 일정 시간 patrol을 반복했다면 꼈다고 판단하고 대기 상태로 전환
+    private void CheckPatrolTime()
+    {
+        if(patrolTime > patrolMaxTime)
+        {
+            stateMachine.ChangeState(stateMachine.IdleState);
+        }
+    }
 }

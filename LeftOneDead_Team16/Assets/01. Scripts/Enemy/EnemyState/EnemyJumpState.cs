@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyJumpState : EnemyBaseState
 {
+    float jumpTime = 0f;
+    float jumpMaxTime = 3f;
     public EnemyJumpState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
 
@@ -12,9 +14,11 @@ public class EnemyJumpState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
-
         stateMachine.enemy.Jump();
         StartAnimation(stateMachine.enemy.enemyAnimaionData.JumpParameterName);
+        stateMachine.enemy.animator.SetFloat("Speed", 1f);
+        jumpTime = 0f;
+        Debug.Log("점프 상태 진입");
     }
     public override void Exit()
     {
@@ -25,16 +29,16 @@ public class EnemyJumpState : EnemyBaseState
     public override void Update()
     {
         base.Update();
+        jumpTime += Time.deltaTime;
+        if(jumpTime > jumpMaxTime)
+        {
+            stateMachine.ChangeState(stateMachine.IdleState);
+        }
     }
 
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (stateMachine.enemy.navMeshAgent.velocity.y <= 0)
-        {
-            stateMachine.ChangeState(stateMachine.FallState);
-            return;
-        }
     }
 
 }
