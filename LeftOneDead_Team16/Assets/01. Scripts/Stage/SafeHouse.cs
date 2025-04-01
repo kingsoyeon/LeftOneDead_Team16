@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SafeHouse : MonoBehaviour
 {
-    private StageManager stageManager;
+    private Player player;
     
     private Door door;
     
@@ -16,7 +16,7 @@ public class SafeHouse : MonoBehaviour
 
     private void Start()
     {
-        stageManager = StageManager.Instance;
+        player = StageManager.Instance.Player;
     }
 
     private void Update()
@@ -31,14 +31,14 @@ public class SafeHouse : MonoBehaviour
     /// <para>False: 건물 외부</para></returns>
     private bool IsInPlayer()
     {
-        return boxCol.bounds.Contains(stageManager.Player.transform.position);
+        return boxCol.bounds.Contains(player.transform.position);
     }
 
     private void StageClear()
     {
         if (IsInPlayer() && door.IsClosed)
         {
-            stageManager.ClearStage();
+            StageManager.Instance.ClearStage();
         }
     }
 }

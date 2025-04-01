@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -28,6 +29,14 @@ public class Door : MonoBehaviour, IInteractable
     {
         // test 코드
         StageManager.Instance.AddActionToEventActionDict(0, Interact);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
     }
 
     public void Interact()
