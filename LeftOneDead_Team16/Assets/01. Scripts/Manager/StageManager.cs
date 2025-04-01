@@ -4,53 +4,16 @@ using UnityEngine;
 
 public class StageManager : Singleton<StageManager>
 {
-    private Dictionary<int, List<StageData>> stageDataDict;
-    private Stage curStage;
+    private Stage curStage; // 현재 스테이지
 
-    private Dictionary<int, Action> eventActionDict;
+    private Dictionary<int, Action> eventActionDict; // 이벤트 저장 딕셔너리
 
-    [NonSerialized] public Player Player;
+    public Player Player { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
         eventActionDict = new Dictionary<int, Action>();
-        InitStageInfoData();
-    }
-
-    private void Update()
-    {
-        // test 코드
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            eventActionDict[0]?.Invoke();
-        }
-    }
-
-    /// <summary>
-    /// 스테이지 SO 딕셔너리에 저장
-    /// </summary>
-    private void InitStageInfoData()
-    {
-        var stageSOAsset = Resources.LoadAll<StageData>("Data/SO/Stage");
-        stageDataDict = new();
-
-        if (stageSOAsset != null)
-        {
-            for (var i = 0; i < stageSOAsset.Length; i++)
-            {
-                if (stageDataDict.ContainsKey(stageSOAsset[i].chapter))
-                {
-                    stageDataDict[stageSOAsset[i].chapter].Add(stageSOAsset[i]);
-                }
-                else
-                {
-                    var stageList = new List<StageData>();
-                    stageList.Add(stageSOAsset[i]);
-                    stageDataDict.Add(stageSOAsset[i].chapter, stageList);
-                }
-            }
-        }
     }
 
     public void SetCurrentStage(Stage stage)
