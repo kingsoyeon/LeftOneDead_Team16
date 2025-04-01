@@ -21,27 +21,37 @@ public class SceneLoader : MonoBehaviour
     public static SceneName sceneName;
     public static GameManager.GameState nextState;
     private LoadingUI loadingUI;
+    //[SerializeField] private CanvasGroup fadeCanvas;
     public Transform uiTransform;
 
     private void Start()
     {
-        var prefab = Resources.Load<LoadingUI>("UI/Screen/LoadingUI");
-        loadingUI = Instantiate(prefab, uiTransform);
-        gameObject.SetActive(true);
-        StartCoroutine(LoadSceneAsync());
+        //var prefab = Resources.Load<LoadingUI>("UI/Screen/LoadingUI");
+        //loadingUI = Instantiate(prefab, uiTransform);
+        //gameObject.SetActive(true);
+        StartCoroutine(LoadSceneAsync(sceneName));
     }
     
-    private IEnumerator LoadSceneAsync()
+    private IEnumerator LoadSceneAsync(SceneName nextScene)
     { 
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)sceneName);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)nextScene);
         asyncOperation.allowSceneActivation = false;
+
+        var prefab = Resources.Load<LoadingUI>("UI/Screen/LoadingUI");
+        loadingUI = Instantiate(prefab, uiTransform);
 
         yield return StartCoroutine(Fade(true)); // 페이드 효과 코루틴
 
+       
+        gameObject.SetActive(true);
+
         float timer = 0f;
+
         while (!asyncOperation.isDone) 
         {
             yield return null; // 로드가 완료되기 전까지 기다린다.
+
+            timer += Time.deltaTime;
 
             if(asyncOperation.progress < 0.9f) // 진행도 바
             {
@@ -54,11 +64,13 @@ public class SceneLoader : MonoBehaviour
                 if (loadingUI.progressBar.fillAmount >= 0.99f) // 100%까지 차오르면
                 {
                     yield return StartCoroutine(Fade(false)); // 페이드아웃
+                   
                     asyncOperation.allowSceneActivation = true; // 씬 활성화
                 }
             }
+            GameManager.Instance.SetGameState(nextState); // 씬 전환 끝난 후 최종 목적지로 상태 업데이트
         }
-        GameManager.Instance.SetGameState(nextState); // 씬 전환 끝난 후 최종 목적지로 상태 업데이트
+        
     }
     /// <summary>
     /// 페이드 전환 효과 코루틴
