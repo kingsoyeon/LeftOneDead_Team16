@@ -6,19 +6,22 @@ using UnityEngine;
 public enum SkillType
 {
     Vomit,
+    Explosion,
 }
 public class Skill : MonoBehaviour
 {
     [field: SerializeField] public SkillType skillType { get; private set; }
 
-    [Header("Vomit")]
-    public ParticleSystem vomitParticle;
+    [Header("If you use Particle System, you can use this")]
+    public ParticleSystem skillParticle;
+
+
 
     void Awake()
     {
-        if(vomitParticle != null)
+        if(skillParticle != null)
         {
-            vomitParticle.Stop();
+            skillParticle.Stop();
         }
     }
 
@@ -29,6 +32,9 @@ public class Skill : MonoBehaviour
             case SkillType.Vomit:
                 Vomit();
                 break;
+            case SkillType.Explosion:
+                Explosion();
+                break;
         }
     }
 
@@ -36,9 +42,20 @@ public class Skill : MonoBehaviour
     {
         Debug.Log("Vomit");
 
-        if(vomitParticle != null)
+        if(skillParticle != null)
         {
-            vomitParticle.Play();
+            skillParticle.Play();
         }
+    }
+
+    private void Explosion()
+    {
+        Debug.Log("Explosion");
+
+        if(skillParticle != null)
+        {
+            skillParticle.Play();
+        }
+        
     }
 }
