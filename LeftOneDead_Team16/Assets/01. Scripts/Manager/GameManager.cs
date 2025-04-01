@@ -20,6 +20,8 @@ public class GameManager : Singleton<GameManager>
         Loading, 
         Setting,
         InGame,
+        GameOver,
+        GameClear
     }
 
     public GameState CurrentState { get; private set; }
