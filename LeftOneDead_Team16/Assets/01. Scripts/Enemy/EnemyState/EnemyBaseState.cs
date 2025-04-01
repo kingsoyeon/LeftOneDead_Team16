@@ -26,6 +26,27 @@ public class EnemyBaseState : IState
     {
     }
 
+    protected void StartAnimation(int animationHash)
+    {
+        stateMachine.enemy.animator.SetBool(animationHash, true);
+    }
+
+    protected void StartTriggerAnimation(int animationName)
+    {
+        stateMachine.enemy.animator.SetTrigger(animationName);
+    }
+
+    protected void StopAnimation(int animationHash)
+    {
+        stateMachine.enemy.animator.SetBool(animationHash, false);
+    }
+
+    protected void StopTriggerAnimation(int animationName)
+    {
+        stateMachine.enemy.animator.ResetTrigger(animationName);
+    }
+
+
     /// <summary>
     /// 타겟 위치로 움직임      
     /// </summary>

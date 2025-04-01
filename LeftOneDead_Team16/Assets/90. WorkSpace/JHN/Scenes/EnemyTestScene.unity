@@ -186,6 +186,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie
       objectReference: {fileID: 0}
+    - target: {fileID: 8550347273633087010, guid: 548b613165deb5f4c8c2aff401eaa3f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -324,7 +329,7 @@ Transform:
   m_GameObject: {fileID: 505607227}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.6, y: 0.86, z: -0.89}
+  m_LocalPosition: {x: -2.6, y: 0.86, z: -1.51}
   m_LocalScale: {x: 2.23635, y: 3.905605, z: 1.3735}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -501,7 +506,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.6, y: 0.86, z: 1.6022767}
-  m_LocalScale: {x: 2.23635, y: 3.905605, z: 1.3735}
+  m_LocalScale: {x: 5.903293, y: 3.905605, z: 3.048758}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1713940363}
@@ -517,7 +522,7 @@ PrefabInstance:
     - target: {fileID: 171053942843558741, guid: 548b613165deb5f4c8c2aff401eaa3f5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.03
+      value: -5.0310845
       objectReference: {fileID: 0}
     - target: {fileID: 171053942843558741, guid: 548b613165deb5f4c8c2aff401eaa3f5,
         type: 3}
@@ -527,27 +532,27 @@ PrefabInstance:
     - target: {fileID: 171053942843558741, guid: 548b613165deb5f4c8c2aff401eaa3f5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.86
+      value: 1.8584383
       objectReference: {fileID: 0}
     - target: {fileID: 171053942843558741, guid: 548b613165deb5f4c8c2aff401eaa3f5,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.82146263
       objectReference: {fileID: 0}
     - target: {fileID: 171053942843558741, guid: 548b613165deb5f4c8c2aff401eaa3f5,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 171053942843558741, guid: 548b613165deb5f4c8c2aff401eaa3f5,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.57026243
       objectReference: {fileID: 0}
     - target: {fileID: 171053942843558741, guid: 548b613165deb5f4c8c2aff401eaa3f5,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 171053942843558741, guid: 548b613165deb5f4c8c2aff401eaa3f5,
         type: 3}
@@ -557,7 +562,7 @@ PrefabInstance:
     - target: {fileID: 171053942843558741, guid: 548b613165deb5f4c8c2aff401eaa3f5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 69.537
       objectReference: {fileID: 0}
     - target: {fileID: 171053942843558741, guid: 548b613165deb5f4c8c2aff401eaa3f5,
         type: 3}
@@ -755,6 +760,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionZombie
       objectReference: {fileID: 0}
+    - target: {fileID: 8550347273633087010, guid: f08b2f5af5136834589c97bcb9364247,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -772,6 +782,7 @@ GameObject:
   - component: {fileID: 1713940362}
   - component: {fileID: 1713940361}
   - component: {fileID: 1713940360}
+  - component: {fileID: 1713940364}
   m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
@@ -868,6 +879,23 @@ Transform:
   - {fileID: 505607228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!191 &1713940364
+OffMeshLink:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713940359}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_AreaIndex: 0
+  m_AgentTypeID: 0
+  m_Start: {fileID: 0}
+  m_End: {fileID: 0}
+  m_CostOverride: -1
+  m_BiDirectional: 1
+  m_Activated: 1
+  m_AutoUpdatePositions: 0
 --- !u!1 &1874172066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,6 +1046,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghoul
       objectReference: {fileID: 0}
+    - target: {fileID: 4917602843003274704, guid: 512c62113b0a26744901346f099e77a7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8092602291252156635, guid: 512c62113b0a26744901346f099e77a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1090,6 +1123,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FatZombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132040801928351175, guid: c8c951d0dee140c49afc90963d4ef61a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5232745261235087165, guid: c8c951d0dee140c49afc90963d4ef61a,
         type: 3}

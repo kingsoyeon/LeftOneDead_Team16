@@ -18,7 +18,8 @@ public class Enemy : MonoBehaviour, IDamageable
     [field:SerializeField] private EnemyStateMachine stateMachine;
     public CharacterController characterController;
     public Animator animator; // 애니메이터
-    public EnemyAnimaionData enemyAnimaionData; // 애니메이션 데이터
+    [field: SerializeField] public EnemyAnimaionData enemyAnimaionData{get; private set;} // 애니메이션 데이터
+
 
     public Skill skill; // 스킬
 
@@ -27,6 +28,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public float moveSpeed => enemySO.MovementData.MoveSpeed;
     public float runSpeed => enemySO.MovementData.RunSpeed;
     public float rotateSpeed => enemySO.MovementData.RotateSpeed;
+    public float jumpForce => enemySO.MovementData.JumpForce;
     public float attackRange => enemySO.MovementData.AttackRange;
     public float traceRange => enemySO.MovementData.TraceRange;
     public float patrolTime => enemySO.MovementData.PatrolTime;
@@ -57,6 +59,7 @@ public class Enemy : MonoBehaviour, IDamageable
         characterController = GetComponent<CharacterController>();
         targetLayer = LayerMask.GetMask("Player");  // 타겟 레이어 설정
         animator = GetComponent<Animator>();
+
     }
 
     private void Awake()
@@ -92,6 +95,13 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Update()
     {
         stateMachine.Update();
+
+        if (stateMachine.enemy.navMeshAgent.velocity.y < 0)
+        {
+            Debug.Log("fall 상태 진입");
+            stateMachine.ChangeState(stateMachine.FallState);
+            return;
+        }
     }
 
     private void OnEnable()
@@ -285,5 +295,14 @@ public class Enemy : MonoBehaviour, IDamageable
         animator.SetBool("Die", true);
     }
 
+   
+    public void Jump()
+    {
+        // 점프 처리
+        navMeshAgent.enabled = false;
+        // 점프 force만큼 점프
+        characterController.Move(Vector3.up * jumpForce);
+        navMeshAgent.enabled = true;
+    }
 
 }

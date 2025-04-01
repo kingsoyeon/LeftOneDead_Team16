@@ -10,6 +10,10 @@ public class EnemyMovementData
 
     [field: SerializeField][field: Range(0, 40)]
     public float RunSpeed { get; private set; } = 10;   // 뛰기 스피드
+
+    [field: SerializeField][field: Range(0, 10)]
+    public float JumpForce { get; private set; } = 10; // 점프 힘
+
     [field: SerializeField][field: Range(0, 10)]
     public float RotateSpeed { get; private set; } = 1f; // 기본 회전 스피드
 
