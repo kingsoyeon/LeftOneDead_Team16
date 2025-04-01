@@ -1,14 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-/*
-public class ItemDataBomb : InteractablesSOBase
-{
-    public List<ExplosiveData> ExplosiveDatas = new List<ExplosiveData>();
-}
-*/
 
 public enum ExplodeType
 {
@@ -16,6 +11,7 @@ public enum ExplodeType
     SpreadFire,
 }
 
+[Serializable]
 public class ExplosiveData
 {
     public ExplodeType ExplodeType;

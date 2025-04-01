@@ -9,4 +9,5 @@ public class StageData : ScriptableObject
     public string stageName;
 
     public SceneAsset scene;
+    public string sceneName;
 }

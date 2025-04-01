@@ -16,3 +16,4 @@ MonoBehaviour:
   stage: 1
   stageName: "\uC2A4\uD14C\uC774\uC9C0 1-1 \uC774\uB984"
   scene: {fileID: 102900000, guid: ac283d43c4a62db4fb9526a746555880, type: 3}
+  sceneName: Stage1_1Scene

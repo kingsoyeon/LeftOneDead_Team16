@@ -43,7 +43,6 @@ public class UIManager : Singleton<UIManager>
         currentScreen = obj.GetComponent<ScreenUI>();
         currentScreen.Show();
 
-
         return currentScreen as T;
     }
     /// <summary>
