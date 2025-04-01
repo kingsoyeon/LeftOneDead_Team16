@@ -71,6 +71,7 @@ public class BombController : MonoBehaviour, IInteractable, IDamageable
             yield return null;
         }
         Explode();
+        Destroy(gameObject);
     }
 
     void InstantExplode(ExplosiveData data)
