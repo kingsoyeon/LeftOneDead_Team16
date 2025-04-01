@@ -5,17 +5,11 @@ using UnityEngine.InputSystem;
 
 public class StageScene : MonoBehaviour
 {
-    
-    
-    void Start()
+    private void Start()
     {
-        
-    }
+        //GameManager.Instance.ChangeState(GameState.Game);
+        UIManager.Instance.ShowScreen<InGameUI>("InGameUI");
+        UIManager.Instance.ShowScreen<HPbar>("HPbar");
 
-
-
-    void Update()
-    {
-        
     }
 }
