@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public enum SceneName
 {
-    MainScene = 0,
+    LobbyScene = 0,
     LoadingScene = 1,
     StageScene= 2
 }
