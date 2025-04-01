@@ -13,7 +13,13 @@ public class EnemyAttackState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
-        
+        stateMachine.enemy.navMeshAgent.isStopped = true;
+        stateMachine.enemy.animator.SetBool("Move", false);
+
+        // 들어오면 일단 처음 공격함
+        lastAttackTime = Time.time - stateMachine.enemy.attackSpeed;
+        Attack(); 
+
     }
 
     public override void Update()
@@ -26,6 +32,7 @@ public class EnemyAttackState : EnemyBaseState
     public override void Exit()
     {
         base.Exit();
+        stateMachine.enemy.navMeshAgent.isStopped = false;
     }
 
 

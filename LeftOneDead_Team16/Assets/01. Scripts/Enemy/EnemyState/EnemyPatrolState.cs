@@ -25,6 +25,7 @@ public class EnemyPatrolState : EnemyBaseState
     {
         base.Enter();
         Debug.Log("PatrolState");
+        stateMachine.enemy.navMeshAgent.isStopped = false;
         stateMachine.enemy.animator.SetBool("Move", true);
         patrolPosition = GetPatrolPosition();
         stateMachine.enemy.navMeshAgent.SetDestination(patrolPosition);

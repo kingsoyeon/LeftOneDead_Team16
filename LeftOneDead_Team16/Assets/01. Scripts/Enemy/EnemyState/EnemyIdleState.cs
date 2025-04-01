@@ -15,6 +15,7 @@ public class EnemyIdleState : EnemyBaseState
         base.Enter();
         Debug.Log("IdleState");
         stateMachine.enemy.animator.SetBool("Idle", true);
+        stateMachine.enemy.navMeshAgent.isStopped = true;
         idleTime = 0;
     }
 
@@ -22,6 +23,8 @@ public class EnemyIdleState : EnemyBaseState
     {
         base.Exit();
         stateMachine.enemy.animator.SetBool("Idle", false);
+        stateMachine.enemy.navMeshAgent.isStopped = false;
+
     }
 
     public override void Update()

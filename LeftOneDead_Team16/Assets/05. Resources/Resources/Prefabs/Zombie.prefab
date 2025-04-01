@@ -4180,6 +4180,7 @@ MonoBehaviour:
     skillAttackParameterName: SkillAttack
     deathParameterName: Death
   skill: {fileID: 0}
+  startState: 0
   target: {fileID: 0}
   targetLayer:
     serializedVersion: 2
