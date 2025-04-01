@@ -80,12 +80,15 @@ public class BallisticController : MonoBehaviour
         IDamageable damageable;
         if (HitObject.transform.gameObject.TryGetComponent(out damageable))
         {
-            Debug.Log("데미지를 입히시오");
-            //throw new System.Exception("데미지 입혀");
-            //damageable.TakeDamage();
+            damageable.TakeDamage((int)GetKineticEnergy() / 5);
+            ChangeState(BulletState.Idle);
         }
     }
 
+    private float GetKineticEnergy()
+    {
+        return data.Mass * velocity.magnitude * velocity.magnitude * 0.5f;
+    }
     private bool CheckCollision(out RaycastHit hit)
     {
         Vector3 direction = posNext - posCurrent;
