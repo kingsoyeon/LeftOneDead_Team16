@@ -20,6 +20,7 @@ public class GunController : MonoBehaviour
     public GunFireMode CurrentFireMode;
 
     public int AmmoCount;
+    public int CurrentAmmoHolding;
 
     private float fireInterval;
     private float timeLastFired;
@@ -39,6 +40,7 @@ public class GunController : MonoBehaviour
     void Initialize()
     {
         fireInterval = 60f / Data.RoundPerMinute;
+        CurrentAmmoHolding = Data.MaxAmmoCanHold;
         Reload();
     }
     private void Update()
@@ -90,15 +92,29 @@ public class GunController : MonoBehaviour
     IEnumerator ReloadCoroutine()
     {
         //먼저 들어있는 탄약 폐기(?)
-        foreach (var ammo in ammos)
+        if (CurrentAmmoHolding != -1) //-1이면 무한
         {
-            if (ammo.state == BulletState.Ready) ammo.ChangeState(BulletState.Idle);
+            foreach (var ammo in ammos)
+            {
+                if (ammo.state == BulletState.Ready)
+                {
+                    ammo.ChangeState(BulletState.Idle);
+                    CurrentAmmoHolding++;
+                }
+            }
         }
         yield return new WaitForSeconds(Data.ReloadingTime); //재장전에 걸리는 시간
-        ammos = pool.GetAvailableAmmo(Data.MagazineCapacity, Data.BulletData);
+
+        int poolRequestAmount = Data.MagazineCapacity;
+        if (CurrentAmmoHolding != -1 && CurrentAmmoHolding < Data.MagazineCapacity)
+        {
+            poolRequestAmount = CurrentAmmoHolding;
+        }
+        ammos = pool.GetAvailableAmmo(poolRequestAmount, Data.BulletData);
+        CurrentAmmoHolding -= (CurrentAmmoHolding != -1) ? ammos.Length : 0;
+        AmmoCount = ammos.Length;
         reloadCoroutine = null;
         ChangeGunState(GunState.Idle);
-        AmmoCount = ammos.Length;
     }
 
 
