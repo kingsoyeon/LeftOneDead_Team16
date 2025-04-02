@@ -214,7 +214,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public void Initialize()
     {
         curHp = baseHp;
-        animator.SetBool("Die", false);
+        animator.SetBool("Death", false);
         animator.SetBool("Move", false);
         animator.SetBool("Attack", false);
         animator.SetBool("Skill", false);
@@ -313,7 +313,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        animator.SetBool("Die", true);
+        animator.SetBool("Death", true);
     }
 
 
