@@ -68,10 +68,7 @@ public class PlayerBaseState : IState
         Move();
     }
 
-    protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
-    {
-
-    }
+    protected virtual void OnMovementCanceled(InputAction.CallbackContext context) { }
 
     protected virtual void OnRunStarted(InputAction.CallbackContext context)
     {
@@ -185,7 +182,6 @@ public class PlayerBaseState : IState
             {
                 Debug.Log("이건 상호작용 안됨");
             }
-
         }
         else
         {

@@ -21,6 +21,7 @@ public class PlayerEquipment : MonoBehaviour
 
     private void Start()
     {
+        equipPoint.SetParent(Camera.main.transform);
         Equipment(secondaryWeaponPrefab);
     }
     public void Equipment(GameObject prefab)
