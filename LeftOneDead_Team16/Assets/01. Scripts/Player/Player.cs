@@ -49,6 +49,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             UIManager.Instance.ShowPopup<GameOverUI>("GameOverUI");
             Time.timeScale = 0;
+            GameManager.Instance.SetGameState(GameManager.GameState.GameOver);
             Cursor.lockState = CursorLockMode.None;
         }
     }

@@ -17,7 +17,10 @@ public class HPbar : ScreenUI
     private void Update()
     {
         float value = player.Data.Condition.currentHealth / player.Data.Condition.maxHealth;
+         
         hpText.text = $"{player.Data.Condition.currentHealth}";
+
+        if(player.Data.Condition.currentHealth < 1) { hpText.text = "0";  } 
         barImage.fillAmount = value;
     }
 }

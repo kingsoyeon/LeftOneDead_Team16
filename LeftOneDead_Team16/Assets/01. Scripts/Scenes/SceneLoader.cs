@@ -29,9 +29,6 @@ public class SceneLoader : MonoBehaviour
 
     private void Start()
     {
-        //var prefab = Resources.Load<LoadingUI>("UI/Screen/LoadingUI");
-        //loadingUI = Instantiate(prefab, uiTransform);
-        //gameObject.SetActive(true);
         StartCoroutine(LoadSceneAsync(sceneName));
     }
     

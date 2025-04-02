@@ -75,7 +75,6 @@ public class UIManager : Singleton<UIManager>
             popup.Show();
         }
 
-        //popup.Show();
         popupStack.Push(popup);
         return popup as T;
     }
