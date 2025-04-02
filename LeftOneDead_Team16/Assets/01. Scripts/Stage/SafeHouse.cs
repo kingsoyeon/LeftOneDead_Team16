@@ -36,7 +36,7 @@ public class SafeHouse : MonoBehaviour
 
     private void StageClear()
     {
-        if (IsInPlayer() && door.IsClosed)
+        if (IsInPlayer() && door.IsClosed && !door.IsMoving)
         {
             StageManager.Instance.ClearStage();
         }
