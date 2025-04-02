@@ -59,7 +59,7 @@ public class PlayerBaseState : IState
 
     public virtual void Update()
     {
-        Debug.DrawRay(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward * interactionDistance, Color.red, 2f);
+        Debug.DrawRay(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward * interactionDistance, Color.red, 1f);
         Move();
     }
 
@@ -142,11 +142,19 @@ public class PlayerBaseState : IState
 
     protected virtual void OnAttack(InputAction.CallbackContext context)
     {
-        stateMachine.ChangeState(stateMachine.attackState);
+        GunController gun = stateMachine.player.GetComponentInChildren<GunController>();
+        if(gun != null)
+        {
+            gun.GunAction.TriggerPull();
+            Debug.Log("shoot");
+        }
     }
 
     protected virtual void OnInteraction(InputAction.CallbackContext context)
     {
+
+        Debug.DrawRay(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward * interactionDistance, Color.green, 2f);
+
         Ray ray = new Ray(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward);
         RaycastHit hit;
 
@@ -161,6 +169,7 @@ public class PlayerBaseState : IState
             {
                 Debug.Log("이건 상호작용 안됨");
             }
+
         }
         else
         {
