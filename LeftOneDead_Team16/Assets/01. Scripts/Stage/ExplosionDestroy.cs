@@ -7,7 +7,6 @@ public class ExplosionDestroy : MonoBehaviour
 
     private void ExplosionEvent()
     {
-        print("폭발 발생");
         Instantiate(explosionFx, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
