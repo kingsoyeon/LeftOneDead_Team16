@@ -17,22 +17,7 @@ public class EnemyWave : MonoBehaviour
         respawnInterval = 1f;
     }
 
-    private void Start()
-    {
-        // test 코드
-        StageManager.Instance.AddActionToEventActionDict(0, () => StartCoroutine(Respawn()));
-    }
-
-    private void Update()
-    {
-        // 테스트 코드
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            StartCoroutine(Respawn());
-        }
-    }
-
-    private IEnumerator Respawn()
+    public IEnumerator Respawn()
     {
         var curRespawnCount = 0;
         while (curRespawnCount < respawnCount)
@@ -51,7 +36,6 @@ public class EnemyWave : MonoBehaviour
             }
             go.GetComponent<Enemy>().startState = EnemyStartState.Trace;
             curRespawnCount++;
-            print($"현재 리스폰 된 좀비 수: {curRespawnCount}");
             yield return new WaitForSeconds(respawnInterval);
         }
     }

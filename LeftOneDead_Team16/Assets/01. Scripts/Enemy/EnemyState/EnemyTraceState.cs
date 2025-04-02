@@ -45,7 +45,6 @@ public class EnemyTraceState : EnemyBaseState
             {
                 // 공격 범위 밖에 있으면 추적 처리
                 stateMachine.enemy.navMeshAgent.SetDestination(stateMachine.enemy.target.position);
-                Debug.Log($"Tracing : {stateMachine.enemy.target}");    
             }
             else
             {

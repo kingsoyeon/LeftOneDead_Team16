@@ -9,34 +9,12 @@ public class Door : MonoBehaviour, IInteractable
 
     private bool isMoving;
     
-    private Material material;
-    private Color originColor;
-    private Color interactColor;
-    
     public bool IsClosed { get; private set; }
 
     private void Awake()
     {
         IsClosed = true;
         isMoving = false;
-        
-        material = GetComponent<MeshRenderer>().material;
-        originColor = material.color;
-        interactColor = new Color(8f, 8f, 8f);
-    }
-
-    private void Start()
-    {
-        // test 코드
-        //StageManager.Instance.AddActionToEventActionDict(0, Interact);
-    }
-
-    private void Update()
-    {
-        /*if (Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-        }*/
     }
 
     public void Interact()
@@ -51,7 +29,6 @@ public class Door : MonoBehaviour, IInteractable
     {
         if (isMoving)
         {
-            print("문 움직이는 중");
             yield break;
         }
 
@@ -60,7 +37,6 @@ public class Door : MonoBehaviour, IInteractable
         var dir = IsClosed ? Vector3.up : Vector3.down;
         var endPos = startPos + dir * movingDistance;
         isMoving = true;
-        print(IsClosed ? "문 열기" : "문 닫기");
         while (elapsedTime < movingTime)
         {
             elapsedTime += Time.deltaTime;

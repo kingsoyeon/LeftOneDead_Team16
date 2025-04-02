@@ -10,7 +10,6 @@ public class EnemyPlayerTargetState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log("플레이어 타겟 상태 진입");
 
         base.Enter();
         SetTarget();
@@ -55,7 +54,6 @@ public class EnemyPlayerTargetState : EnemyBaseState
     {
         // 플레이어 타겟 찾기 일단 tag로 찾음 => instance 찾는걸로 수정하면 좋을듯
         stateMachine.enemy.target = GameObject.FindGameObjectWithTag("Player").transform;
-        Debug.Log($"플레이어 타겟 찾기 : {stateMachine.enemy.target}");
     }
 
     /// <summary>

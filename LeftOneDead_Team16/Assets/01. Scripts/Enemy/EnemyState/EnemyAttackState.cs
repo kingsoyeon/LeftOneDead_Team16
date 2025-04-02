@@ -22,10 +22,26 @@ public class EnemyAttackState : EnemyBaseState
 
     }
 
+    private float allTime = 0f;
     public override void Update()
     {
         base.Update();
-        CheckPlayerDistance();
+        allTime += Time.deltaTime;  
+
+        if(allTime >= 0.1f)
+        {
+            CheckPlayerDistance();
+
+            // 어택 공격할 때 플레이어가 돌아갈 수 있으니 체크
+            if (stateMachine.enemy.target != null)
+            {
+                stateMachine.enemy.target.transform.Rotate(Vector3.up, stateMachine.enemy.rotateSpeed * Time.deltaTime);
+            }
+            
+            allTime = 0f;
+        }
+
+
 
         UseSkillOrAttack(); // 스킬 공격 또는 일반 공격 처리
     }
@@ -80,6 +96,7 @@ public class EnemyAttackState : EnemyBaseState
     /// </summary>
     public void Attack()
     {
+
         float currentTime = Time.time;
         if(currentTime - lastAttackTime >= stateMachine.enemy.attackSpeed)
         {
@@ -93,7 +110,6 @@ public class EnemyAttackState : EnemyBaseState
                 damageable.TakeDamage(stateMachine.enemy.baseAtk);
             }
 
-            Debug.Log("Attack");
         }
     }
 
