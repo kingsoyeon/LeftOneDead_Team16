@@ -315,6 +315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 149323878}
   - component: {fileID: 149323877}
+  - component: {fileID: 149323879}
   m_Layer: 0
   m_Name: WaveTrigger
   m_TagString: Untagged
@@ -358,6 +359,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &149323879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149323876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfec1bdf4f7605246843e5a4afc56467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &318717382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1046,6 +1059,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1365273054}
   - component: {fileID: 1365273053}
+  - component: {fileID: 1365273055}
   m_Layer: 0
   m_Name: WaveTrigger (1)
   m_TagString: Untagged
@@ -1089,6 +1103,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1365273055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365273052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfec1bdf4f7605246843e5a4afc56467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1452505538
 PrefabInstance:
   m_ObjectHideFlags: 0
