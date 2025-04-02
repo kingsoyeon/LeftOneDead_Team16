@@ -43038,6 +43038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ac92da6103d7149816c5203bff1dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zombieSound: {fileID: 8300000, guid: 1225b0f997026d64fa600c3fd93f1a74, type: 3}
   enemySO: {fileID: 11400000, guid: 65374633dcc75fa48af21f95220c8b69, type: 2}
   characterController: {fileID: 924207405335318717}
   animator: {fileID: 5683206305843586048}
@@ -43050,6 +43051,7 @@ MonoBehaviour:
     airParameterName: '@Air'
     jumpParameterName: Jump
     fallParameterName: Fall
+    climbParameterName: Climb
   skill: {fileID: 0}
   startState: 0
   target: {fileID: 0}

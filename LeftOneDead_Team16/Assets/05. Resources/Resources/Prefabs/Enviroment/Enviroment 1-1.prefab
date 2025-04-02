@@ -7289,6 +7289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a593195c3253cc40a45d06e60cbcf4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explodeSound: {fileID: 0}
   explosionFx: {fileID: 417761080263594737, guid: 7800b8f6b712bfe49bd663eeb3ebe1e4,
     type: 3}
 --- !u!208 &3191132294619971051
@@ -11424,7 +11425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011198025078, guid: 9df406dc401707343b6396bd2ba69f93, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1000011198025078, guid: 9df406dc401707343b6396bd2ba69f93, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -11531,6 +11532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f766a6532a5c34b9d714e93ae719f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorSound: {fileID: 0}
   movingTime: 3
   movingDistance: 3
 --- !u!1 &2475442773587995726 stripped
@@ -26870,7 +26872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000014188284424, guid: 9df406dc401707343b6396bd2ba69f93, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1000014188284424, guid: 9df406dc401707343b6396bd2ba69f93, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -26956,6 +26958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f766a6532a5c34b9d714e93ae719f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorSound: {fileID: 0}
   movingTime: 2
   movingDistance: 4
 --- !u!4 &6493501687084864059 stripped

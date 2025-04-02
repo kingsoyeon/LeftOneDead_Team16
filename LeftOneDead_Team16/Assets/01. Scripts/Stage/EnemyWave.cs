@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -17,15 +18,23 @@ public class EnemyWave : MonoBehaviour
         respawnInterval = 1f;
     }
 
+    private void Start()
+    {
+        StageManager.Instance.AddActionToEventActionDict(0, () => StartCoroutine(Respawn()));
+        StageManager.Instance.AddActionToEventActionDict(1, () => StartCoroutine(Respawn()));
+    }
+
     public IEnumerator Respawn()
     {
         var curRespawnCount = 0;
         while (curRespawnCount < respawnCount)
         {
             GameObject go;
+            
             var dir = Random.insideUnitSphere;
             dir.y = 0f;
             var respawnPos = transform.position + dir * Random.Range(-maxRespawnBoundaryRange, maxRespawnBoundaryRange);
+            
             if (curRespawnCount % 15 == 14)
             {
                 go = Instantiate(specialEnemyResource, respawnPos, Quaternion.identity);

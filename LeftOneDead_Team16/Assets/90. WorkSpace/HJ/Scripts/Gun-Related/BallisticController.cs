@@ -89,6 +89,8 @@ public class BallisticController : MonoBehaviour
     {
         return data.Mass * velocity.magnitude * velocity.magnitude * 0.5f;
     }
+
+    //총알의 비행 경로에서 총알에 콜라이더, 리지드바디 없이 충돌 체크
     private bool CheckCollision(out RaycastHit hit)
     {
         Vector3 direction = posNext - posCurrent;
