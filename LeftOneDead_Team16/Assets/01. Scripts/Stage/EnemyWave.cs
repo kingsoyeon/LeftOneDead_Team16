@@ -18,6 +18,12 @@ public class EnemyWave : MonoBehaviour
         respawnInterval = 1f;
     }
 
+    private void Start()
+    {
+        StageManager.Instance.AddActionToEventActionDict(0, () => StartCoroutine(Respawn()));
+        StageManager.Instance.AddActionToEventActionDict(1, () => StartCoroutine(Respawn()));
+    }
+
     public IEnumerator Respawn()
     {
         var curRespawnCount = 0;

@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class WaveTrigger : MonoBehaviour
+public class EventTrigger : MonoBehaviour
 {
+    [SerializeField] private int eventID;
+    
     private BoxCollider boxCol;
 
     private void Awake()
@@ -13,7 +15,7 @@ public class WaveTrigger : MonoBehaviour
     {
         if (boxCol.bounds.Contains(StageManager.Instance.Player.transform.position))
         {
-            StageManager.Instance.MakeWave();
+            StageManager.Instance.InitEventAction(eventID);
             Destroy(gameObject);
         }
     }
