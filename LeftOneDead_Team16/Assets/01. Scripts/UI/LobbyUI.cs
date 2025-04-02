@@ -12,6 +12,6 @@ public class LobbyUI : ScreenUI
     public void OnSettingButtonClicked()
     {
         UIManager.Instance.ShowPopup<SettingUI>("SettingUI");
-        UIManager.Instance.ShowPopup<GeneralSettingUI>("GeneralSettingUI");
+
     }
 }
