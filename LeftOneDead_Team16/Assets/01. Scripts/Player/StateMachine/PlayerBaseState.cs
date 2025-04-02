@@ -9,6 +9,7 @@ public class PlayerBaseState : IState
     protected PlayerStateMachine stateMachine;
     protected readonly PlayerGroundData groundData;
 
+    private float interactionDistance = 3f;
     public PlayerBaseState(PlayerStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
@@ -31,6 +32,8 @@ public class PlayerBaseState : IState
         input.playerActions.Movement.canceled += OnMovementCanceled;
         input.playerActions.Run.started += OnRunStarted;
         input.playerActions.Jump.started += OnJumpStarted;
+        input.playerActions.Attack.started += OnAttack;
+        input.playerActions.Interaction.started += OnInteraction;
     }
 
     protected virtual void RemoveinputActionCallbacks()
@@ -39,6 +42,9 @@ public class PlayerBaseState : IState
         input.playerActions.Movement.canceled -= OnMovementCanceled;
         input.playerActions.Run.started -= OnRunStarted;
         input.playerActions.Jump.started -= OnJumpStarted;
+        input.playerActions.Attack.started -= OnAttack;
+        input.playerActions.Interaction.started -= OnInteraction;
+
     }
 
     public virtual void HandleInput()
@@ -53,6 +59,7 @@ public class PlayerBaseState : IState
 
     public virtual void Update()
     {
+        Debug.DrawRay(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward * interactionDistance, Color.red, 1f);
         Move();
     }
 
@@ -80,19 +87,15 @@ public class PlayerBaseState : IState
     }
     protected virtual void OnRunCanceled(InputAction.CallbackContext context)
     {
-        Debug.Log("▶ Run canceled!");
-
         if (stateMachine.GroundState != null)
         {
             if (stateMachine.MovementInput != Vector2.zero)
             {
-                Debug.Log("→ Switching to WalkState");
                 stateMachine.GroundState.ChangeSubState(stateMachine.GroundState.WalkState);
                 stateMachine.MovementSpeedModifier = groundData.WalkSpeedModifier;
             }
             else
             {
-                Debug.Log("→ Switching to IdleState");
                 stateMachine.GroundState.ChangeSubState(stateMachine.GroundState.IdleState);
                 stateMachine.MovementSpeedModifier = 1f;
             }
@@ -109,8 +112,6 @@ public class PlayerBaseState : IState
         Vector3 movementDiretion = GetMovementDirection();
 
         Move(movementDiretion);
-
-        Rotate(movementDiretion);
     }
 
     private Vector3 GetMovementDirection()
@@ -139,13 +140,42 @@ public class PlayerBaseState : IState
         return moveSpeed;
     }
 
-    private void Rotate(Vector3 direction)
+    protected virtual void OnAttack(InputAction.CallbackContext context)
     {
-        float targetYRotation = stateMachine.MainCamTransform.eulerAngles.y;
-        Quaternion targetRotation = Quaternion.Euler(0f, targetYRotation, 0f);
-        stateMachine.player.transform.rotation = targetRotation;
+        GunController gun = stateMachine.player.GetComponentInChildren<GunController>();
+        if(gun != null)
+        {
+            gun.GunAction.TriggerPull();
+            Debug.Log("shoot");
+        }
     }
 
+    protected virtual void OnInteraction(InputAction.CallbackContext context)
+    {
+
+        Debug.DrawRay(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward * interactionDistance, Color.green, 2f);
+
+        Ray ray = new Ray(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, interactionDistance))
+        {
+            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            if (interactable != null)
+            {
+                interactable.Interact();
+            }
+            else
+            {
+                Debug.Log("이건 상호작용 안됨");
+            }
+
+        }
+        else
+        {
+            Debug.Log("상호작용 할게 없음");
+        }
+    }
     public void FixedUpdate()
     {
 

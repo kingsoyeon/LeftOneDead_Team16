@@ -9,9 +9,14 @@ public class PlayerCondition
     [Header("Health")]
     public float maxHealth = 100f;
     public float currentHealth = 100f;
+}
 
-    [Header("Movement")]
-    public float moveSpeed = 5f;
+[Serializable]
+public class CameraData
+{
+    [field: Header("Camera")]
+    [field: SerializeField][field: Range(0f, 1f)] public float mouseSensitivity { get; private set; } = 1f;
+
 }
 
 [Serializable]
@@ -46,4 +51,6 @@ public class PlayerSO : ScriptableObject
     [field: SerializeField] public PlayerCondition Condition { get; private set; }
     [field: SerializeField] public PlayerGroundData GroundData { get; private set; }
     [field: SerializeField] public PlayerAirData AirData { get; private set; }
+    [field: SerializeField] public CameraData cameraData { get; private set; }
+
 }
