@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chapter: 1
   stage: 1
-  stageName: "\uC2A4\uD14C\uC774\uC9C0 1-1 \uC774\uB984"
+  stageName: "\uC2A4\uD14C\uC774\uC9C0 1-1"
   scene: {fileID: 102900000, guid: 726f2e75470790046a784e2f124acfbb, type: 3}
   sceneName: Stage1_1Scene

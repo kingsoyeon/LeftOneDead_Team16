@@ -72,4 +72,14 @@ public class CameraController : MonoBehaviour
             flashLight.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
         }
     }
+
+    public void turnOn()
+    {
+        flashLight.SetActive(true);
+    }
+
+    public void turnOff()
+    {
+        flashLight.SetActive(false);
+    }
 }
