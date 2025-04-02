@@ -594,14 +594,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88761808dcf90ee4a8142565ae860d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffectVolume: 0
-  soundEffectPitchVariance: 0
-  musicVolume: 0
+  masterVolume: 0.3
+  soundEffectVolume: 0.3
+  soundEffectPitchVariance: 0.3
+  musicVolume: 0.3
   bgmCilps:
+  - {fileID: 8300000, guid: 07e8135af967bdc439efa53bee9c4956, type: 3}
   - {fileID: 0}
+  - {fileID: 8300000, guid: 84a0119fd5f28f14b8ac4403f1b10542, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  masterMixer: {fileID: 24100000, guid: 2c1ccacb3b521654d87983320cc6b52c, type: 2}
   soundSourcePrefab: {fileID: 8065217624875792479, guid: 4364d0978992b7c418df53ae8207ca4a,
     type: 3}
 --- !u!4 &721749720
@@ -628,7 +630,8 @@ AudioSource:
   m_GameObject: {fileID: 721749718}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7521959808215333216, guid: 2c1ccacb3b521654d87983320cc6b52c,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
