@@ -35,7 +35,9 @@ public class PlayerBaseState : IState
         input.playerActions.Attack.started += OnAttack;
         input.playerActions.Attack.canceled += OnAttack;
         input.playerActions.Interaction.started += OnInteraction;
+        input.playerActions.Reload.started += OnReload;
     }
+
 
     protected virtual void RemoveinputActionCallbacks()
     {
@@ -46,6 +48,7 @@ public class PlayerBaseState : IState
         input.playerActions.Attack.started -= OnAttack;
         input.playerActions.Attack.canceled -= OnAttack;
         input.playerActions.Interaction.started -= OnInteraction;
+        input.playerActions.Reload.started -= OnReload;
 
     }
 
@@ -157,6 +160,10 @@ public class PlayerBaseState : IState
             gun.GunAction.TriggerRelease();
             }
         }
+    }
+    protected virtual void OnReload(InputAction.CallbackContext context)
+    {
+        stateMachine.player.GetComponentInChildren<GunController>().GunAction.Reload();
     }
 
     protected virtual void OnInteraction(InputAction.CallbackContext context)
