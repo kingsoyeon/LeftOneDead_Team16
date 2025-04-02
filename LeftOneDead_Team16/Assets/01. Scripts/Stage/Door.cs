@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable
 {
+    [SerializeField] private AudioClip doorSound;
+    
     [SerializeField, Range(1f, 5f)] private float movingTime;
     [SerializeField, Range(1f, 5f)] private float movingDistance;
 
@@ -37,6 +39,9 @@ public class Door : MonoBehaviour, IInteractable
         var dir = IsClosed ? Vector3.up : Vector3.down;
         var endPos = startPos + dir * movingDistance;
         isMoving = true;
+        
+        SoundManager.PlayClip(doorSound);
+        
         while (elapsedTime < movingTime)
         {
             elapsedTime += Time.deltaTime;
