@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PlayerBaseState : IState
     protected PlayerStateMachine stateMachine;
     protected readonly PlayerGroundData groundData;
 
+    private bool isFlash = false;
     private float interactionDistance = 3f;
     private LayerMask interactionLayer = LayerMask.GetMask("Interaction");
     public PlayerBaseState(PlayerStateMachine stateMachine)
@@ -37,6 +39,7 @@ public class PlayerBaseState : IState
         input.playerActions.Attack.canceled += OnAttack;
         input.playerActions.Interaction.started += OnInteraction;
         input.playerActions.Reload.started += OnReload;
+        input.playerActions.Falsh.performed += OnFlash;
     }
 
 
@@ -50,7 +53,7 @@ public class PlayerBaseState : IState
         input.playerActions.Attack.canceled -= OnAttack;
         input.playerActions.Interaction.started -= OnInteraction;
         input.playerActions.Reload.started -= OnReload;
-
+        input.playerActions.Falsh.performed -= OnFlash;
     }
 
     public virtual void HandleInput()
@@ -189,6 +192,21 @@ public class PlayerBaseState : IState
             Debug.Log("상호작용 할게 없음");
         }
     }
+    protected virtual void OnFlash(InputAction.CallbackContext context)
+    {
+        isFlash = !isFlash;
+
+        if (isFlash)
+        {
+            stateMachine.player.cameraController.turnOn();
+        }
+        else
+        { 
+            stateMachine.player.cameraController.turnOff();
+        }
+
+    }
+
     public void FixedUpdate()
     {
 
