@@ -13,6 +13,7 @@ public class EnemyAnimaionData
     [SerializeField] private string airParameterName = "@Air";
     [SerializeField] private string jumpParameterName = "Jump";
     [SerializeField] private string fallParameterName = "Fall";
+    [SerializeField] private string climbParameterName = "Climb";
 
     public int IdleParameterName {get; private set;}
     public int MoveParameterName {get; private set;}
@@ -23,7 +24,7 @@ public class EnemyAnimaionData
     public int AirParameterName {get; private set;}
     public int JumpParameterName {get; private set;}
     public int FallParameterName {get; private set;}
-
+    public int ClimbParameterName {get; private set;}
     public void Initialize()
     {
         IdleParameterName = Animator.StringToHash(idleParameterName);
@@ -31,10 +32,12 @@ public class EnemyAnimaionData
         AttackParameterName = Animator.StringToHash(attackParameterName);
         SkillAttackParameterName = Animator.StringToHash(skillAttackParameterName);
         DeathParameterName = Animator.StringToHash(deathParameterName);
+        ClimbParameterName = Animator.StringToHash(climbParameterName);
 
         AirParameterName = Animator.StringToHash(airParameterName);
         JumpParameterName = Animator.StringToHash(jumpParameterName);
         FallParameterName = Animator.StringToHash(fallParameterName);
+        ClimbParameterName = Animator.StringToHash(climbParameterName);
     }
 
 }

@@ -95,6 +95,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     }
 
+
     private void Update()
     {
         stateMachine.Update();
@@ -116,14 +117,20 @@ public class Enemy : MonoBehaviour, IDamageable
                 stateMachine.ChangeState(stateMachine.FallState);
                 return;
             }
+            else if(linkData.offMeshLink != null && linkData.offMeshLink.area == 3) // climb 타입이면 벽을 오르는 상태로 변경
+            {
+                Debug.Log("벽을 오르는 상태");
+                stateMachine.ChangeState(stateMachine.ClimbState);
+                return;
+            }
         }
 
-        if (stateMachine.enemy.navMeshAgent.velocity.y < -1f)
-        {
-            Debug.Log("fall 상태 진입");
-            stateMachine.ChangeState(stateMachine.FallState);
-            return;
-        }
+        // if (stateMachine.enemy.navMeshAgent.velocity.y < -1f && !stateMachine.enemy.navMeshAgent.isStopped)
+        // {
+        //     Debug.Log("fall 상태 진입");
+        //     stateMachine.ChangeState(stateMachine.FallState);
+        //     return;
+        // }
 
     }
 
@@ -414,6 +421,73 @@ public class Enemy : MonoBehaviour, IDamageable
         transform.position = endPosition;
         navMeshAgent.CompleteOffMeshLink();
         navMeshAgent.isStopped = false;
+    }
+
+    public void StartClimb()
+    {
+        StartCoroutine(Climb());
+    }
+
+    /// <summary>
+    /// 벽을 오르는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator Climb()
+    {
+        // NavMeshAgent의 자동 이동을 중지합니다.
+        navMeshAgent.isStopped = true;
+
+        // 현재 OffMeshLink 데이터를 가져옵니다.
+        OffMeshLinkData linkData = navMeshAgent.currentOffMeshLinkData;
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = linkData.endPos;
+
+        // 벽을 오르는 속도: 이동 속도의 50% (필요에 따라 조정)
+        float climbSpeed = moveSpeed * 0.5f;
+        // 시작점과 끝점 사이의 거리를 구합니다.
+        float distance = Vector3.Distance(startPosition, endPosition);
+        // 전체 클라임 시간 = 거리 / 속도
+        float climbTime = distance / climbSpeed;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < climbTime)
+        {
+            elapsedTime += Time.deltaTime;
+            // 0~1 사이의 진행률
+            float t = Mathf.Clamp01(elapsedTime / climbTime);
+            // 선형 보간으로 위치 업데이트
+            Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, t);
+            transform.position = newPosition;
+            yield return null;
+        }
+
+        // 최종 위치 보정: 정확히 종료 위치로 이동
+        transform.position = endPosition;
+
+        // OffMeshLink 완료 처리 및 NavMeshAgent 재개
+        navMeshAgent.CompleteOffMeshLink();
+        navMeshAgent.isStopped = false;
+    }
+
+    /// <summary>
+    /// 벽을 오르는 링크인지 확인하는 함수  
+    /// </summary>
+    /// <returns></returns>
+    public bool IsClimbLink()
+    {
+        if(navMeshAgent.isOnOffMeshLink)
+        {
+            Debug.Log("IsClimbLink");
+
+            OffMeshLinkData linkData = navMeshAgent.currentOffMeshLinkData;
+            if(linkData.offMeshLink!=null && linkData.offMeshLink.area == 3)
+            {
+                Debug.Log("IsClimbLink true");
+                return true;
+            }
+        }
+        Debug.Log("IsClimbLink false");
+        return false;
     }
 
 }
