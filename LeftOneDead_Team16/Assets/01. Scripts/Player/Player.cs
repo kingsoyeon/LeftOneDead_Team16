@@ -9,7 +9,7 @@ public class Player : MonoBehaviour, IDamageable
     public PlayerController Input { get; private set; }
     public CharacterController Controller { get; private set; }
     public ForceReceiver ForceReceiver { get; private set; }
-
+    public CameraController cameraController { get; private set; }
 
     private PlayerStateMachine stateMachine;
 
@@ -18,6 +18,7 @@ public class Player : MonoBehaviour, IDamageable
         Input = GetComponent<PlayerController>();
         Controller = GetComponent<CharacterController>();
         ForceReceiver = GetComponent<ForceReceiver>();
+        cameraController = GetComponent<CameraController>();
 
         stateMachine = new PlayerStateMachine(this);
     }
