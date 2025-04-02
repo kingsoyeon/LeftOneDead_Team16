@@ -58,12 +58,8 @@ public class StageManager : Singleton<StageManager>
         UIManager.Instance.ShowPopup<ClearUI>("ClearUI");
     }
 
-    public void MakeWave()
+    public void InitEventAction(int eventID)
     {
-        var waveRespawn = FindObjectsByType<EnemyWave>(FindObjectsSortMode.None);
-        foreach (EnemyWave respawn in waveRespawn)
-        {
-            StartCoroutine(respawn.Respawn());
-        }
+        eventActionDict[eventID]?.Invoke();
     }
 }

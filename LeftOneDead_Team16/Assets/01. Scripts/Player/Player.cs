@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour, IDamageable
 {
     [field: SerializeField] public PlayerSO Data { get; private set; }
-
     
     public PlayerController Input { get; private set; }
     public CharacterController Controller { get; private set; }
@@ -26,7 +25,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         //체력 초기화
         Data.Condition.currentHealth = Data.Condition.maxHealth;
-        //Cursor.lockState = CursorLockMode.Locked;
         stateMachine.ChangeState(stateMachine.GroundState);
     }
 
@@ -45,6 +43,12 @@ public class Player : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         stateMachine.player.Data.Condition.currentHealth -= damage;
-        Debug.Log(stateMachine.player.Data.Condition.currentHealth);
+
+        if(Data.Condition.currentHealth <= 0 )
+        {
+            UIManager.Instance.ShowPopup<GameOverUI>("GameOverUI");
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }
