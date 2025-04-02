@@ -12,12 +12,25 @@ public class VomitParticleDamage : MonoBehaviour
 
     private ParticleSystem ps;
     private List<ParticleSystem.Particle> enter = new();
+    private Transform target;
 
     private int count = 0;
 
     private void Awake() 
     {
         ps = GetComponent<ParticleSystem>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+
+    }
+
+    /// <summary>
+    /// 플레이어의 콜라이더 가져온 후 파티클 시스템의 트리거 모듈을 가져와서 활성화합니다. 그 후 인덱스 0에 플레이어 콜라이더를 등록합니다.
+    /// </summary>
+    private void Start() {
+        Collider playerCollider = target.GetComponent<Collider>();
+        ParticleSystem.TriggerModule triggerModule = ps.trigger;
+        triggerModule.enabled = true;
+        triggerModule.SetCollider(0, playerCollider);
     }
     
     /// <summary>
@@ -26,7 +39,8 @@ public class VomitParticleDamage : MonoBehaviour
     /// <returns></returns> 
     IEnumerator PoisonCoroutine()
     {
-        Debug.Log("포이즌 데미지 주기");
+        Debug.Log("PoisonCoroutine 포이즌 데미지 주기");
+        
         yield return new WaitForSeconds(poisonDuration);
         poisonCoroutine = null;
     }

@@ -32,10 +32,22 @@ public class Stage : MonoBehaviour
     /// </summary>
     private void RespawnInitialEnemy()
     {
-        var enemyRes = Resources.Load<GameObject>("Prefabs/Character/Enemy/Zombie");
+        // 두 종류의 적 프리팹 로드
+        var zombiePrefab = Resources.Load<GameObject>("Prefabs/Character/Enemy/Zombie");
+        var vomitZombiePrefab = Resources.Load<GameObject>("Prefabs/Character/Enemy/VomitZombie");
+
         for (var i = 0; i < enemyRespawn.Count; i++)
         {
-            var go = Instantiate(enemyRes, enemyRespawn[i].position, enemyRespawn[i].rotation);
+            GameObject go;
+            // 0 ~ 1 사이의 랜덤값, 0.7 미만이면 Zombie, 아니면 VomitZombie 소환 (7:3 비율)
+            if (UnityEngine.Random.value < 0.7f)
+            {
+                go = Instantiate(zombiePrefab, enemyRespawn[i].position, enemyRespawn[i].rotation);
+            }
+            else
+            {
+                go = Instantiate(vomitZombiePrefab, enemyRespawn[i].position, enemyRespawn[i].rotation);
+            }
             enemyList.Add(go.GetComponent<Enemy>());
         }
     }
