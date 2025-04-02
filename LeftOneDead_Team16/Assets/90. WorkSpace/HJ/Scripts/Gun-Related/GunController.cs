@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-public class GunController : MonoBehaviour
+public class GunController : MonoBehaviour,IInteractable
 {
     public GunActions GunAction;
     public GunController()
@@ -183,6 +183,12 @@ public class GunController : MonoBehaviour
             if (FireModes.Contains(mode)) CurrentFireMode = mode;
         }
     }
+
+    public void Interact()
+    {
+        Destroy(gameObject);
+    }
+
     /// <summary>
     /// 총 조작하는 메서드가 담긴 클래스
     /// </summary>

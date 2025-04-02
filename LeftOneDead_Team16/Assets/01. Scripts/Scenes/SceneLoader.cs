@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public enum SceneName
 {
@@ -19,9 +20,11 @@ public enum SceneName
 public class SceneLoader : MonoBehaviour
 {
     public static SceneName sceneName;
+    public static StageData CurrentStageData { get; private set; }
+
     public static GameManager.GameState nextState;
     private LoadingUI loadingUI;
-    //[SerializeField] private CanvasGroup fadeCanvas;
+    [SerializeField] private CanvasGroup fadeCanvas;
     public Transform uiTransform;
 
     private void Start()
@@ -40,9 +43,9 @@ public class SceneLoader : MonoBehaviour
         var prefab = Resources.Load<LoadingUI>("UI/Screen/LoadingUI");
         loadingUI = Instantiate(prefab, uiTransform);
 
-        yield return StartCoroutine(Fade(true)); // 페이드 효과 코루틴
+        //yield return StartCoroutine(Fade(true)); // 페이드 효과 코루틴
 
-       
+
         gameObject.SetActive(true);
 
         float timer = 0f;
@@ -63,7 +66,7 @@ public class SceneLoader : MonoBehaviour
                  loadingUI.progressBar.fillAmount = Mathf.Lerp(loadingUI.progressBar.fillAmount, 1f, timer);
                 if (loadingUI.progressBar.fillAmount >= 0.99f) // 100%까지 차오르면
                 {
-                    yield return StartCoroutine(Fade(false)); // 페이드아웃
+                    //yield return StartCoroutine(Fade(false)); // 페이드아웃
                    
                     asyncOperation.allowSceneActivation = true; // 씬 활성화
                 }
@@ -85,7 +88,13 @@ public class SceneLoader : MonoBehaviour
         {
             yield return null;
             timer += Time.deltaTime * 2f;
-            loadingUI.canvasGroup.alpha = Mathf.Lerp(isFadeIn ? 0 : 1, isFadeIn ? 1 : 0, timer); // true - 안 투명 -> false - 투명
+            fadeCanvas.alpha = Mathf.Lerp(isFadeIn ? 0 : 1, isFadeIn ? 1 : 0, timer); // true - 안 투명 -> false - 투명
         }
+    }
+
+    public static void SetStageData(StageData data)
+    {
+        CurrentStageData = data;
+        sceneName = (SceneName)Enum.Parse(typeof(SceneName), data.sceneName);
     }
 }

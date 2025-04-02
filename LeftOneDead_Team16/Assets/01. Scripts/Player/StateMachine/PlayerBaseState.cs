@@ -10,6 +10,7 @@ public class PlayerBaseState : IState
     protected readonly PlayerGroundData groundData;
 
     private float interactionDistance = 3f;
+    private LayerMask interactionLayer = LayerMask.GetMask("Interaction");
     public PlayerBaseState(PlayerStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
@@ -171,7 +172,7 @@ public class PlayerBaseState : IState
         Ray ray = new Ray(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward);
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit, interactionDistance))
+        if(Physics.Raycast(ray, out hit, interactionDistance, interactionLayer))
         {
             IInteractable interactable = hit.collider.GetComponent<IInteractable>();
             if (interactable != null)

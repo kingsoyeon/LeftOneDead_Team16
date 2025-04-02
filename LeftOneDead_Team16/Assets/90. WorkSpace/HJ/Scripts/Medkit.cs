@@ -22,6 +22,6 @@ public class Medkit : MonoBehaviour, IInteractable, IConsumable
 
     public void Interact()
     {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
     }
 }
