@@ -8,15 +8,14 @@ public class Door : MonoBehaviour, IInteractable
     
     [SerializeField, Range(1f, 5f)] private float movingTime;
     [SerializeField, Range(1f, 5f)] private float movingDistance;
-
-    private bool isMoving;
     
     public bool IsClosed { get; private set; }
+    public bool IsMoving { get; private set; }
 
     private void Awake()
     {
         IsClosed = true;
-        isMoving = false;
+        IsMoving = false;
     }
 
     public void Interact()
@@ -29,7 +28,7 @@ public class Door : MonoBehaviour, IInteractable
     /// </summary>
     private IEnumerator ToggleDoor()
     {
-        if (isMoving)
+        if (IsMoving)
         {
             yield break;
         }
@@ -38,7 +37,7 @@ public class Door : MonoBehaviour, IInteractable
         var startPos = transform.position;
         var dir = IsClosed ? Vector3.up : Vector3.down;
         var endPos = startPos + dir * movingDistance;
-        isMoving = true;
+        IsMoving = true;
         IsClosed = !IsClosed;
         SoundManager.PlayClip(doorSound);
         
@@ -51,6 +50,6 @@ public class Door : MonoBehaviour, IInteractable
         
         transform.position = endPos;
         
-        isMoving = false;
+        IsMoving = false;
     }
 }

@@ -2023,10 +2023,20 @@ PrefabInstance:
       propertyPath: doorSound
       value: 
       objectReference: {fileID: 8300000, guid: b1334dbf63b8b12469d492e285f8003d, type: 3}
+    - target: {fileID: 1113498921822626700, guid: a15c36040fd9900428d9c74ca1227f06,
+        type: 3}
+      propertyPath: movingTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113498921822626700, guid: a15c36040fd9900428d9c74ca1227f06,
+        type: 3}
+      propertyPath: movingDistance
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2474501953140555396, guid: a15c36040fd9900428d9c74ca1227f06,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.947
+      value: 9.774
       objectReference: {fileID: 0}
     - target: {fileID: 2991052632937081237, guid: a15c36040fd9900428d9c74ca1227f06,
         type: 3}

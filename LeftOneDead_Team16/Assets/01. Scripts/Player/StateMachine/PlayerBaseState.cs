@@ -8,8 +8,9 @@ public class PlayerBaseState : IState
 {
     protected PlayerStateMachine stateMachine;
     protected readonly PlayerGroundData groundData;
-
-    private float interactionDistance = 3f;
+    
+    private bool isFlash = false;
+    private float interactionDistance = 4f;
     private LayerMask interactionLayer = LayerMask.GetMask("Interaction");
     public PlayerBaseState(PlayerStateMachine stateMachine)
     {
