@@ -80,17 +80,14 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        Debug.Log($"시작 상태 : {startState}");
 
         if (startState == EnemyStartState.Idle)
         {
             stateMachine.ChangeState(stateMachine.IdleState);
-            Debug.Log("대기 상태 진입");
         }
         else if(startState == EnemyStartState.Trace)
         {
             stateMachine.ChangeState(stateMachine.PlayerTargetState);
-            Debug.Log("플레이어 타겟 상태 진입");
         }
 
     }
@@ -106,20 +103,17 @@ public class Enemy : MonoBehaviour, IDamageable
             OffMeshLinkData linkData = stateMachine.enemy.navMeshAgent.currentOffMeshLinkData;
             if(linkData.linkType == OffMeshLinkType.LinkTypeJumpAcross) // jumpAcross 타입이면 점프 상태로 변경
             {
-                Debug.Log("점프 상태");
                 stateMachine.ChangeState(stateMachine.JumpState);
 
                 return;
             }
             else if(linkData.linkType == OffMeshLinkType.LinkTypeDropDown) // dropDown 타입이면 떨어지는 상태로 변경
             {
-                Debug.Log("떨어지는 상태");
                 stateMachine.ChangeState(stateMachine.FallState);
                 return;
             }
             else if(linkData.offMeshLink != null && linkData.offMeshLink.area == 3) // climb 타입이면 벽을 오르는 상태로 변경
             {
-                Debug.Log("벽을 오르는 상태");
                 stateMachine.ChangeState(stateMachine.ClimbState);
                 return;
             }
@@ -197,10 +191,8 @@ public class Enemy : MonoBehaviour, IDamageable
                 b = b.normalized;
 
                 float angle = Vector3.Angle(a, b);  // 얘는 0에서 180도 사이의 각도를 반환함
-                Debug.Log($"angle : {angle}");
                 if (angle <= detectionAngle)   // 만약에 detectionAngle이 30이면, 왼쪽 30 / 오른쪽 30 => 총 60도 만큼 체크해줌
                 {
-                    Debug.Log("플레이어 타겟 발견");
                     stateMachine.ChangeState(stateMachine.PlayerTargetState);
                     return true;
                 }
@@ -253,7 +245,6 @@ public class Enemy : MonoBehaviour, IDamageable
     /// </summary>
     public void DetectTarget()
     {
-        Debug.Log("DetectTarget");
         if(target == null)
         {
             return;
@@ -271,7 +262,6 @@ public class Enemy : MonoBehaviour, IDamageable
     /// </summary>
     public bool FindNearestTarget()
     {
-        Debug.Log("FindNearestTarget");
         // 감지 범위 내의 모든 타겟 찾기
         Collider[] colliders = Physics.OverlapSphere(stateMachine.enemy.transform.position, stateMachine.enemy.detectionRange, stateMachine.enemy.targetLayer);
         float nearestDistance = float.MaxValue;
@@ -321,7 +311,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        Debug.Log("Die");
         animator.SetBool("Die", true);
     }
 
@@ -477,16 +466,13 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if(navMeshAgent.isOnOffMeshLink)
         {
-            Debug.Log("IsClimbLink");
 
             OffMeshLinkData linkData = navMeshAgent.currentOffMeshLinkData;
             if(linkData.offMeshLink!=null && linkData.offMeshLink.area == 3)
             {
-                Debug.Log("IsClimbLink true");
                 return true;
             }
         }
-        Debug.Log("IsClimbLink false");
         return false;
     }
 

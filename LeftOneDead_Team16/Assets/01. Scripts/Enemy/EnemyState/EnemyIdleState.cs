@@ -13,7 +13,6 @@ public class EnemyIdleState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("IdleState");
         stateMachine.enemy.animator.SetBool("Idle", true);
         stateMachine.enemy.navMeshAgent.isStopped = true;
         idleTime = 0;

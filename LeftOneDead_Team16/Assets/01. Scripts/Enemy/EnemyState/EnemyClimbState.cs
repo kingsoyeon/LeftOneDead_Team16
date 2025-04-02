@@ -14,7 +14,6 @@ public class EnemyClimbState : EnemyBaseState
         base.Enter();
         StartAnimation(stateMachine.enemy.enemyAnimaionData.ClimbParameterName);
         stateMachine.enemy.StartClimb();
-        Debug.Log("벽을 오르는 상태 진입");
     }   
 
     public override void Exit()
@@ -28,7 +27,6 @@ public class EnemyClimbState : EnemyBaseState
         base.Update();
         if(!stateMachine.enemy.navMeshAgent.isStopped)
         {
-            Debug.Log("벽을 오르는 상태 종료");
             stateMachine.ChangeState(stateMachine.beforeState);
         }
     }

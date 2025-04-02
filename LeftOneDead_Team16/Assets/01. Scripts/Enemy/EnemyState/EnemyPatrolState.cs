@@ -82,7 +82,6 @@ public class EnemyPatrolState : EnemyBaseState
     /// <returns>정찰 위치</returns>
     private Vector3 GetPatrolPosition()
     {
-        Debug.Log("GetPatrolPosition");
         NavMeshHit hit;
 
         Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * UnityEngine.Random.Range(stateMachine.enemy.traceRange, maxWanderDistance);
