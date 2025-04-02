@@ -18,7 +18,6 @@ public class EnemyJumpState : EnemyBaseState
         stateMachine.enemy.animator.SetFloat("Speed", 1f);
         jumpTime = 0f;
         stateMachine.enemy.StartJump();
-        Debug.Log("점프 상태 진입");
     }
     public override void Exit()
     {
