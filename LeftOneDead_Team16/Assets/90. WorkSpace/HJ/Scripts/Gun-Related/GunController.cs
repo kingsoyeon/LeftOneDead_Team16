@@ -8,7 +8,7 @@ public class GunController : MonoBehaviour,IInteractable
     public GunActions GunAction;
     public AudioClip fireSound;
     public AudioClip reloadingSound;
-
+    [SerializeField] private GameObject muzzleFX;
 
     public GunController()
     {
@@ -162,6 +162,9 @@ public class GunController : MonoBehaviour,IInteractable
 
     void Fire()
     {
+        var fx = Instantiate(muzzleFX, MuzzlePositon.transform.position, MuzzlePositon.transform.rotation);
+        fx.transform.parent = MuzzlePositon.transform;
+        
         float deltaTime = Time.time - timeLastFired;
         if (deltaTime >= fireInterval)
         {
