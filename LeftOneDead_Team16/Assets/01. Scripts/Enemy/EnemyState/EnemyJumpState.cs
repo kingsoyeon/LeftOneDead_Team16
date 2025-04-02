@@ -17,6 +17,7 @@ public class EnemyJumpState : EnemyBaseState
         StartAnimation(stateMachine.enemy.enemyAnimaionData.JumpParameterName);
         stateMachine.enemy.animator.SetFloat("Speed", 1f);
         jumpTime = 0f;
+        stateMachine.enemy.StartJump();
         Debug.Log("점프 상태 진입");
     }
     public override void Exit()
@@ -32,6 +33,13 @@ public class EnemyJumpState : EnemyBaseState
         if(jumpTime > jumpMaxTime)
         {
             stateMachine.ChangeState(stateMachine.beforeState);
+            return;
+        }
+
+        if(!stateMachine.enemy.navMeshAgent.isStopped)
+        {
+            stateMachine.ChangeState(stateMachine.beforeState);
+            return;
         }
     }
 

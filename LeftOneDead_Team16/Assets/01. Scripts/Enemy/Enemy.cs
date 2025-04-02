@@ -107,7 +107,6 @@ public class Enemy : MonoBehaviour, IDamageable
             {
                 Debug.Log("점프 상태");
                 stateMachine.ChangeState(stateMachine.JumpState);
-                StartCoroutine(Jump());
 
                 return;
             }
@@ -319,7 +318,17 @@ public class Enemy : MonoBehaviour, IDamageable
         animator.SetBool("Die", true);
     }
 
-    // 포물선으로 점프하는 코루틴
+
+    public void StartJump()
+    {
+        StartCoroutine(Jump());
+    }
+
+   /// <summary>
+   /// 점프하는 코루틴
+   /// 포물선으로 점프        
+   /// </summary>
+   /// <returns></returns>
     IEnumerator Jump()
     {
         navMeshAgent.isStopped = true;
@@ -354,7 +363,57 @@ public class Enemy : MonoBehaviour, IDamageable
         transform.position = endPosition;
         navMeshAgent.CompleteOffMeshLink();
         navMeshAgent.isStopped = false;
-        stateMachine.ChangeState(stateMachine.beforeState);
+    }
+
+    public void StartFall()
+    {
+        StartCoroutine(Fall());
+    }
+
+    /// <summary>
+    /// 떨어지는 코루틴
+    /// 중력기반 낙하 
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator Fall()
+    {
+        // 떨어지는 동안 NavMeshAgent를 정지
+        navMeshAgent.isStopped = true;
+
+        // 현재 OffMeshLink 정보를 가져옴
+        OffMeshLinkData linkData = navMeshAgent.currentOffMeshLinkData;
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = linkData.endPos;
+
+        float g = 9.8f;  // 중력 가속도
+                         // 떨어지는 높이 계산 (startPosition.y > endPosition.y 가정)
+        float height = startPosition.y - endPosition.y;
+        // 자유 낙하 공식: t = sqrt(2 * height / g)
+        float fallTime = Mathf.Sqrt(2 * height / g);
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fallTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp(elapsedTime, 0, fallTime);
+
+            // 수직 위치: y = startY - 0.5 * g * t^2
+            float newY = startPosition.y - 0.5f * g * t * t;
+            newY = Mathf.Max(newY, endPosition.y);
+
+            // 수평 보간 (선형 보간)
+            float percent = t / fallTime;
+            Vector3 horizontalPos = Vector3.Lerp(new Vector3(startPosition.x, 0, startPosition.z),
+                                                  new Vector3(endPosition.x, 0, endPosition.z), percent);
+
+            transform.position = new Vector3(horizontalPos.x, newY, horizontalPos.z);
+            yield return null;
+        }
+
+        // 최종 위치 보정 및 OffMeshLink 완료 처리
+        transform.position = endPosition;
+        navMeshAgent.CompleteOffMeshLink();
+        navMeshAgent.isStopped = false;
     }
 
 }
