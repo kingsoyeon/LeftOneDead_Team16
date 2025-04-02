@@ -77,6 +77,7 @@ public class BombController : MonoBehaviour, IInteractable, IDamageable
     void InstantExplode(ExplosiveData data)
     {
         //범위 안의 데미지 입을 수 있는 오브젝트들 리스트에 넣기
+        //콜라이더 컴포넌트 없이 범위 안의 데미지 입을 수 있는 오브젝트 탐지
         Collider[] colliders = Physics.OverlapSphere(transform.position, data.Radius);
         foreach (Collider collider in colliders)
         {
