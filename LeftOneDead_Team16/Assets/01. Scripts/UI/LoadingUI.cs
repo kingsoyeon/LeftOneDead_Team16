@@ -19,7 +19,6 @@ public class LoadingUI : ScreenUI
 
     public void Start()
     {
-
         stageData = SceneLoader.CurrentStageData;
         Init(stageData);
     }

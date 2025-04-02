@@ -43,7 +43,7 @@ public class SceneLoader : MonoBehaviour
         var prefab = Resources.Load<LoadingUI>("UI/Screen/LoadingUI");
         loadingUI = Instantiate(prefab, uiTransform);
 
-        yield return StartCoroutine(Fade(true)); // 페이드 효과 코루틴
+        //yield return StartCoroutine(Fade(true)); // 페이드 효과 코루틴
 
 
         gameObject.SetActive(true);
@@ -66,7 +66,7 @@ public class SceneLoader : MonoBehaviour
                  loadingUI.progressBar.fillAmount = Mathf.Lerp(loadingUI.progressBar.fillAmount, 1f, timer);
                 if (loadingUI.progressBar.fillAmount >= 0.99f) // 100%까지 차오르면
                 {
-                    yield return StartCoroutine(Fade(false)); // 페이드아웃
+                    //yield return StartCoroutine(Fade(false)); // 페이드아웃
                    
                     asyncOperation.allowSceneActivation = true; // 씬 활성화
                 }
