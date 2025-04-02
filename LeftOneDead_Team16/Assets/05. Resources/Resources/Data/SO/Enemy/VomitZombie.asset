@@ -19,7 +19,7 @@ MonoBehaviour:
     <JumpForce>k__BackingField: 1
     <RotateSpeed>k__BackingField: 1
     <DetectionRange>k__BackingField: 5
-    <DetectionAngle>k__BackingField: 5
+    <DetectionAngle>k__BackingField: 30
     <PatrolRange>k__BackingField: 5
     <PatrolTime>k__BackingField: 6
     <PatrolWaitTime>k__BackingField: 3

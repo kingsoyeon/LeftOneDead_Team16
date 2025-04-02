@@ -10725,7 +10725,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1
+  m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -10788,6 +10788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ac92da6103d7149816c5203bff1dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zombieSound: {fileID: 8300000, guid: 821b6440d8e269c40b5a0eb8a44a079d, type: 3}
   enemySO: {fileID: 11400000, guid: 7f3449eb3918c874eaf0e316816bdbb1, type: 2}
   characterController: {fileID: 595363618866044097}
   animator: {fileID: 5079528523709285242}
@@ -10800,6 +10801,7 @@ MonoBehaviour:
     airParameterName: '@Air'
     jumpParameterName: Jump
     fallParameterName: Fall
+    climbParameterName: Climb
   skill: {fileID: 5820269036545954028}
   startState: 0
   target: {fileID: 0}

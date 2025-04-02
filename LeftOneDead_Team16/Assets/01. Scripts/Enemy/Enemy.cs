@@ -16,7 +16,7 @@ public enum EnemyStartState
 public class Enemy : MonoBehaviour, IDamageable
 {
 
-    [SerializeField] private AudioClip zombieSound;
+    public AudioClip zombieSound;
     [field:SerializeField] private EnemySO enemySO;
     [field:SerializeField] private EnemyStateMachine stateMachine;
     [field:SerializeField] private EnemyStateMachine beforeStateMachine;
@@ -199,9 +199,7 @@ public class Enemy : MonoBehaviour, IDamageable
                     return true;
                 }
             }
-
         }
-
         return false;
     }
 
