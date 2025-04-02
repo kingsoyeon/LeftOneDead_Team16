@@ -26,7 +26,7 @@ public class GunController : MonoBehaviour
     private float timeLastFired;
 
     private BallisticController[] ammos = new BallisticController[0];
-    [SerializeField] private BulletPool pool;
+    private BulletPool pool;
 
     private bool isTriggerPulled;
     private bool awaitTriggerRelease;
@@ -35,6 +35,7 @@ public class GunController : MonoBehaviour
 
     private void Start()
     {
+        pool = BulletPool.Instance;
         Initialize();
     }
     void Initialize()

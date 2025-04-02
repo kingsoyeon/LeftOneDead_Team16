@@ -29,7 +29,6 @@ public class Door : MonoBehaviour, IInteractable
     {
         if (isMoving)
         {
-            print("문 움직이는 중");
             yield break;
         }
 
@@ -38,7 +37,6 @@ public class Door : MonoBehaviour, IInteractable
         var dir = IsClosed ? Vector3.up : Vector3.down;
         var endPos = startPos + dir * movingDistance;
         isMoving = true;
-        print(IsClosed ? "문 열기" : "문 닫기");
         while (elapsedTime < movingTime)
         {
             elapsedTime += Time.deltaTime;

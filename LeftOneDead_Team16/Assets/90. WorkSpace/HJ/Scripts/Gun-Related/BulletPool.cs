@@ -1,9 +1,41 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    public BulletBallistics[] ammoDatas; //존재하는 모든 탄약 정보를 연결
+    private static BulletPool instance;
+    public static BulletPool Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new GameObject().AddComponent<BulletPool>();
+                instance.ammoPrefab = new GameObject().AddComponent<BallisticController>().AddComponent<TrailRenderer>().gameObject;
+            }
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
+
+
+
+
+    //public BulletBallistics[] ammoDatas; //존재하는 모든 탄약 정보를 연결
     public List<BallisticController> ammoPool = new List<BallisticController>();
 
     public GameObject ammoPrefab;

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Rendering.Universal;
 
-
 /// <summary>
 /// UnityEngine.Pool API 사용
 /// </summary>

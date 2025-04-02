@@ -36,7 +36,6 @@ public class EnemyWave : MonoBehaviour
             }
             go.GetComponent<Enemy>().startState = EnemyStartState.Trace;
             curRespawnCount++;
-            print($"현재 리스폰 된 좀비 수: {curRespawnCount}");
             yield return new WaitForSeconds(respawnInterval);
         }
     }
