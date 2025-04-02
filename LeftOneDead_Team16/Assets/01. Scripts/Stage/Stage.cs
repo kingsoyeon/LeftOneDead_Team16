@@ -39,9 +39,4 @@ public class Stage : MonoBehaviour
             enemyList.Add(go.GetComponent<Enemy>());
         }
     }
-
-    public void StartEnemyWave()
-    {
-        
-    }
 }

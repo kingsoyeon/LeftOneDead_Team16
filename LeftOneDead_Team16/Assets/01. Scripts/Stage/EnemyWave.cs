@@ -17,21 +17,6 @@ public class EnemyWave : MonoBehaviour
         respawnInterval = 1f;
     }
 
-    private void Start()
-    {
-        // test 코드
-        StageManager.Instance.AddActionToEventActionDict(0, () => StartCoroutine(Respawn()));
-    }
-
-    private void Update()
-    {
-        // 테스트 코드
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            StartCoroutine(Respawn());
-        }
-    }
-
     private IEnumerator Respawn()
     {
         var curRespawnCount = 0;
