@@ -383,6 +383,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jerry (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
       value: -130.35
@@ -445,6 +449,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: c52eea8f3ad5d004f8e73fe703b83613, type: 3}
       propertyPath: m_Name
       value: FirstAid
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c52eea8f3ad5d004f8e73fe703b83613, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c52eea8f3ad5d004f8e73fe703b83613, type: 3}
       propertyPath: m_LocalPosition.x
@@ -671,6 +679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jerry (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
       value: -114.22
@@ -733,6 +745,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_Name
       value: Jerry (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
@@ -998,6 +1014,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jerry (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
       value: -135.31
@@ -1127,6 +1147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jerry (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
       value: -98.5
@@ -1192,9 +1216,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 985105463}
     m_Modifications:
+    - target: {fileID: 100000, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
       propertyPath: m_Name
       value: rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1235,6 +1271,11 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4012864673880303567, guid: 844a418646e833e48a7c8838f9661aad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1441,6 +1482,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AmmoBox
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: caa3ab629c889904994d4ccc07bd895a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: caa3ab629c889904994d4ccc07bd895a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.044
@@ -1549,6 +1594,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jerry (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
       value: -153.3
@@ -1618,6 +1667,11 @@ PrefabInstance:
       propertyPath: doorSound
       value: 
       objectReference: {fileID: 8300000, guid: b1334dbf63b8b12469d492e285f8003d, type: 3}
+    - target: {fileID: 2474501953140555396, guid: a15c36040fd9900428d9c74ca1227f06,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.947
+      objectReference: {fileID: 0}
     - target: {fileID: 4128234486008633744, guid: a15c36040fd9900428d9c74ca1227f06,
         type: 3}
       propertyPath: doorSound

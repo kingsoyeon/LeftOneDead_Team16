@@ -39,7 +39,7 @@ public class Door : MonoBehaviour, IInteractable
         var dir = IsClosed ? Vector3.up : Vector3.down;
         var endPos = startPos + dir * movingDistance;
         isMoving = true;
-        
+        IsClosed = !IsClosed;
         SoundManager.PlayClip(doorSound);
         
         while (elapsedTime < movingTime)
@@ -50,7 +50,7 @@ public class Door : MonoBehaviour, IInteractable
         }
         
         transform.position = endPos;
-        IsClosed = !IsClosed;
+        
         isMoving = false;
     }
 }
