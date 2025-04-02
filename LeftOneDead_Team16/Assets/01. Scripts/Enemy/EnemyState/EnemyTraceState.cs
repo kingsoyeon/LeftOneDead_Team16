@@ -10,7 +10,7 @@ public class EnemyTraceState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log("TraceState");
+       // Debug.Log("TraceState");
         base.Enter();
         stateMachine.enemy.animator.SetBool("Move", true);
         stateMachine.enemy.animator.SetFloat("Speed", 1f);
@@ -37,7 +37,7 @@ public class EnemyTraceState : EnemyBaseState
     /// </summary>
     public void Trace()
     {
-        Debug.Log("Trace");
+        // Debug.Log("Trace");
         if(stateMachine.enemy.target != null)   
         { 
             // 타겟이 있으면 추적 처리

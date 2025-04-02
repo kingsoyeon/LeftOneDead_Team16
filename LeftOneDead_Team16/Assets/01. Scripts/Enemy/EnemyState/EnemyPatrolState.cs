@@ -27,7 +27,7 @@ public class EnemyPatrolState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("PatrolState");
+        // Debug.Log("PatrolState");
         stateMachine.enemy.navMeshAgent.isStopped = false;
         stateMachine.enemy.animator.SetBool("Move", true);
         patrolPosition = GetPatrolPosition();
@@ -66,7 +66,7 @@ public class EnemyPatrolState : EnemyBaseState
     /// </summary>
     private void Patrol()
     {
-        Debug.Log("Patrol");
+       // Debug.Log("Patrol");
         // Debug.Log($"patrolPosition: {patrolPosition}");
 
         // 정찰 위치에 도달했을 때 아이들 상태로 전환
