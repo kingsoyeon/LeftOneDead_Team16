@@ -38,6 +38,7 @@ public class PlayerBaseState : IState
         input.playerActions.Attack.canceled += OnAttack;
         input.playerActions.Interaction.started += OnInteraction;
         input.playerActions.Reload.started += OnReload;
+        input.playerActions.Falsh.performed += OnFlash;
     }
 
 
@@ -51,7 +52,7 @@ public class PlayerBaseState : IState
         input.playerActions.Attack.canceled -= OnAttack;
         input.playerActions.Interaction.started -= OnInteraction;
         input.playerActions.Reload.started -= OnReload;
-
+        input.playerActions.Falsh.performed -= OnFlash;
     }
 
     public virtual void HandleInput()
@@ -68,6 +69,10 @@ public class PlayerBaseState : IState
     {
         Debug.DrawRay(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward * interactionDistance, Color.red, 1f);
         Move();
+    }
+
+    public void FixedUpdate()
+    {
     }
 
     protected virtual void OnMovementCanceled(InputAction.CallbackContext context) { }
@@ -190,8 +195,19 @@ public class PlayerBaseState : IState
             Debug.Log("상호작용 할게 없음");
         }
     }
-    public void FixedUpdate()
+    
+    protected virtual void OnFlash(InputAction.CallbackContext context)
     {
+        isFlash = !isFlash;
+
+        if (isFlash)
+        {
+            stateMachine.player.cameraController.turnOn();
+        }
+        else
+        { 
+            stateMachine.player.cameraController.turnOff();
+        }
 
     }
 }

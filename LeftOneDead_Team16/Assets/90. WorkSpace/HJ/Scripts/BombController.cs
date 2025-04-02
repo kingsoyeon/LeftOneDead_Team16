@@ -5,6 +5,9 @@ using UnityEngine;
 public class BombController : MonoBehaviour, IInteractable, IDamageable
 {
     public List<ExplosiveData> ExplosiveDatas = new List<ExplosiveData>();
+
+    public ParticleSystem exploreParticle;
+
     /// <summary>
     /// 장판 효과 오브젝트 프리팹
     /// </summary>
@@ -70,7 +73,9 @@ public class BombController : MonoBehaviour, IInteractable, IDamageable
             if (strikedCount > ImmediateExplodeCount) break;
             yield return null;
         }
+        exploreParticle.Play();
         Explode();
+        yield return new WaitForSeconds(1.0f);
         Destroy(gameObject);
     }
 
@@ -88,6 +93,8 @@ public class BombController : MonoBehaviour, IInteractable, IDamageable
             }
         }
 
+        exploreParticle.Play();
+
         //리스트에 있는 오브젝트들 데미지 입히기
         foreach (IDamageable damageable in damageables)
         {
@@ -98,6 +105,7 @@ public class BombController : MonoBehaviour, IInteractable, IDamageable
     void SpreadExplode(ExplosiveData data)
     {
         Debug.Log("화염 효과 미구현");
-        throw new System.NotImplementedException();
+
+        exploreParticle.Play();
     }
 }
