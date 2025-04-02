@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -9,9 +10,10 @@ using UnityEngine;
 /// </summary>
 public class StageSelectButton : MonoBehaviour
 {
+    
     private StageData stageData;
     [SerializeField] private TextMeshProUGUI stageNameText;
-
+    //[SerializeField] private CanvasGroup fadeImage;
     public void Init(StageData data)
     {
         stageData = data;
@@ -20,6 +22,6 @@ public class StageSelectButton : MonoBehaviour
 
     public void OnStageSelectButton()
     {
-        GameManager.Instance.StageStart(stageData);
+            GameManager.Instance.StageStart(stageData);
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletPool : MonoBehaviour
@@ -12,7 +11,7 @@ public class BulletPool : MonoBehaviour
             if (instance == null)
             {
                 instance = new GameObject().AddComponent<BulletPool>();
-                instance.ammoPrefab = new GameObject().AddComponent<BallisticController>().AddComponent<TrailRenderer>().gameObject;
+                instance.ammoPrefab = new GameObject().AddComponent<BallisticController>().gameObject;
             }
             return instance;
         }
