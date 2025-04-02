@@ -24,6 +24,8 @@ public class Player : MonoBehaviour, IDamageable
     }
     void Start()
     {
+        //체력 초기화
+        Data.Condition.currentHealth = Data.Condition.maxHealth;
         //Cursor.lockState = CursorLockMode.Locked;
         stateMachine.ChangeState(stateMachine.GroundState);
     }
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour, IDamageable
         stateMachine.PhysicsUpdate();
     }
 
+    //데미지를 받으면 호출되는 함수
     public void TakeDamage(int damage)
     {
         stateMachine.player.Data.Condition.currentHealth -= damage;
