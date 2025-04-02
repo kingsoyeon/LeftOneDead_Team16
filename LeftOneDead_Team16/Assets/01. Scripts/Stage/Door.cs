@@ -28,15 +28,15 @@ public class Door : MonoBehaviour, IInteractable
     private void Start()
     {
         // test 코드
-        StageManager.Instance.AddActionToEventActionDict(0, Interact);
+        //StageManager.Instance.AddActionToEventActionDict(0, Interact);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
-        }
+        }*/
     }
 
     public void Interact()

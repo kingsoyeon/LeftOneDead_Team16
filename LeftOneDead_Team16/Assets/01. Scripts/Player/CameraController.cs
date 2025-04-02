@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
     private Transform cameraPoint;
     private Camera mainCamera;
     private float verticalRotation = 0f;
-    private float verticalClamp = 90f;
+    private float verticalClamp = 85f;
 
     private Player player;
 
