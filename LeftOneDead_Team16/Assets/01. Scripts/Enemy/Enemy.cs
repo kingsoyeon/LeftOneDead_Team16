@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,7 +33,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public float rotateSpeed => enemySO.MovementData.RotateSpeed;
     public float jumpForce => enemySO.MovementData.JumpForce;
     public float attackRange => enemySO.MovementData.AttackRange;
-    public float traceRange => enemySO.MovementData.TraceRange;
+    public float traceRange => enemySO.MovementData.PatrolRange;
     public float patrolTime => enemySO.MovementData.PatrolTime;
     public float patrolWaitTime => enemySO.MovementData.PatrolWaitTime;
     public float skillAttackRange => enemySO.MovementData.SkillAttackRange;
@@ -94,24 +95,42 @@ public class Enemy : MonoBehaviour, IDamageable
 
     }
 
+
     private void Update()
     {
         stateMachine.Update();
 
-        if (stateMachine.enemy.navMeshAgent.velocity.y < -1f)
+        // 에이전트가 isOnOffMeshLink에 있는지 확인한다. (어차피 nav로 움직이니까 저걸로 떨이지고 올라갈거임)
+        if (stateMachine.enemy.navMeshAgent.isOnOffMeshLink && !stateMachine.enemy.navMeshAgent.isStopped)
         {
-            Debug.Log("fall 상태 진입");
-            stateMachine.ChangeState(stateMachine.FallState);
-            return;
+            OffMeshLinkData linkData = stateMachine.enemy.navMeshAgent.currentOffMeshLinkData;
+            if(linkData.linkType == OffMeshLinkType.LinkTypeJumpAcross) // jumpAcross 타입이면 점프 상태로 변경
+            {
+                Debug.Log("점프 상태");
+                stateMachine.ChangeState(stateMachine.JumpState);
+
+                return;
+            }
+            else if(linkData.linkType == OffMeshLinkType.LinkTypeDropDown) // dropDown 타입이면 떨어지는 상태로 변경
+            {
+                Debug.Log("떨어지는 상태");
+                stateMachine.ChangeState(stateMachine.FallState);
+                return;
+            }
+            else if(linkData.offMeshLink != null && linkData.offMeshLink.area == 3) // climb 타입이면 벽을 오르는 상태로 변경
+            {
+                Debug.Log("벽을 오르는 상태");
+                stateMachine.ChangeState(stateMachine.ClimbState);
+                return;
+            }
         }
 
-        // 점프 상태 진입
-        if (stateMachine.enemy.navMeshAgent.velocity.y > 1f)
-        {
-            Debug.Log("jump 상태 진입");
-            stateMachine.ChangeState(stateMachine.JumpState);
-            return;
-        }
+        // if (stateMachine.enemy.navMeshAgent.velocity.y < -1f && !stateMachine.enemy.navMeshAgent.isStopped)
+        // {
+        //     Debug.Log("fall 상태 진입");
+        //     stateMachine.ChangeState(stateMachine.FallState);
+        //     return;
+        // }
 
     }
 
@@ -306,11 +325,169 @@ public class Enemy : MonoBehaviour, IDamageable
         animator.SetBool("Die", true);
     }
 
-   
-    public void Jump()
-    {
-        // 점프 처리
 
+    public void StartJump()
+    {
+        StartCoroutine(Jump());
+    }
+
+   /// <summary>
+   /// 점프하는 코루틴
+   /// 포물선으로 점프        
+   /// </summary>
+   /// <returns></returns>
+    IEnumerator Jump()
+    {
+        navMeshAgent.isStopped = true;
+        OffMeshLinkData linkData = navMeshAgent.currentOffMeshLinkData;
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = linkData.endPos;
+
+        float jumpTime = 1.0f; // 원하는 점프 시간 (조정 가능)
+        float g = 9.8f;       // 중력 가속도
+                              // 초기 속도 계산: (endY - startY + 0.5 * g * jumpTime^2) / jumpTime
+        float v0 = ((endPosition.y - startPosition.y) + 0.5f * g * jumpTime * jumpTime) / jumpTime;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < jumpTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp(elapsedTime, 0, jumpTime);
+            float percent = t / jumpTime;
+
+            // 수평 위치 보간 (선형 보간)
+            Vector3 horizontalPos = Vector3.Lerp(startPosition, endPosition, percent);
+
+            // 수직 위치: y = startY + v0 * t - 0.5 * g * t^2
+            float yOffset = v0 * t - 0.5f * g * t * t;
+            horizontalPos.y = startPosition.y + yOffset;
+
+            transform.position = horizontalPos;
+            yield return null;
+        }
+
+        // 착지 보정
+        transform.position = endPosition;
+        navMeshAgent.CompleteOffMeshLink();
+        navMeshAgent.isStopped = false;
+    }
+
+    public void StartFall()
+    {
+        StartCoroutine(Fall());
+    }
+
+    /// <summary>
+    /// 떨어지는 코루틴
+    /// 중력기반 낙하 
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator Fall()
+    {
+        // 떨어지는 동안 NavMeshAgent를 정지
+        navMeshAgent.isStopped = true;
+
+        // 현재 OffMeshLink 정보를 가져옴
+        OffMeshLinkData linkData = navMeshAgent.currentOffMeshLinkData;
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = linkData.endPos;
+
+        float g = 9.8f;  // 중력 가속도
+                         // 떨어지는 높이 계산 (startPosition.y > endPosition.y 가정)
+        float height = startPosition.y - endPosition.y;
+        // 자유 낙하 공식: t = sqrt(2 * height / g)
+        float fallTime = Mathf.Sqrt(2 * height / g);
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fallTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp(elapsedTime, 0, fallTime);
+
+            // 수직 위치: y = startY - 0.5 * g * t^2
+            float newY = startPosition.y - 0.5f * g * t * t;
+            newY = Mathf.Max(newY, endPosition.y);
+
+            // 수평 보간 (선형 보간)
+            float percent = t / fallTime;
+            Vector3 horizontalPos = Vector3.Lerp(new Vector3(startPosition.x, 0, startPosition.z),
+                                                  new Vector3(endPosition.x, 0, endPosition.z), percent);
+
+            transform.position = new Vector3(horizontalPos.x, newY, horizontalPos.z);
+            yield return null;
+        }
+
+        // 최종 위치 보정 및 OffMeshLink 완료 처리
+        transform.position = endPosition;
+        navMeshAgent.CompleteOffMeshLink();
+        navMeshAgent.isStopped = false;
+    }
+
+    public void StartClimb()
+    {
+        StartCoroutine(Climb());
+    }
+
+    /// <summary>
+    /// 벽을 오르는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator Climb()
+    {
+        // NavMeshAgent의 자동 이동을 중지합니다.
+        navMeshAgent.isStopped = true;
+
+        // 현재 OffMeshLink 데이터를 가져옵니다.
+        OffMeshLinkData linkData = navMeshAgent.currentOffMeshLinkData;
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = linkData.endPos;
+
+        // 벽을 오르는 속도: 이동 속도의 50% (필요에 따라 조정)
+        float climbSpeed = moveSpeed * 0.5f;
+        // 시작점과 끝점 사이의 거리를 구합니다.
+        float distance = Vector3.Distance(startPosition, endPosition);
+        // 전체 클라임 시간 = 거리 / 속도
+        float climbTime = distance / climbSpeed;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < climbTime)
+        {
+            elapsedTime += Time.deltaTime;
+            // 0~1 사이의 진행률
+            float t = Mathf.Clamp01(elapsedTime / climbTime);
+            // 선형 보간으로 위치 업데이트
+            Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, t);
+            transform.position = newPosition;
+            yield return null;
+        }
+
+        // 최종 위치 보정: 정확히 종료 위치로 이동
+        transform.position = endPosition;
+
+        // OffMeshLink 완료 처리 및 NavMeshAgent 재개
+        navMeshAgent.CompleteOffMeshLink();
+        navMeshAgent.isStopped = false;
+    }
+
+    /// <summary>
+    /// 벽을 오르는 링크인지 확인하는 함수  
+    /// </summary>
+    /// <returns></returns>
+    public bool IsClimbLink()
+    {
+        if(navMeshAgent.isOnOffMeshLink)
+        {
+            Debug.Log("IsClimbLink");
+
+            OffMeshLinkData linkData = navMeshAgent.currentOffMeshLinkData;
+            if(linkData.offMeshLink!=null && linkData.offMeshLink.area == 3)
+            {
+                Debug.Log("IsClimbLink true");
+                return true;
+            }
+        }
+        Debug.Log("IsClimbLink false");
+        return false;
     }
 
 }
