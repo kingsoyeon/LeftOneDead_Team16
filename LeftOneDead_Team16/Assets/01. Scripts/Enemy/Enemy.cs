@@ -306,7 +306,7 @@ public class Enemy : MonoBehaviour, IDamageable
        
         // 데미지 처리
         curHp -= damage;
-        Debug.Log(curHp);
+        // Debug.Log(curHp);
 
         // 체력이 0이하면 죽음
         if(curHp <= 0 && isLive)
