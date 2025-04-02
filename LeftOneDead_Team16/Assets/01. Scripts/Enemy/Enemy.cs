@@ -15,6 +15,8 @@ public enum EnemyStartState
 
 public class Enemy : MonoBehaviour, IDamageable
 {
+
+    [SerializeField] private AudioClip zombieSound;
     [field:SerializeField] private EnemySO enemySO;
     [field:SerializeField] private EnemyStateMachine stateMachine;
     [field:SerializeField] private EnemyStateMachine beforeStateMachine;
@@ -295,6 +297,8 @@ public class Enemy : MonoBehaviour, IDamageable
     /// <param name="damage">데미지</param>
     public void TakeDamage(int damage)
     {
+        SoundManager.PlayClip(zombieSound);
+
         float damageMultiplier = 100f / (100f + baseDef);
         // 데미지 받기 방어력 적용해서 데미지 계산
         damage = Mathf.Max(Mathf.RoundToInt(damage * damageMultiplier), 1);
