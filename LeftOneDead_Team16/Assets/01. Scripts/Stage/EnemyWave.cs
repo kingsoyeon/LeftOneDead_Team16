@@ -12,12 +12,6 @@ public class EnemyWave : MonoBehaviour
     [SerializeField] private GameObject enemyResource;
     [SerializeField] private GameObject specialEnemyResource;
 
-    private void Awake()
-    {
-        respawnCount = 30;
-        respawnInterval = 1f;
-    }
-
     private void Start()
     {
         StageManager.Instance.AddActionToEventActionDict(0, () => StartCoroutine(Respawn()));
@@ -35,7 +29,7 @@ public class EnemyWave : MonoBehaviour
             dir.y = 0f;
             var respawnPos = transform.position + dir * Random.Range(-maxRespawnBoundaryRange, maxRespawnBoundaryRange);
             
-            if (curRespawnCount % 15 == 14)
+            if (curRespawnCount % 5 == 4)
             {
                 go = Instantiate(specialEnemyResource, respawnPos, Quaternion.identity);
             }
