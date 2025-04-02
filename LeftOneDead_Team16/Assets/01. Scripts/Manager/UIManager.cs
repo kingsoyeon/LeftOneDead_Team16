@@ -19,6 +19,7 @@ public class UIManager : Singleton<UIManager>
 {
     private Stack<PopupUI> popupStack = new Stack<PopupUI>();
     private ScreenUI currentScreen;
+    private PopupUI currentPopup;
     public Transform uirootTransform; // 이 밑으로 UI 생성
     private Dictionary<string, PopupUI> pool = new Dictionary<string, PopupUI>(); // 팝업 UI용 오브젝트풀
 
@@ -46,7 +47,7 @@ public class UIManager : Singleton<UIManager>
         return currentScreen as T;
     }
     /// <summary>
-    /// 팝업되는 UI를 띄워주는 메서드
+    /// 팝업되는 UI를 띄워주는 메서드 (제너릭 형식)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="name"></param>
@@ -77,6 +78,38 @@ public class UIManager : Singleton<UIManager>
         //popup.Show();
         popupStack.Push(popup);
         return popup as T;
+    }
+    /// <summary>
+    /// 이름으로만 UI를 팝업하는 메서드
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public PopupUI ShowPopUp(string name)
+    {
+        PopupUI popup;
+
+        // 이전 팝업 UI SETACTIVE=FALSE 처리
+        if ( currentPopup != null)
+        {
+            currentPopup.Hide();
+        }
+        
+        if (pool.TryGetValue(name, out popup))
+        {
+            popup.gameObject.SetActive(true);
+        }
+        else
+        {
+            GameObject prefab = Resources.Load<GameObject>($"UI/Popup/{name}");
+            var obj = Instantiate(prefab, uirootTransform);
+            popup = obj.GetComponent<PopupUI>();
+
+            pool[name] = popup;
+            popup.Show();
+        }
+        popupStack.Push(popup);
+        currentPopup = popup;
+        return currentPopup;
     }
     /// <summary>
     /// 팝업 UI 닫기
