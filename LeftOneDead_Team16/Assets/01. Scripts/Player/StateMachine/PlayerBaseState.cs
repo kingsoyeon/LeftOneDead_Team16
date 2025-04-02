@@ -33,6 +33,7 @@ public class PlayerBaseState : IState
         input.playerActions.Run.started += OnRunStarted;
         input.playerActions.Jump.started += OnJumpStarted;
         input.playerActions.Attack.started += OnAttack;
+        input.playerActions.Attack.canceled += OnAttack;
         input.playerActions.Interaction.started += OnInteraction;
     }
 
@@ -43,6 +44,7 @@ public class PlayerBaseState : IState
         input.playerActions.Run.started -= OnRunStarted;
         input.playerActions.Jump.started -= OnJumpStarted;
         input.playerActions.Attack.started -= OnAttack;
+        input.playerActions.Attack.canceled -= OnAttack;
         input.playerActions.Interaction.started -= OnInteraction;
 
     }
@@ -145,8 +147,15 @@ public class PlayerBaseState : IState
         GunController gun = stateMachine.player.GetComponentInChildren<GunController>();
         if(gun != null)
         {
+            if (context.started)
+            {
             gun.GunAction.TriggerPull();
             Debug.Log("shoot");
+            }
+            if (context.canceled)
+            {
+            gun.GunAction.TriggerRelease();
+            }
         }
     }
 
