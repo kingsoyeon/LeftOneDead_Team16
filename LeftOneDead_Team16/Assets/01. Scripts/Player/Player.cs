@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     [field: SerializeField] public PlayerSO Data { get; private set; }
 
@@ -37,5 +37,11 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         stateMachine.PhysicsUpdate();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        stateMachine.player.Data.Condition.currentHealth -= damage;
+        Debug.Log(stateMachine.player.Data.Condition.currentHealth);
     }
 }
