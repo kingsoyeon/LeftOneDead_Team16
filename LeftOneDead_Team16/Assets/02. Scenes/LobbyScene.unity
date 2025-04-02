@@ -594,6 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88761808dcf90ee4a8142565ae860d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 0
   soundEffectVolume: 0
   soundEffectPitchVariance: 0
   musicVolume: 0
