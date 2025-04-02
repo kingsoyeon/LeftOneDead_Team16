@@ -6,6 +6,10 @@ using UnityEngine;
 public class GunController : MonoBehaviour,IInteractable
 {
     public GunActions GunAction;
+    public AudioClip fireSound;
+    public AudioClip reloadingSound;
+
+
     public GunController()
     {
         GunAction = new GunActions(this);
@@ -32,6 +36,7 @@ public class GunController : MonoBehaviour,IInteractable
     private bool awaitTriggerRelease;
 
 
+    private bool init = false;
 
     private void Start()
     {
@@ -43,6 +48,8 @@ public class GunController : MonoBehaviour,IInteractable
         fireInterval = 60f / Data.RoundPerMinute;
         CurrentAmmoHolding = Data.MaxAmmoCanHold;
         Reload();
+        init = true;
+
     }
     private void Update()
     {
@@ -86,6 +93,8 @@ public class GunController : MonoBehaviour,IInteractable
     {
         if (reloadCoroutine == null)
         {
+            if(init)
+                SoundManager.PlayClip(reloadingSound);
             reloadCoroutine = StartCoroutine(ReloadCoroutine());
         }
     }
@@ -160,6 +169,8 @@ public class GunController : MonoBehaviour,IInteractable
             //fire
             AmmoCount--;
             ammos[AmmoCount].Fire(MuzzlePositon.transform, Data);
+            SoundManager.PlayClip(fireSound);
+            
         }
     }
 

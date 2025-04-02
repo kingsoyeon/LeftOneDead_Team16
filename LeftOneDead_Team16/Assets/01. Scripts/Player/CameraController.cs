@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     private Camera mainCamera;
     private float verticalRotation = 0f;
     private float verticalClamp = 85f;
+    [SerializeField] GameObject flashLight;
 
     private Player player;
 
@@ -68,6 +69,17 @@ public class CameraController : MonoBehaviour
         if (mainCamera != null)
         {
             mainCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+            flashLight.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
         }
+    }
+
+    public void turnOn()
+    {
+        flashLight.SetActive(true);
+    }
+
+    public void turnOff()
+    {
+        flashLight.SetActive(false);
     }
 }

@@ -65,11 +65,13 @@ public class EnemyAttackState : EnemyBaseState
         {
             SkillAttack();
             lastAttackTime = currentTime;
+
         }
         else if(currentTime - lastAttackTime >= stateMachine.enemy.attackSpeed)
         {
             Attack();
             lastAttackTime = currentTime;
+
         }
 
     }
@@ -85,7 +87,10 @@ public class EnemyAttackState : EnemyBaseState
         {
             lastSkillAttackTime = Time.time;
             stateMachine.enemy.animator.SetTrigger("Skill");
+            SoundManager.PlayClip(stateMachine.enemy.zombieSound);
+
             stateMachine.enemy.skill?.UseSkill();
+
 
 
         }
@@ -102,6 +107,8 @@ public class EnemyAttackState : EnemyBaseState
         {
             lastAttackTime = currentTime;
             stateMachine.enemy.animator.SetTrigger("Attack");
+            SoundManager.PlayClip(stateMachine.enemy.zombieSound);
+
 
             // 나중에 플레이어 생기면 플레이어의 takeDamage 호출
             stateMachine.enemy.target.TryGetComponent<IDamageable>(out IDamageable damageable);

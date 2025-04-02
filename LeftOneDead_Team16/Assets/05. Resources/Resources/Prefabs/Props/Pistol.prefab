@@ -204,6 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8e349890e0e1f49bb69ca65b65d56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireSound: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
+  reloadingSound: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
   Data: {fileID: 11400000, guid: 865eb7a51bdf7264c9ddb0392600b2ab, type: 2}
   State: 0
   MuzzlePositon: {fileID: 6742818389604071183}
@@ -211,4 +213,3 @@ MonoBehaviour:
   CurrentFireMode: 1
   AmmoCount: 0
   CurrentAmmoHolding: 0
-  pool: {fileID: 0}
