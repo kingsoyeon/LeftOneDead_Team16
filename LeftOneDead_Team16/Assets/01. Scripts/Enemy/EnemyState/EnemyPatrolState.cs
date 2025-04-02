@@ -9,8 +9,8 @@ public class EnemyPatrolState : EnemyBaseState
 {
 
     [Header("Wandering")]
-    private float maxWanderDistance = 5f;
-    private float maxDistance = 5f;
+    private float maxWanderDistance = 10f;
+    private float maxDistance = 10f;
 
 
     private float patrolMaxTime = 5f;
@@ -43,7 +43,9 @@ public class EnemyPatrolState : EnemyBaseState
         base.Update();
 
         allTime += Time.deltaTime;
-        if(allTime > 0.1f){
+        patrolTime += Time.deltaTime;
+
+        if (allTime > 0.1f){
 
             if(stateMachine.enemy.CheckTargetInSight()) return;
             Patrol();
@@ -65,8 +67,7 @@ public class EnemyPatrolState : EnemyBaseState
     private void Patrol()
     {
         Debug.Log("Patrol");
-        Debug.Log($"patrolPosition: {patrolPosition}");
-        patrolTime += Time.deltaTime;
+        // Debug.Log($"patrolPosition: {patrolPosition}");
 
         // 정찰 위치에 도달했을 때 아이들 상태로 전환
         if (Vector3.Distance(stateMachine.enemy.transform.position, patrolPosition) < 0.1f)

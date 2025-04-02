@@ -14,6 +14,7 @@ public class EnemyStateMachine : StateMachine
     public EnemySkillAttackState SkillAttackState { get; private set; }
     public EnemyJumpState JumpState { get; private set; }
     public EnemyFallState FallState { get; private set; }
+    public EnemyClimbState ClimbState { get; private set; }
 
     public EnemyStateMachine(Enemy enemy)
     {
@@ -27,6 +28,7 @@ public class EnemyStateMachine : StateMachine
         PlayerTargetState = new EnemyPlayerTargetState(this);
         JumpState = new EnemyJumpState(this);
         FallState = new EnemyFallState(this);
+        ClimbState = new EnemyClimbState(this);
     }
 
 

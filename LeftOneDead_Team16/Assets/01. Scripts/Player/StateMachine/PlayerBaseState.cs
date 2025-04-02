@@ -9,6 +9,7 @@ public class PlayerBaseState : IState
     protected PlayerStateMachine stateMachine;
     protected readonly PlayerGroundData groundData;
 
+    private float interactionDistance = 3f;
     public PlayerBaseState(PlayerStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
@@ -32,6 +33,7 @@ public class PlayerBaseState : IState
         input.playerActions.Run.started += OnRunStarted;
         input.playerActions.Jump.started += OnJumpStarted;
         input.playerActions.Attack.started += OnAttack;
+        input.playerActions.Interaction.started += OnInteraction;
     }
 
     protected virtual void RemoveinputActionCallbacks()
@@ -41,6 +43,7 @@ public class PlayerBaseState : IState
         input.playerActions.Run.started -= OnRunStarted;
         input.playerActions.Jump.started -= OnJumpStarted;
         input.playerActions.Attack.started -= OnAttack;
+        input.playerActions.Interaction.started -= OnInteraction;
 
     }
 
@@ -56,6 +59,7 @@ public class PlayerBaseState : IState
 
     public virtual void Update()
     {
+        Debug.DrawRay(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward * interactionDistance, Color.red, 1f);
         Move();
     }
 
@@ -138,9 +142,40 @@ public class PlayerBaseState : IState
 
     protected virtual void OnAttack(InputAction.CallbackContext context)
     {
-        stateMachine.ChangeState(stateMachine.attackState);
+        GunController gun = stateMachine.player.GetComponentInChildren<GunController>();
+        if(gun != null)
+        {
+            gun.GunAction.TriggerPull();
+            Debug.Log("shoot");
+        }
     }
 
+    protected virtual void OnInteraction(InputAction.CallbackContext context)
+    {
+
+        Debug.DrawRay(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward * interactionDistance, Color.green, 2f);
+
+        Ray ray = new Ray(stateMachine.MainCamTransform.position, stateMachine.MainCamTransform.forward);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, interactionDistance))
+        {
+            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            if (interactable != null)
+            {
+                interactable.Interact();
+            }
+            else
+            {
+                Debug.Log("이건 상호작용 안됨");
+            }
+
+        }
+        else
+        {
+            Debug.Log("상호작용 할게 없음");
+        }
+    }
     public void FixedUpdate()
     {
 
