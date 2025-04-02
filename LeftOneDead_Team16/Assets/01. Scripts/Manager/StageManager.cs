@@ -26,7 +26,7 @@ public class StageManager : Singleton<StageManager>
     {
         if (isStageEnd) return;
         
-        PlayTime += Time.unscaledTime;
+        PlayTime += Time.unscaledDeltaTime;
     }
 
     public void SetCurrentStage(Stage stage)

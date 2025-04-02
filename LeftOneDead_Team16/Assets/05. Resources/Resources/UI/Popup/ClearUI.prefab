@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC8C\uC784 \uD50C\uB808\uC774 \uD1B5\uACC4"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 72e1053d340409e4abed74d96b9ee6c8, type: 2}
   m_sharedMaterial: {fileID: 3144099566091815686, guid: 72e1053d340409e4abed74d96b9ee6c8,
@@ -471,6 +471,7 @@ GameObject:
   - component: {fileID: 4107179180886712110}
   - component: {fileID: 5029204576537673631}
   - component: {fileID: 6556150082572645149}
+  - component: {fileID: 6221845883941399475}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -563,6 +564,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &6221845883941399475
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4439594444703784515}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5680252154285174705
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,7 +767,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 300, y: 100}
+  m_CellSize: {x: 700, y: 100}
   m_Spacing: {x: 0, y: 50}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -823,7 +836,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC8C\uC784 \uD50C\uB808\uC774 \uD1B5\uACC4"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 72e1053d340409e4abed74d96b9ee6c8, type: 2}
   m_sharedMaterial: {fileID: 3144099566091815686, guid: 72e1053d340409e4abed74d96b9ee6c8,
@@ -1075,3 +1088,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playTimeText: {fileID: 8095696873139776650}
   killCountText: {fileID: 3688303014055820946}
+  fadeCanvasGroup: {fileID: 6221845883941399475}
+  fadeDuration: 1

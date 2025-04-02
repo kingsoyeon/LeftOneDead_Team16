@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,7 +10,10 @@ public class ClearUI : PopupUI
 {
     [SerializeField] private TextMeshProUGUI playTimeText;
     [SerializeField] private TextMeshProUGUI killCountText;
+    [SerializeField] private CanvasGroup fadeCanvasGroup;
+    [SerializeField] private float fadeDuration = 1f; 
 
+   
     public void OnSkipButtonClicked()
     {
         GameManager.Instance.ChangeToLobby();
@@ -17,7 +21,19 @@ public class ClearUI : PopupUI
 
     private void Start()
     {
-        killCountText.text = $"처치 횟수 : {StageManager.Instance.KillCount}";
-        playTimeText.text = $"클리어 시간 : {StageManager.Instance.PlayTime}";
+        fadeCanvasGroup.alpha = 0f;
+        fadeCanvasGroup.DOFade(1f, fadeDuration).OnComplete(() =>
+        {
+            killCountText.alpha = 0;
+            playTimeText.alpha = 0;
+
+            killCountText.DOFade(1f, 0.5f);
+            playTimeText.DOFade(1f, 0.5f);
+
+            killCountText.text = $"처치 횟수 : {StageManager.Instance.KillCount}";
+            int minutes = (int)(StageManager.Instance.PlayTime / 60);
+            int seconds = (int)(StageManager.Instance.PlayTime % 60);
+            playTimeText.text = $"클리어 시간 : {minutes}분 {seconds}초";
+        });
     }
 }
