@@ -1,12 +1,13 @@
-using System;
 using UnityEngine;
 
-public class ExplosionDestroy : MonoBehaviour
+public class Trailer : MonoBehaviour, IExplosive
 {
+    [SerializeField] private AudioClip explodeSound;
     [SerializeField] private GameObject explosionFx;
 
-    private void ExplosionEvent()
+    public void Explosion()
     {
+        SoundManager.PlayClip(explodeSound);
         Instantiate(explosionFx, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
