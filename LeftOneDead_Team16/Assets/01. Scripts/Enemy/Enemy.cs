@@ -317,6 +317,8 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }   
 
+    
+
     private void Die()
     {
         animator.SetBool("Death", true);
@@ -393,6 +395,7 @@ public class Enemy : MonoBehaviour, IDamageable
         navMeshAgent.CompleteOffMeshLink();
         navMeshAgent.isStopped = false;
     }
+
 
     public void StartFall()
     {
