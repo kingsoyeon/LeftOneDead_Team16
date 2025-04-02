@@ -9,9 +9,6 @@ public class PlayerCondition
     [Header("Health")]
     public float maxHealth = 100f;
     public float currentHealth = 100f;
-
-    [Header("Movement")]
-    public float moveSpeed = 5f;
 }
 
 [Serializable]
