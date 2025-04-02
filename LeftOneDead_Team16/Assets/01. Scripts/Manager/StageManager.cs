@@ -56,6 +56,14 @@ public class StageManager : Singleton<StageManager>
         isStageEnd = true;
         GameManager.Instance.SetGameState(GameManager.GameState.GameClear);
         UIManager.Instance.ShowPopup<ClearUI>("ClearUI");
+    }
 
+    public void MakeWave()
+    {
+        var waveRespawn = FindObjectsByType<EnemyWave>(FindObjectsSortMode.None);
+        foreach (EnemyWave respawn in waveRespawn)
+        {
+            StartCoroutine(respawn.Respawn());
+        }
     }
 }

@@ -17,7 +17,7 @@ public class EnemyWave : MonoBehaviour
         respawnInterval = 1f;
     }
 
-    private IEnumerator Respawn()
+    public IEnumerator Respawn()
     {
         var curRespawnCount = 0;
         while (curRespawnCount < respawnCount)
