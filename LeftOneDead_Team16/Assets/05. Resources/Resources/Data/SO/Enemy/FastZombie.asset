@@ -29,5 +29,5 @@ MonoBehaviour:
     <SkillAttackSpeed>k__BackingField: 1
   <StatData>k__BackingField:
     <BaseHp>k__BackingField: 100
-    <BaseAtk>k__BackingField: 1
+    <BaseAtk>k__BackingField: 30
     <BaseDef>k__BackingField: 1
