@@ -16,6 +16,8 @@ public class SoundManager : Singleton<SoundManager>
 
     private AudioSource musicAudioSource;
 
+    [SerializeField] private AudioMixer masterMixer;
+
     // 사운드소스 프리팹
     public SoundSource soundSourcePrefab;
 
@@ -58,7 +60,9 @@ public class SoundManager : Singleton<SoundManager>
     // master 볼륨 저장
     public void SetMasterVolume(float volume)
     {
-        masterVolume = volume;
+       
+        float dB = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f;
+        masterMixer.SetFloat("MasterVolume", dB);
         PlayerPrefs.SetFloat("MasterVolume", volume);
         PlayerPrefs.Save();
     }
