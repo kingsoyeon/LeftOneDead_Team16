@@ -14,7 +14,6 @@ public class EnemyJumpState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
-        stateMachine.enemy.Jump();
         StartAnimation(stateMachine.enemy.enemyAnimaionData.JumpParameterName);
         stateMachine.enemy.animator.SetFloat("Speed", 1f);
         jumpTime = 0f;
@@ -32,7 +31,7 @@ public class EnemyJumpState : EnemyBaseState
         jumpTime += Time.deltaTime;
         if(jumpTime > jumpMaxTime)
         {
-            stateMachine.ChangeState(stateMachine.IdleState);
+            stateMachine.ChangeState(stateMachine.beforeState);
         }
     }
 

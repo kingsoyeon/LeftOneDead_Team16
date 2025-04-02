@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,7 +33,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public float rotateSpeed => enemySO.MovementData.RotateSpeed;
     public float jumpForce => enemySO.MovementData.JumpForce;
     public float attackRange => enemySO.MovementData.AttackRange;
-    public float traceRange => enemySO.MovementData.TraceRange;
+    public float traceRange => enemySO.MovementData.PatrolRange;
     public float patrolTime => enemySO.MovementData.PatrolTime;
     public float patrolWaitTime => enemySO.MovementData.PatrolWaitTime;
     public float skillAttackRange => enemySO.MovementData.SkillAttackRange;
@@ -98,18 +99,30 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         stateMachine.Update();
 
+        // 에이전트가 isOnOffMeshLink에 있는지 확인한다. (어차피 nav로 움직이니까 저걸로 떨이지고 올라갈거임)
+        if (stateMachine.enemy.navMeshAgent.isOnOffMeshLink && !stateMachine.enemy.navMeshAgent.isStopped)
+        {
+            OffMeshLinkData linkData = stateMachine.enemy.navMeshAgent.currentOffMeshLinkData;
+            if(linkData.linkType == OffMeshLinkType.LinkTypeJumpAcross) // jumpAcross 타입이면 점프 상태로 변경
+            {
+                Debug.Log("점프 상태");
+                stateMachine.ChangeState(stateMachine.JumpState);
+                StartCoroutine(Jump());
+
+                return;
+            }
+            else if(linkData.linkType == OffMeshLinkType.LinkTypeDropDown) // dropDown 타입이면 떨어지는 상태로 변경
+            {
+                Debug.Log("떨어지는 상태");
+                stateMachine.ChangeState(stateMachine.FallState);
+                return;
+            }
+        }
+
         if (stateMachine.enemy.navMeshAgent.velocity.y < -1f)
         {
             Debug.Log("fall 상태 진입");
             stateMachine.ChangeState(stateMachine.FallState);
-            return;
-        }
-
-        // 점프 상태 진입
-        if (stateMachine.enemy.navMeshAgent.velocity.y > 1f)
-        {
-            Debug.Log("jump 상태 진입");
-            stateMachine.ChangeState(stateMachine.JumpState);
             return;
         }
 
@@ -306,11 +319,42 @@ public class Enemy : MonoBehaviour, IDamageable
         animator.SetBool("Die", true);
     }
 
-   
-    public void Jump()
+    // 포물선으로 점프하는 코루틴
+    IEnumerator Jump()
     {
-        // 점프 처리
+        navMeshAgent.isStopped = true;
+        OffMeshLinkData linkData = navMeshAgent.currentOffMeshLinkData;
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = linkData.endPos;
 
+        float jumpTime = 1.0f; // 원하는 점프 시간 (조정 가능)
+        float g = 9.8f;       // 중력 가속도
+                              // 초기 속도 계산: (endY - startY + 0.5 * g * jumpTime^2) / jumpTime
+        float v0 = ((endPosition.y - startPosition.y) + 0.5f * g * jumpTime * jumpTime) / jumpTime;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < jumpTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp(elapsedTime, 0, jumpTime);
+            float percent = t / jumpTime;
+
+            // 수평 위치 보간 (선형 보간)
+            Vector3 horizontalPos = Vector3.Lerp(startPosition, endPosition, percent);
+
+            // 수직 위치: y = startY + v0 * t - 0.5 * g * t^2
+            float yOffset = v0 * t - 0.5f * g * t * t;
+            horizontalPos.y = startPosition.y + yOffset;
+
+            transform.position = horizontalPos;
+            yield return null;
+        }
+
+        // 착지 보정
+        transform.position = endPosition;
+        navMeshAgent.CompleteOffMeshLink();
+        navMeshAgent.isStopped = false;
+        stateMachine.ChangeState(stateMachine.beforeState);
     }
 
 }

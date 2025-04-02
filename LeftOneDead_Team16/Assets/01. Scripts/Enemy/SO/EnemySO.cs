@@ -24,7 +24,7 @@ public class EnemyMovementData
     public float DetectionAngle { get; private set; } = 30; // 감지 각도
 
     [field: SerializeField][field: Range(0, 10)]
-    public float TraceRange { get; private set; } = 10; // 순찰 거리
+    public float PatrolRange { get; private set; } = 10; // 순찰 거리
 
 
     [field: SerializeField][field: Range(0, 10)]
