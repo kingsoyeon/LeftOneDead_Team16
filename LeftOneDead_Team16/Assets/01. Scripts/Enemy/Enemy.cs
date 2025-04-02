@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using VFavorites.Libs;
 
 public enum EnemyStartState
 {
     Idle,
     Trace,
+    
 }
 
 
@@ -56,6 +58,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public LayerMask targetLayer;
 
     public int curHp{get; private set;}
+    public bool isLive = true;
 
     public NavMeshAgent navMeshAgent{get; private set;}
 
@@ -222,6 +225,7 @@ public class Enemy : MonoBehaviour, IDamageable
         navMeshAgent.enabled = true;
         navMeshAgent.ResetPath();
         target = null;
+        isLive = true;
 
         if (startState == EnemyStartState.Idle)
         {
@@ -303,17 +307,44 @@ public class Enemy : MonoBehaviour, IDamageable
        
         // 데미지 처리
         curHp -= damage;
+        Debug.Log(curHp);
 
         // 체력이 0이하면 죽음
-        if(curHp <= 0)
+        if(curHp <= 0 && isLive)
         {
             Die();
+            
         }
-    }
+    }   
 
     private void Die()
     {
         animator.SetBool("Death", true);
+        isLive = false;
+        StartCoroutine(DieCorutine());
+        
+    }
+
+    IEnumerator DieCorutine()
+    {
+        navMeshAgent.isStopped = true;
+
+        float duration = 3f;
+        float elapsed = 0f;
+        float startY = transform.position.y;
+        float targetY = startY - 1.0f; 
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float newY = Mathf.Lerp(startY, targetY, elapsed / duration);
+            transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+            yield return null;
+        }
+
+        // 최종 위치 보정
+        transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
+        Destroy(gameObject);
     }
 
 
