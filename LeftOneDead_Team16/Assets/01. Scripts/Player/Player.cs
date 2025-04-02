@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     [field: SerializeField] public PlayerSO Data { get; private set; }
 
@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        //체력 초기화
+        Data.Condition.currentHealth = Data.Condition.maxHealth;
         //Cursor.lockState = CursorLockMode.Locked;
         stateMachine.ChangeState(stateMachine.GroundState);
     }
@@ -37,5 +39,12 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         stateMachine.PhysicsUpdate();
+    }
+
+    //데미지를 받으면 호출되는 함수
+    public void TakeDamage(int damage)
+    {
+        stateMachine.player.Data.Condition.currentHealth -= damage;
+        Debug.Log(stateMachine.player.Data.Condition.currentHealth);
     }
 }

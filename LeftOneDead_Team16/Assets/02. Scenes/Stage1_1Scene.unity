@@ -315,6 +315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 149323878}
   - component: {fileID: 149323877}
+  - component: {fileID: 149323879}
   m_Layer: 0
   m_Name: WaveTrigger
   m_TagString: Untagged
@@ -337,7 +338,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -358,6 +359,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &149323879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149323876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfec1bdf4f7605246843e5a4afc56467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &318717382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -369,6 +382,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_Name
       value: Jerry (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
@@ -432,6 +449,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: c52eea8f3ad5d004f8e73fe703b83613, type: 3}
       propertyPath: m_Name
       value: FirstAid
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c52eea8f3ad5d004f8e73fe703b83613, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c52eea8f3ad5d004f8e73fe703b83613, type: 3}
       propertyPath: m_LocalPosition.x
@@ -658,6 +679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jerry (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
       value: -114.22
@@ -720,6 +745,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_Name
       value: Jerry (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
@@ -985,6 +1014,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jerry (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
       value: -135.31
@@ -1046,6 +1079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1365273054}
   - component: {fileID: 1365273053}
+  - component: {fileID: 1365273055}
   m_Layer: 0
   m_Name: WaveTrigger (1)
   m_TagString: Untagged
@@ -1068,7 +1102,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1089,6 +1123,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1365273055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365273052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfec1bdf4f7605246843e5a4afc56467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1452505538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1100,6 +1146,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_Name
       value: Jerry (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1166,9 +1216,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 985105463}
     m_Modifications:
+    - target: {fileID: 100000, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
       propertyPath: m_Name
       value: rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1209,6 +1271,11 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 844a418646e833e48a7c8838f9661aad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4012864673880303567, guid: 844a418646e833e48a7c8838f9661aad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1415,6 +1482,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AmmoBox
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: caa3ab629c889904994d4ccc07bd895a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: caa3ab629c889904994d4ccc07bd895a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.044
@@ -1523,6 +1594,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jerry (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae0a4ddfb11d5a54a8cb9e5c4dd75172, type: 3}
       propertyPath: m_LocalPosition.x
       value: -153.3
@@ -1587,6 +1662,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enviroment 1-1
       objectReference: {fileID: 0}
+    - target: {fileID: 1113498921822626700, guid: a15c36040fd9900428d9c74ca1227f06,
+        type: 3}
+      propertyPath: doorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b1334dbf63b8b12469d492e285f8003d, type: 3}
+    - target: {fileID: 2474501953140555396, guid: a15c36040fd9900428d9c74ca1227f06,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.947
+      objectReference: {fileID: 0}
+    - target: {fileID: 4128234486008633744, guid: a15c36040fd9900428d9c74ca1227f06,
+        type: 3}
+      propertyPath: doorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b1334dbf63b8b12469d492e285f8003d, type: 3}
     - target: {fileID: 8993116617222630082, guid: a15c36040fd9900428d9c74ca1227f06,
         type: 3}
       propertyPath: m_LocalPosition.x

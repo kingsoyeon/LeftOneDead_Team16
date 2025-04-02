@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class SoundManager : Singleton<SoundManager>
 {
     // 볼륨,피치 조절
+    [SerializeField][Range(0f, 1f)] private float masterVolume;
     [SerializeField][Range(0f, 1f)] private float soundEffectVolume;
     [SerializeField][Range(0f, 1f)] private float soundEffectPitchVariance;
     [SerializeField][Range(0f, 1f)] private float musicVolume;
@@ -14,6 +15,8 @@ public class SoundManager : Singleton<SoundManager>
     public AudioClip[] bgmCilps; // 씬별 bgm
 
     private AudioSource musicAudioSource;
+
+    [SerializeField] private AudioMixer masterMixer;
 
     // 사운드소스 프리팹
     public SoundSource soundSourcePrefab;
@@ -53,6 +56,15 @@ public class SoundManager : Singleton<SoundManager>
        SoundSource obj = Instantiate(Instance.soundSourcePrefab);
        SoundSource soundSource = obj.GetComponent<SoundSource>();
        soundSource.Play(clip, Instance.soundEffectVolume, Instance.soundEffectPitchVariance);
+    }
+    // master 볼륨 저장
+    public void SetMasterVolume(float volume)
+    {
+       
+        float dB = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f;
+        masterMixer.SetFloat("MasterVolume", dB);
+        PlayerPrefs.SetFloat("MasterVolume", volume);
+        PlayerPrefs.Save();
     }
 
     // bgm 볼륨 저장

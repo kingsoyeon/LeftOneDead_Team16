@@ -47,7 +47,8 @@ public class GameManager : Singleton<GameManager>
             SceneLoader.sceneName = scene;
 
             SceneLoader.nextState = GameState.InGame;
-            SceneManager.LoadScene("LoadingScene");
+            SceneLoader.SetStageData(stage);
+            SceneManager.LoadSceneAsync("LoadingScene");
             }
     }
 

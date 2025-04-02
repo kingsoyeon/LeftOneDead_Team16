@@ -13,6 +13,9 @@ public class BulletPool : MonoBehaviour
             {
                 instance = new GameObject().AddComponent<BulletPool>();
                 instance.ammoPrefab = new GameObject().AddComponent<BallisticController>().AddComponent<TrailRenderer>().gameObject;
+                instance.ammoPrefab.GetComponent<TrailRenderer>().time = 0.5f;
+                instance.ammoPrefab.GetComponent<TrailRenderer>().startWidth = 0.5f;
+                instance.ammoPrefab.GetComponent<TrailRenderer>().endWidth = 0f;
             }
             return instance;
         }
